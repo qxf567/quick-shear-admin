@@ -5,85 +5,93 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.quickshear.common.vo.PageVo;
+import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.domain.Order;
-import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.OrderQuery;
-import com.quickshear.service.HairstyleService;
 import com.quickshear.service.OrderService;
-import com.quickshear.service.ShopService;
 import com.shear.admin.base.controller.AbstractController;
 import com.shear.admin.vo.OrderVo;
 
 @Controller
-@RequestMapping("/shear/admin")
+@RequestMapping("/shear/admin/order")
 public class OrderController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
-    private ShopService shopService;
-    @Autowired
-    private HairstyleService hairstyleService;
-    @Autowired
     private OrderService orderService;
 
-    @RequestMapping("/pay/detail")
-    public String detail(Model model,@ModelAttribute OrderVo order) {
-	
-	Shop shop = null;
-	try {
-	    shop = shopService.findbyid(Long.valueOf(order.getShopId()));
-	} catch (NumberFormatException e) {
-	    e.printStackTrace();
-	} catch (Exception e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-	
-	OrderQuery query = new OrderQuery();
-	query.setShopId(order.getShopId());
-	//支付完成
-	query.setOrderStatus(1);
-	
-	try {
-	    PageVo<Order>  pv = orderService.findByParam(query);
-	    model.addAttribute("count", pv.getTotalCount());
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	
-	//保存订单
-	//@TODO
-	
-	
-	model.addAttribute("shop", shop);
-	model.addAttribute("order", order);
-	return "order/detail";
-    }
+	@RequestMapping(value = "/list")
+	public String list(Model model) {
+		OrderQuery query = new OrderQuery();
+		List<Order> orderList = null;
+		try {
+			orderList = orderService.selectByParam(query);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
 
-    
-    @RequestMapping("/order/list")
-    public String list(Model model,Long customerId) {
-	
-	
-	OrderQuery query = new OrderQuery();
-	query.setCustomerId(customerId);
-	//支付完成
-	//query.setOrderStatus(1);
-	List<Order>  orderList = null;
-	try {
-	    orderList = orderService.selectByParam(query);
-	} catch (Exception e) {
-	    e.printStackTrace();
+		model.addAttribute("orderList", orderList);
+		return "admin/order/list";
 	}
-	
-	model.addAttribute("orderList", orderList);
-	return "order/list";
-    }
+
+	@RequestMapping(value = "/edit")
+	public String edit(@ModelAttribute("formBean") OrderVo orderVo, Model model,
+			@RequestParam Long orderId) {
+		Order order = null;
+		try {
+			order = orderService.findbyid(orderId);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+		BeanCopier copier = BeanCopierUtil.copy(Order.class, OrderVo.class);
+		copier.copy(order, orderVo, null);
+		model.addAttribute("addOrEdit", "edit");
+		return "admin/order/edit";
+	}
+
+	@RequestMapping(value = "/view")
+	public String view(@ModelAttribute("formBean") OrderVo orderVo, Model model,
+			@RequestParam Long orderId) {
+		Order order = null;
+		try {
+			order = orderService.findbyid(orderId);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+		BeanCopier copier = BeanCopierUtil.copy(Order.class, OrderVo.class);
+		copier.copy(order, orderVo, null);
+		return "admin/order/view";
+	}
+
+	@RequestMapping(value = "/save")
+	@ResponseBody
+	public String save(@ModelAttribute("formBean") OrderVo orderVo, Model model,
+			@RequestParam Long orderId) {
+		String success = "{\"success\": true}";
+		try {
+			Order order = new Order();
+			BeanCopier copier = BeanCopierUtil.copy(OrderVo.class, Order.class);
+			copier.copy(orderVo, order, null);
+			// 保存操作
+			int rlt = orderService.update(order);
+
+			if (rlt < 0) {
+				success = "{\"success\": false, \"exception\": \"保存失败\"}";
+			}
+		} catch (Exception e) {
+			success = "{\"success\": false, \"exception\": \"保存失败\"}";
+			LOGGER.error(e.getMessage());
+		}
+
+		return success;
+	}
     
 }
