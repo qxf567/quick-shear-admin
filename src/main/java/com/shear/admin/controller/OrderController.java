@@ -39,7 +39,7 @@ public class OrderController extends AbstractController {
 		}
 
 		model.addAttribute("orderList", orderList);
-		return "admin/order/list";
+		return "admin/order_list";
 	}
 
 	@RequestMapping(value = "/edit")
@@ -54,7 +54,7 @@ public class OrderController extends AbstractController {
 		BeanCopier copier = BeanCopierUtil.copy(Order.class, OrderVo.class);
 		copier.copy(order, orderVo, null);
 		model.addAttribute("addOrEdit", "edit");
-		return "admin/order/edit";
+		return "admin/order_edit";
 	}
 
 	@RequestMapping(value = "/view")
@@ -68,7 +68,7 @@ public class OrderController extends AbstractController {
 		}
 		BeanCopier copier = BeanCopierUtil.copy(Order.class, OrderVo.class);
 		copier.copy(order, orderVo, null);
-		return "admin/order/view";
+		return "admin/order_view";
 	}
 
 	@RequestMapping(value = "/save")

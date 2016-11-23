@@ -20,6 +20,9 @@ public class HairdresserVo implements Serializable{
 
     /** 所属门店 */
     private Long shopId;
+    
+    /** 所属门店 */
+    private Long shopName;
 
     /** 微信id */
     private String wechatId;
@@ -128,6 +131,14 @@ public class HairdresserVo implements Serializable{
 
 	public void setmTime(String mTime) {
 		this.mTime = mTime;
+	}
+
+	public Long getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(Long shopName) {
+		this.shopName = shopName;
 	}
 
 }

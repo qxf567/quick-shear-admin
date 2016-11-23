@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>shear-admin-Webapp</name>
-
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -98,111 +98,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>front</finalName>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<junitArtifactName>junit:junit-dep</junitArtifactName>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.7</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.2</version>
-				<configuration>
-					<format>{0,date,yyyy-MM-dd HH:mm:ss}</format>
-					<items>
-						<item>timestamp</item>
-					</items>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>create</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<useCache>false</useCache>
-					<archive>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-						</manifest>
-						<manifestEntries>
-							<Implementation-Environment>${env}</Implementation-Environment>
-							<Implementation-Build>${buildNumber}</Implementation-Build>
-						</manifestEntries>
-					</archive>
-					<dependentWarExcludes>WEB-INF/web.xml,WEB-INF/lib/*,WEB-INF/classes/*.xml</dependentWarExcludes>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>war</goal>
-						</goals>
-						<configuration>
-							<classifier>${env}</classifier>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>net.jawr.tools</groupId>
-				<artifactId>maven-jawr-plugin</artifactId>
-				<version>1.6</version>
-				<executions>
-					<execution>
-						<!-- Use this phase so that we could deal with the war folder just 
-							before the war package -->
-						<phase>package</phase>
-						<goals>
-							<goal>bundle</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<generateCDNFiles>true</generateCDNFiles>
-					<springConfigFiles>file:${basedir}/jawr-plugin.xml</springConfigFiles>
-					<keepUrlMapping>true</keepUrlMapping>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>javax.servlet</groupId>
-						<artifactId>servlet-api</artifactId>
-						<version>2.5</version>
-					</dependency>
-					<dependency>
-						<groupId>com.yahoo.platform.yui</groupId>
-						<artifactId>yuicompressor</artifactId>
-						<version>2.4.8</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>
+		<finalName>shear-admin-Webapp</finalName>
 	</build>
 
 </project>

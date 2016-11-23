@@ -41,13 +41,13 @@ public class ShopController extends AbstractController {
 		}
 
 		model.addAttribute("shopList", shopList);
-		return "admin/shop/list";
+		return "admin/shop_list";
 	}
 
 	@RequestMapping(value = "/add")
 	public String add(@ModelAttribute("formBean") ShopVo shopVo, Model model) {
 		model.addAttribute("addOrEdit", "add");
-		return "admin/shop/edit";
+		return "admin/shop_edit";
 	}
 
 	@RequestMapping(value = "/edit")
@@ -62,7 +62,7 @@ public class ShopController extends AbstractController {
 		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
 		copier.copy(shop, shopVo, null);
 		model.addAttribute("addOrEdit", "edit");
-		return "admin/shop/edit";
+		return "admin/shop_edit";
 	}
 
 	@RequestMapping(value = "/view")
@@ -76,7 +76,7 @@ public class ShopController extends AbstractController {
 		}
 		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
 		copier.copy(shop, shopVo, null);
-		return "admin/shop/view";
+		return "admin/shop_view";
 	}
 
 	@RequestMapping(value = "/save")

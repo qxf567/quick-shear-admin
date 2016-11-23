@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.domain.Hairdresser;
+import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.HairdresserQuery;
 import com.quickshear.service.HairdresserService;
+import com.quickshear.service.ShopService;
 import com.shear.admin.base.controller.AbstractController;
 import com.shear.admin.vo.HairdresserVo;
 
 @Controller
-@RequestMapping("/shear/amin/hairdresser")
+@RequestMapping("/shear/admin/hairdresser")
 public class HairdresserController extends AbstractController {
 
 	private static final Logger LOGGER = LoggerFactory
@@ -29,11 +31,14 @@ public class HairdresserController extends AbstractController {
 
 	@Autowired
 	private HairdresserService hairdresserService;
+	@Autowired
+	private ShopService shopService;
 
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		HairdresserQuery query = new HairdresserQuery();
 		List<Hairdresser> hairdresserList = null;
+		query.setSort( "shop_id");
 		try {
 			hairdresserList = hairdresserService.selectByParam(query);
 		} catch (Exception e) {
@@ -41,13 +46,13 @@ public class HairdresserController extends AbstractController {
 		}
 
 		model.addAttribute("hairdresserList", hairdresserList);
-		return "admin/hairdresser/list";
+		return "admin/hairdresser_list";
 	}
 
 	@RequestMapping(value = "/add")
 	public String add(@ModelAttribute("formBean") HairdresserVo hairdresserVo, Model model) {
 		model.addAttribute("addOrEdit", "add");
-		return "admin/hairdresser/edit";
+		return "admin/hairdresser_edit";
 	}
 
 	@RequestMapping(value = "/edit")
@@ -62,7 +67,7 @@ public class HairdresserController extends AbstractController {
 		BeanCopier copier = BeanCopierUtil.copy(Hairdresser.class, HairdresserVo.class);
 		copier.copy(hairdresser, hairdresserVo, null);
 		model.addAttribute("addOrEdit", "edit");
-		return "admin/hairdresser/edit";
+		return "admin/hairdresser_edit";
 	}
 
 	@RequestMapping(value = "/view")
@@ -76,7 +81,7 @@ public class HairdresserController extends AbstractController {
 		}
 		BeanCopier copier = BeanCopierUtil.copy(Hairdresser.class, HairdresserVo.class);
 		copier.copy(hairdresser, hairdresserVo, null);
-		return "admin/hairdresser/view";
+		return "admin/hairdresser_view";
 	}
 
 	@RequestMapping(value = "/save")

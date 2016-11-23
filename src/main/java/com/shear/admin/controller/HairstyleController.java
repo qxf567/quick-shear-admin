@@ -21,7 +21,7 @@ import com.shear.admin.base.controller.AbstractController;
 import com.shear.admin.vo.HairstyleVo;
 
 @Controller
-@RequestMapping("/shear/amin/hairstyle")
+@RequestMapping("/shear/admin/hairstyle")
 public class HairstyleController extends AbstractController {
 
 	private static final Logger LOGGER = LoggerFactory
@@ -41,13 +41,13 @@ public class HairstyleController extends AbstractController {
 		}
 
 		model.addAttribute("hairstyleList", hairstyleList);
-		return "admin/hairstyle/list";
+		return "admin/hairstyle_list";
 	}
 
 	@RequestMapping(value = "/add")
 	public String add(@ModelAttribute("formBean") HairstyleVo hairstyleVo, Model model) {
 		model.addAttribute("addOrEdit", "add");
-		return "admin/hairstyle/edit";
+		return "admin/hairstyle_edit";
 	}
 
 	@RequestMapping(value = "/edit")
@@ -62,7 +62,7 @@ public class HairstyleController extends AbstractController {
 		BeanCopier copier = BeanCopierUtil.copy(Hairstyle.class, HairstyleVo.class);
 		copier.copy(hairstyle, hairstyleVo, null);
 		model.addAttribute("addOrEdit", "edit");
-		return "admin/hairstyle/edit";
+		return "admin/hairstyle_edit";
 	}
 
 	@RequestMapping(value = "/view")
@@ -76,7 +76,7 @@ public class HairstyleController extends AbstractController {
 		}
 		BeanCopier copier = BeanCopierUtil.copy(Hairstyle.class, HairstyleVo.class);
 		copier.copy(hairstyle, hairstyleVo, null);
-		return "admin/hairstyle/view";
+		return "admin/hairstyle_view";
 	}
 
 	@RequestMapping(value = "/save")
