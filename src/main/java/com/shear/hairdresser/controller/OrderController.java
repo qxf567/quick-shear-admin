@@ -21,7 +21,7 @@ import com.shear.admin.base.controller.AbstractController;
 import com.shear.admin.vo.OrderVo;
 
 @Controller
-@RequestMapping("/shear/hairdresser")
+@RequestMapping("/hairdresser/order")
 public class OrderController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 

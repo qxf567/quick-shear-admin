@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>shear</groupId>
-	<artifactId>quick-shear-admin</artifactId>
+	<artifactId>shear-admin</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>shear-admin-Webapp</name>
@@ -98,7 +98,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>shear-admin-Webapp</finalName>
+		<finalName>shear-admin</finalName>
 	</build>
 
 </project>

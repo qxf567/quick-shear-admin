@@ -23,7 +23,7 @@ import com.shear.admin.base.controller.AbstractController;
 import com.shear.admin.vo.HairdresserVo;
 
 @Controller
-@RequestMapping("/shear/admin/hairdresser")
+@RequestMapping("/admin/hairdresser")
 public class HairdresserController extends AbstractController {
 
 	private static final Logger LOGGER = LoggerFactory

@@ -21,7 +21,7 @@ import com.shear.admin.base.controller.AbstractController;
 import com.shear.admin.vo.ShopVo;
 
 @Controller
-@RequestMapping("/shear/amin/shop")
+@RequestMapping("/admin/shop")
 public class ShopController extends AbstractController {
 
 	private static final Logger LOGGER = LoggerFactory
