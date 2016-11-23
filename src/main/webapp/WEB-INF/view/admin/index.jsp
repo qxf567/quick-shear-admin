@@ -23,7 +23,7 @@
 		<div class="head" align="center"></div>
 		<div class="gap"></div>
 		<div class="info_list">
-			<a href="">
+			<a href="javascript:;">
 				<div class="info_one">
 					<span></span> <img src="/js/detail/appointment_icon.png" /> <span
 						class="checked_title">店铺管理</span>
@@ -31,7 +31,7 @@
 						<span></span> <img src="/js/detail/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="">
+			</a> <a href="javascript:;">
 				<div class="info_one">
 					<span></span> <img src="/js/detail/appointment_icon.png" /> <span
 						class="checked_title">发型管理</span>
@@ -39,7 +39,7 @@
 						<span></span> <img src="/js/detail/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="">
+			</a> <a href="javascript:;">
 				<div class="info_one">
 					<span></span> <img src="/js/detail/appointment_icon.png" /> <span
 						class="checked_title">订单管理</span>
@@ -47,7 +47,7 @@
 						<span></span> <img src="/js/detail/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="">
+			</a> <a href="javascript:;">
 				<div class="info_one">
 					<span></span> <img src="/js/detail/appointment_icon.png" /> <span
 						class="checked_title">发型师管理</span>
@@ -72,3 +72,4 @@
 		});
 	</script>
 </body>
+</html>
