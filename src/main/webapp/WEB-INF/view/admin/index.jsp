@@ -6,17 +6,17 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <title>后台管理</title>
-<script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
-<script type="text/javascript" src="/js/fastclick.js"></script>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/fastclick.js"></script>
 <script type="text/javascript">
 	//移动设备快速响应点击事件
 	$(document).ready(function() {
 		FastClick.attach(document.body);
 	});
 </script>
-<link type="text/css" rel="stylesheet" href="/css/common.css">
-<link type="text/css" rel="stylesheet" href="/css/user_center.css">
+<link type="text/css" rel="stylesheet" href="../css/common.css">
+<link type="text/css" rel="stylesheet" href="../css/user_center.css">
 </head>
 <body>
 	<div class="container">
@@ -25,34 +25,34 @@
 		<div class="info_list">
 			<a href="javascript:;">
 				<div class="info_one">
-					<span></span> <img src="/js/detail/appointment_icon.png" /> <span
+					<span></span> <img src="../img/appointment_icon.png" /> <span
 						class="checked_title">店铺管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="/js/detail/checked_icon.png" />
+						<span></span> <img src="../img/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
-					<span></span> <img src="/js/detail/appointment_icon.png" /> <span
+					<span></span> <img src="../img/appointment_icon.png" /> <span
 						class="checked_title">发型管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="/js/detail/checked_icon.png" />
+						<span></span> <img src="../img/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
-					<span></span> <img src="/js/detail/appointment_icon.png" /> <span
+					<span></span> <img src="../img/appointment_icon.png" /> <span
 						class="checked_title">订单管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="/js/detail/checked_icon.png" />
+						<span></span> <img src="../img/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
-					<span></span> <img src="/js/detail/appointment_icon.png" /> <span
+					<span></span> <img src="../img/appointment_icon.png" /> <span
 						class="checked_title">发型师管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="/js/detail/checked_icon.png" />
+						<span></span> <img src="../img/checked_icon.png" />
 					</div>
 				</div>
 			</a>
