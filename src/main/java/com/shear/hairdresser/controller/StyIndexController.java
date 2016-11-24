@@ -10,9 +10,9 @@ import com.shear.admin.base.controller.AbstractController;
 
 @Controller
 @RequestMapping("/stylist")
-public class IndexController extends AbstractController {
+public class StyIndexController extends AbstractController {
 	
-    private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StyIndexController.class);
 
 	@RequestMapping(value = "/index")
 	public String index(Model model) {
