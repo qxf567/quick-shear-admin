@@ -1,4 +1,4 @@
-package com.shear.hairdresser.controller;
+package com.shear.admin.controller.hairdresser;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.quickshear.domain.query.OrderQuery;
 import com.quickshear.service.HairstyleService;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
-import com.shear.admin.base.controller.AbstractController;
+import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.OrderVo;
 
 @Controller

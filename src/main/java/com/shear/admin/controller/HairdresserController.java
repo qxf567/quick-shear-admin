@@ -19,7 +19,7 @@ import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.HairdresserQuery;
 import com.quickshear.service.HairdresserService;
 import com.quickshear.service.ShopService;
-import com.shear.admin.base.controller.AbstractController;
+import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.HairdresserVo;
 
 @Controller

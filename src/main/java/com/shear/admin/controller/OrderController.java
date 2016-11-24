@@ -17,7 +17,7 @@ import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.domain.Order;
 import com.quickshear.domain.query.OrderQuery;
 import com.quickshear.service.OrderService;
-import com.shear.admin.base.controller.AbstractController;
+import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.OrderVo;
 
 @Controller

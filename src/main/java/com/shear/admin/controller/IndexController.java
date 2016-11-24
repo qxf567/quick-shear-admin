@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shear.admin.base.controller.AbstractController;
+import com.shear.admin.controller.base.AbstractController;
 
 @Controller
 @RequestMapping("/admin")

@@ -2,7 +2,7 @@
  * AbstractController.java
  * Copyright (c) 2013 by lashou.com
  */
-package com.shear.admin.base.controller;
+package com.shear.admin.controller.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
