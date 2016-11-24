@@ -22,8 +22,8 @@ import com.shear.admin.vo.OrderVo;
 
 @Controller
 @RequestMapping("/stylist/order")
-public class StyOrderController extends AbstractController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(StyOrderController.class);
+public class OrderController extends AbstractController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
     private ShopService shopService;
