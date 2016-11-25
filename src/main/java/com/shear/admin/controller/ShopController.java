@@ -65,7 +65,7 @@ public class ShopController extends AbstractController {
 		return "admin/shop_edit";
 	}
 
-	@RequestMapping(value = "/view")
+	@RequestMapping(value = "/detail")
 	public String view(@ModelAttribute("formBean") ShopVo shopVo, Model model,
 			@RequestParam Long id) {
 		Shop shop = null;
@@ -76,7 +76,7 @@ public class ShopController extends AbstractController {
 		}
 		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
 		copier.copy(shop, shopVo, null);
-		return "admin/shop_view";
+		return "admin/shop_detail";
 	}
 
 	@RequestMapping(value = "/save")
