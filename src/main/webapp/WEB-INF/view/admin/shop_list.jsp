@@ -1,27 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <%@ include file="../common/meta.jsp"%>
-<title>店铺列表</title>
-<script type="text/javascript"
-	src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript"
-	src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.js/common.js"></script>
-<script type="text/javascript"
-	src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.js/fastclick.js"></script>
+<%@ include file="../common/taglibs.jsp"%>
 <script type="text/javascript">
 	//移动设备快速响应点击事件
 	$(document).ready(function() {
 		FastClick.attach(document.body);
 	});
 </script>
-<link type="text/css" rel="stylesheet"
-	href="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.css/common.css">
-<link type="text/css" rel="stylesheet"
-	href="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.css/user_center.css">
+<title>店铺列表</title>
 </head>
 <body>
 	<div class="container">
@@ -39,7 +29,7 @@
 			<c:if test="${not empty shopList}">
 				<div class="total_main">
 					<c:forEach items="${shopList}" var="shop">
-						<a class="" href="/shear/detail/11"> <img
+						<a class="" href="/admin/shop/detail?id=${shop.id}"> <img
 							src="/img/index/yingyezhong.png" class="status"> <img
 							src="/img/index/dianpu.png" class="shop-img" />
 							<div class="checked_info_main">

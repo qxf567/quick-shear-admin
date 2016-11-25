@@ -1,64 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <%@ include file="../common/meta.jsp"%>
-<title>后台管理</title>
-<script type="text/javascript" src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.js/common.js"></script>
-<script type="text/javascript" src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.js/fastclick.js"></script>
+<%@ include file="../common/taglibs.jsp"%>
 <script type="text/javascript">
 	//移动设备快速响应点击事件
 	$(document).ready(function() {
 		FastClick.attach(document.body);
 	});
 </script>
-<link type="text/css" rel="stylesheet" href="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.css/common.css">
-<link type="text/css" rel="stylesheet" href="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.css/user_center.css">
+<title>后台管理</title>
 </head>
 <body>
 	<div class="container">
-		<div class="head" align="center">
-		<img src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEKJMd8lLra88qsIJIdYcWdSKwx4t6foBuwRr4ef58gTC0BxnKDlGjaoABKWfc4WiaNQGhl09RIicpeQ/0" style=""/>
-		<div class="name">Den</div>
+		<div class="head" align="center"
+			style="background-image:url(${admin_common_img}/user_bg.jpg);">
+			<img
+				src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEKJMd8lLra88qsIJIdYcWdSKwx4t6foBuwRr4ef58gTC0BxnKDlGjaoABKWfc4WiaNQGhl09RIicpeQ/0"
+				style="" />
+			<div class="name">Den</div>
 		</div>
 		<div class="gap"></div>
 		<div class="info_list">
 			<a href="../admin/shop/list">
 				<div class="info_one">
-					<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" /> <span
+					<span></span> <img src="${admin_common_img}/order_icon.png" /> <span
 						class="checked_title">店铺管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
+						<span></span> <img
+							src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" /> <span
-						class="checked_title">发型管理</span>
+					<hr style="background: #f2f2f2;height: 1px;border: none">
+					<span></span> <img
+						src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" />
+					<span class="checked_title">发型管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
+						<span></span> <img
+							src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" /> <span
-						class="checked_title">订单管理</span>
+					<hr style="background: #f2f2f2;height: 1px;border: none">
+					<span></span> <img
+						src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" />
+					<span class="checked_title">订单管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
+						<span></span> <img
+							src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" /> <span
-						class="checked_title">发型师管理</span>
+					<hr style="background: #f2f2f2;height: 1px;border: none">
+					<span></span> <img
+						src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" />
+					<span class="checked_title">发型师管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
+						<span></span> <img
+							src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
 					</div>
 				</div>
 			</a>

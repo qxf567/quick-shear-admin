@@ -9,6 +9,7 @@ import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,17 +66,18 @@ public class ShopController extends AbstractController {
 		return "admin/shop_edit";
 	}
 
-	@RequestMapping(value = "/detail")
+	@RequestMapping(value = "/detail/{id}")
 	public String view(@ModelAttribute("formBean") ShopVo shopVo, Model model,
-			@RequestParam Long id) {
+			 @PathVariable(value = "id") Long id) {
 		Shop shop = null;
 		try {
 			shop = shopService.findbyid(id);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
-		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
-		copier.copy(shop, shopVo, null);
+//		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
+//		copier.copy(shop, shopVo, null);
+		model.addAttribute("shop", shop);
 		return "admin/shop_detail";
 	}
 
