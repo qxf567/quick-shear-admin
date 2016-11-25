@@ -23,37 +23,37 @@
 		<div class="info_list">
 			<a href="../admin/shop/list">
 				<div class="info_one">
-					<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" /> <span
+					<span></span> <img src="${admin_common_img}/order_icon.png" /> <span
 						class="checked_title">店铺管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
+						<span></span> <img src="${admin_common_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
 				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" /> <span
+					<span></span> <img src="${admin_common_img}/order_icon.png" /> <span
 						class="checked_title">发型管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
+						<span></span> <img src="${admin_common_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
 				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" /> <span
+					<span></span> <img src="${admin_common_img}/order_icon.png" /> <span
 						class="checked_title">订单管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
+						<span></span> <img src="${admin_common_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
 				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/order_icon.png" /> <span
+					<span></span> <img src="${admin_common_img}/order_icon.png" /> <span
 						class="checked_title">发型师管理</span>
 					<div class="checked_info_main">
-						<span></span> <img src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.img/checked_icon.png" />
+						<span></span> <img src="${admin_common_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a>
