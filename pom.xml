@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>shear</groupId>
+	<groupId>com.qiansishun.m</groupId>
 	<artifactId>shear-admin</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>shear-admin-Webapp</name>
 	
 	<properties>
@@ -14,7 +14,7 @@
 
 	<dependencies>
 		<dependency>
-		<groupId>shear</groupId>
+		<groupId>com.qiansishun.m</groupId>
 			<artifactId>quick-shear-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
