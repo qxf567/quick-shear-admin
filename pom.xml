@@ -85,17 +85,7 @@
 			<artifactId>poi</artifactId>
 			<version>3.8</version>
 		</dependency>
-		<dependency>
-			<groupId>com.lashou.common</groupId>
-			<artifactId>common-util</artifactId>
-			<version>1.11</version>
-		</dependency>
 
-		<dependency>
-			<groupId>gui.ava</groupId>
-			<artifactId>html2image</artifactId>
-			<version>0.9</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<finalName>shear-admin</finalName>

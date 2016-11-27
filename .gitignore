@@ -7,5 +7,5 @@ target/
 /target
 overlays/
 .idea/
-v-crm.iml
+*.iml
 /target
