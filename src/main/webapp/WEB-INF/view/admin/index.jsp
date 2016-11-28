@@ -16,7 +16,7 @@
 <body>
 	<div class="container">
 		<div class="head" align="center"
-			style="background-image:url(${admin_common_img}/user_bg.jpg);">
+			style="background-image:url(${admin_img}/user_bg.jpg);">
 			<img
 				src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEKJMd8lLra88qsIJIdYcWdSKwx4t6foBuwRr4ef58gTC0BxnKDlGjaoABKWfc4WiaNQGhl09RIicpeQ/0"
 				style="" />
@@ -24,46 +24,46 @@
 		</div>
 		<div class="gap"></div>
 		<div class="info_list">
-			<a href="../admin/shop/list">
+			<a href="/admin/shop/list">
 				<div class="info_one">
-					<span></span> <img src="${admin_common_img}/order_icon.png" /> <span
+					<span></span> <img src="${admin_img}/order_icon.png" /> <span
 						class="checked_title">店铺管理</span>
 					<div class="checked_info_main">
 						<span></span> <img
-							src="${admin_common_img}/checked_icon.png" />
+							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
-						src="${admin_common_img}/order_icon.png" />
+						src="${admin_img}/order_icon.png" />
 					<span class="checked_title">发型管理</span>
 					<div class="checked_info_main">
 						<span></span> <img
-							src="${admin_common_img}/checked_icon.png" />
+							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
-						src="${admin_common_img}/order_icon.png" />
+						src="${admin_img}/order_icon.png" />
 					<span class="checked_title">订单管理</span>
 					<div class="checked_info_main">
 						<span></span> <img
-							src="${admin_common_img}/checked_icon.png" />
+							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a> <a href="javascript:;">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
-						src="${admin_common_img}/order_icon.png" />
+						src="${admin_img}/order_icon.png" />
 					<span class="checked_title">发型师管理</span>
 					<div class="checked_info_main">
 						<span></span> <img
-							src="${admin_common_img}/checked_icon.png" />
+							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a>

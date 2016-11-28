@@ -21,7 +21,7 @@
 				<div class="max_box">
 					<div class="info_box">
 						<img
-							src="${admin_common_img}/my-icon08.png">
+							src="${admin_img}/my-icon08.png">
 						<p>未找到店铺～</p>
 					</div>
 				</div>
@@ -34,7 +34,7 @@
 							src="/img/index/dianpu.png" class="shop-img" />
 							<div class="checked_info_main">
 								<span></span> <img
-									src="${admin_common_img}/checked_icon.png" />
+									src="${admin_img}/checked_icon.png" />
 							</div>
 						</a>
 
