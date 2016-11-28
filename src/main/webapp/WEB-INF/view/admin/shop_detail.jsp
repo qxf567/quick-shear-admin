@@ -15,10 +15,6 @@
 </head>
 <body>
 	<div class="container">
-		<div class="head" align="center">
-		<img src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEKJMd8lLra88qsIJIdYcWdSKwx4t6foBuwRr4ef58gTC0BxnKDlGjaoABKWfc4WiaNQGhl09RIicpeQ/0" style=""/>
-		<div class="name">Den</div>
-		</div>
 		<div class="gap"></div>
 		<div class="info_list">
 			<a href="../admin/shop/list">

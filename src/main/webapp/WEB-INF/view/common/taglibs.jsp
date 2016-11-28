@@ -12,3 +12,5 @@
 
 <link type="text/css" rel="stylesheet" href="${admin_css}/common.css">
 <link type="text/css" rel="stylesheet" href="${admin_css}/user_center.css">
+<link type="text/css" rel="stylesheet" href="${admin_css}/order_list.css">
+<link type="text/css" rel="stylesheet" href="${admin_css}/slides.css">

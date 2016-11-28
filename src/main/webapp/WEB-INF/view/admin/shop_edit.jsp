@@ -11,52 +11,18 @@
 		FastClick.attach(document.body);
 	});
 </script>
-<title>后台管理</title>
+<title><c:if test="${addOrEdit eq 'add'}">新增店铺</c:if> <c:if
+		test="${addOrEdit eq 'add'}">编辑店铺</c:if></title>
 </head>
 <body>
 	<div class="container">
-		<div class="head" align="center">
-		<img src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEKJMd8lLra88qsIJIdYcWdSKwx4t6foBuwRr4ef58gTC0BxnKDlGjaoABKWfc4WiaNQGhl09RIicpeQ/0" style=""/>
-		<div class="name">Den</div>
-		</div>
 		<div class="gap"></div>
-		<div class="info_list">
-			<a href="../admin/shop/list">
-				<div class="info_one">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">店铺管理</span>
-					<div class="checked_info_main">
-						<span></span> <img src="${admin_img}/checked_icon.png" />
-					</div>
-				</div>
-			</a> <a href="javascript:;">
-				<div class="info_one">
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">发型管理</span>
-					<div class="checked_info_main">
-						<span></span> <img src="${admin_img}/checked_icon.png" />
-					</div>
-				</div>
-			</a> <a href="javascript:;">
-				<div class="info_one">
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">订单管理</span>
-					<div class="checked_info_main">
-						<span></span> <img src="${admin_img}/checked_icon.png" />
-					</div>
-				</div>
-			</a> <a href="javascript:;">
-				<div class="info_one">
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">发型师管理</span>
-					<div class="checked_info_main">
-						<span></span> <img src="${admin_img}/checked_icon.png" />
-					</div>
-				</div>
-			</a>
+		<div class="warp">
+			<div class="input-list">
+				<span>店铺名称</span>
+				<input type="text" placeholder="请填写店铺名称" id="myName"
+					value="${shop.name}">
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">

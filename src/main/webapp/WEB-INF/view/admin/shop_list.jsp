@@ -16,35 +16,20 @@
 <body>
 	<div class="container">
 		<div class="gap"></div>
-		<div class="info_list">
-			<c:if test="${empty shopList}">
-				<div class="max_box">
-					<div class="info_box">
-						<img
-							src="${admin_img}/my-icon08.png">
-						<p>未找到店铺～</p>
-					</div>
-				</div>
-			</c:if>
-			<c:if test="${not empty shopList}">
-				<div class="total_main">
-					<c:forEach items="${shopList}" var="shop">
-						<a class="" href="/admin/shop/detail?id=${shop.id}"> <img
-							src="/img/index/yingyezhong.png" class="status"> <img
-							src="/img/index/dianpu.png" class="shop-img" />
-							<div class="checked_info_main">
-								<span></span> <img
-									src="${admin_img}/checked_icon.png" />
-							</div>
-						</a>
+		<div class="store_list">
+			<c:forEach items="${shopList}" var="shop">
+			<div class="bj_store">
+				<a class="" href="/admin/shop/detail?id=${shop.id}"> <img
+					src="http://60.205.150.77:8180/admin.img/yingyezhong.png" class="status"> <img
+					src="http://60.205.150.77:8180/admin.img/dianpu.png" class="shop-img" />
+				</a>
 
-						<p class="shop-title">${shop.name}</p>
-						<p class="shop-text">营业时间：${shop.businessHours}</p>
-						<p class="shop-text">地址：${shop.address}</p>
-						<hr style="background: #f2f2f2;height: 1px;border: none">
-					</c:forEach>
+				<p class="store_name">${shop.name}</p>
+				<p class="store_address">营业时间：${shop.businessHours}</p>
+				<p class="store_address">地址：${shop.address}</p>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
 				</div>
-			</c:if>
+			</c:forEach>
 		</div>
 		<!--底部固定End-->
 		<div class="fixed_menu">
