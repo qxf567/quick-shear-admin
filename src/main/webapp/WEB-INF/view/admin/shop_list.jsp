@@ -18,23 +18,22 @@
 		<div class="gap"></div>
 		<div class="store_list">
 			<c:forEach items="${shopList}" var="shop">
-			<div class="bj_store">
-				<a class="" href="/admin/shop/detail?id=${shop.id}"> <img
-					src="http://60.205.150.77:8180/admin.img/yingyezhong.png" class="status"> <img
-					src="http://60.205.150.77:8180/admin.img/dianpu.png" class="shop-img" />
-				</a>
-
-				<p class="store_name">${shop.name}</p>
-				<p class="store_address">营业时间：${shop.businessHours}</p>
-				<p class="store_address">地址：${shop.address}</p>
-				<hr style="background: #f2f2f2;height: 1px;border: none">
+				<div class="bj_store">
+					<div class="${shop.labelCssName}">${shop.statusName}</div>
+					<a class="" href="/admin/shop/detail?id=${shop.id}"> <img
+						src="http://60.205.150.77:8180/admin.img/dianpu.png"
+						class="store_list_img" />
+					</a>
+					<p class="store_name">${shop.name}</p>
+					<p class="store_address">${shop.address}</p>
+					<hr style="background: #f2f2f2;height: 1px;border: none">
 				</div>
 			</c:forEach>
 		</div>
 		<!--底部固定End-->
 		<div class="fixed_menu">
 			<div class="amount"></div>
-			<a href="javascript:;" id="addnew">
+			<a href="/admin/shop/add" id="addnew">
 				<div class="payment_btn">新增店铺</div>
 			</a>
 		</div>

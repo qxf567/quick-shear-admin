@@ -1,5 +1,6 @@
 package com.shear.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quickshear.common.enumeration.ShopStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.ShopQuery;
@@ -35,13 +37,28 @@ public class ShopController extends AbstractController {
 	public String list(Model model) {
 		ShopQuery query = new ShopQuery();
 		List<Shop> shopList = null;
+		List<ShopVo> shopVoList = new ArrayList<ShopVo>(); 
 		try {
 			shopList = shopService.selectByParam(query);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
-
-		model.addAttribute("shopList", shopList);
+        if(shopList!=null){
+        	for(Shop shop : shopList){
+        		ShopVo shopVo =new ShopVo();
+        		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
+        		copier.copy(shop, shopVo, null);
+        		//店铺状态
+        		shopVo.setStatusName(ShopStatusEnum.valueOfCode(shop.getStatus()).getName());
+        		if(shop.getStatus()!=1){
+        			shopVo.setLabelCssName("status rest");
+        		}else{
+        			shopVo.setLabelCssName("status");
+        		}
+        		shopVoList.add(shopVo);
+        	}
+        }
+		model.addAttribute("shopList", shopVoList);
 		return "admin/shop_list";
 	}
 

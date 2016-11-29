@@ -48,6 +48,12 @@ public class ShopVo implements Serializable{
 
     /** 状态(0无效1正常营业2暂停营业) */
     private Integer status;
+    
+    /** 状态名称(0无效1正常营业2暂停营业) */
+    private String statusName;
+    
+    /** 状态效果(0无效1正常营业2暂停营业) */
+    private String labelCssName;
 
     /** 创建时间 */
     private String cTime;
@@ -173,6 +179,22 @@ public class ShopVo implements Serializable{
 
 	public void setmTime(String mTime) {
 		this.mTime = mTime;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+
+	public String getLabelCssName() {
+		return labelCssName;
+	}
+
+	public void setLabelCssName(String labelCssName) {
+		this.labelCssName = labelCssName;
 	}
 
 }
