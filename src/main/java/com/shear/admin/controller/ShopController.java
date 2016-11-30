@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.enumeration.ShopStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
+import com.quickshear.domain.City;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.ShopQuery;
+import com.quickshear.service.CityService;
 import com.quickshear.service.ShopService;
 import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.ShopVo;
@@ -32,6 +34,8 @@ public class ShopController extends AbstractController {
 
 	@Autowired
 	private ShopService shopService;
+	@Autowired
+	private CityService cityService;
 
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
@@ -92,9 +96,19 @@ public class ShopController extends AbstractController {
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
-//		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
-//		copier.copy(shop, shopVo, null);
-		model.addAttribute("shop", shop);
+		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
+		copier.copy(shop, shopVo, null);
+		//店铺状态
+		shopVo.setStatusName(ShopStatusEnum.valueOfCode(shop.getStatus()).getName());
+		//城市名称
+		try {
+			City city=cityService.findbyid(shop.getCityId());
+			shopVo.setFullPathName(city.getFullPathName());
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+		
+		model.addAttribute("shop", shopVo);
 		return "admin/shop_detail";
 	}
 

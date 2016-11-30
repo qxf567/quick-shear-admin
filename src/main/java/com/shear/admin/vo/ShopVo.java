@@ -24,6 +24,12 @@ public class ShopVo implements Serializable{
 
     /** 城市id */
     private Long cityId;
+    
+    /** 城市全路径id */
+    private String fullPathId;
+
+    /** 城市全路径名称 */
+    private String fullPathName;
 
     /** 坐标经度 */
     private Double longitude;
@@ -195,6 +201,22 @@ public class ShopVo implements Serializable{
 
 	public void setLabelCssName(String labelCssName) {
 		this.labelCssName = labelCssName;
+	}
+
+	public String getFullPathId() {
+		return fullPathId;
+	}
+
+	public void setFullPathId(String fullPathId) {
+		this.fullPathId = fullPathId;
+	}
+
+	public String getFullPathName() {
+		return fullPathName;
+	}
+
+	public void setFullPathName(String fullPathName) {
+		this.fullPathName = fullPathName;
 	}
 
 }

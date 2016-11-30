@@ -17,12 +17,87 @@
 <body>
 	<div class="container">
 		<div class="gap"></div>
-		<div class="warp">
-			<div class="input-list">
-				<span>店铺名称</span>
-				<input type="text" placeholder="请填写店铺名称" id="myName"
-					value="${shop.name}">
+		<div class="input_list">
+			<div class="input_one">
+				<span>名称</span>
+				<div class="input_info_main">
+					<input type="text" placeholder="输入门店名称" id="name"
+						value="${shop.name}" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
+			<div class="input_one">
+				<span>电话</span>
+				<div class="input_info_main">
+					<input type="text" placeholder="输入联系电话" id="phoneNumber"
+						value="${shop.phoneNumber}" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>价格￥</span>
+				<div class="input_info_main">
+					<input type="text" placeholder="理发价格单位:元" id="businessHours"
+						value="${shop.businessHours}" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>营业时间</span>
+				<div class="input_info_main">
+					<input type="text" placeholder="时间格式:10:00-21:00" id="businessHours"
+						value="${shop.businessHours}" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>地址</span>
+				<div class="input_info_main">
+					<section>
+						<select id="province" class="gray">
+							<option value="-100">选择省份</option>
+						</select> <select id="city" class="gray">
+							<option value="-100">选择城市</option>
+						</select> <select id="town" class="gray">
+							<option value="-100">选择区县</option>
+						</select>
+					</section>
+				</div>
+			</div>
+			<div class="input_one">
+				<span></span>
+				<div class="input_info_main">
+					<input type="text" placeholder="输入详细地址" id="address"
+						value="${shop.address}" readonly="readonly" /> <img
+						src="${admin_img}/checked_icon.png" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>图片</span>
+				<div class="input_info_main">
+					<input type="text" placeholder="门店主图" id="businessHours"
+						value="${shop.businessHours}" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>状态</span>
+				<div class="input_info_main">
+					<section>
+						<select id="province" class="gray">
+							<option value="-100">正常营业</option>
+						</select>
+					</section>
+				</div>
+			</div>
+		</div>
+		<!--底部固定End-->
+		<div class="fixed_menu">
+			<div class="amount"></div>
+			<a href="/admin/shop/save" id="save">
+				<div class="fixed_btn">保存</div>
+			</a>
 		</div>
 	</div>
 	<script type="text/javascript">

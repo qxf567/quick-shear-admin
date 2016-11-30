@@ -20,8 +20,8 @@
 			<c:forEach items="${shopList}" var="shop">
 				<div class="bj_store">
 					<div class="${shop.labelCssName}">${shop.statusName}</div>
-					<a class="" href="/admin/shop/detail?id=${shop.id}"> <img
-						src="http://60.205.150.77:8180/admin.img/dianpu.png"
+					<a class="" href="/admin/shop/detail/${shop.id}"> <img
+						src="${admin_img}/dianpu.png"
 						class="store_list_img" />
 					</a>
 					<p class="store_name">${shop.name}</p>
@@ -34,7 +34,7 @@
 		<div class="fixed_menu">
 			<div class="amount"></div>
 			<a href="/admin/shop/add" id="addnew">
-				<div class="payment_btn">新增店铺</div>
+				<div class="fixed_btn">新增店铺</div>
 			</a>
 		</div>
 	</div>

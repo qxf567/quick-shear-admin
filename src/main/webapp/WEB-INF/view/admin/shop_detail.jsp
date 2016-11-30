@@ -16,42 +16,76 @@
 <body>
 	<div class="container">
 		<div class="gap"></div>
-		<div class="info_list">
-			<a href="../admin/shop/list">
-				<div class="info_one">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">店铺管理</span>
-					<div class="checked_info_main">
-						<span></span> <img src="${admin_img}/checked_icon.png" />
-					</div>
+		<input id="id" value="${shop.id}" type="hidden" />
+		<div class="input_list">
+			<div class="input_one">
+				<span>名称</span>
+				<div class="input_info_main">
+					<input type="text" id="name"
+						value="${shop.name}" readonly="readonly"/>
 				</div>
-			</a> <a href="javascript:;">
-				<div class="info_one">
 				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">发型管理</span>
-					<div class="checked_info_main">
-						<span></span> <img src="${admin_img}/checked_icon.png" />
-					</div>
+			</div>
+			<div class="input_one">
+				<span>电话</span>
+				<div class="input_info_main">
+					<input type="text" id="phoneNumber"
+						value="${shop.phoneNumber}" readonly="readonly"/>
 				</div>
-			</a> <a href="javascript:;">
-				<div class="info_one">
 				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">订单管理</span>
-					<div class="checked_info_main">
-						<span></span> <img src="${admin_img}/checked_icon.png" />
-					</div>
+			</div>
+			<div class="input_one">
+				<span>价格￥</span>
+				<div class="input_info_main">
+					<input type="text" id="businessHours"
+						value="${shop.businessHours}" readonly="readonly"/>
 				</div>
-			</a> <a href="javascript:;">
-				<div class="info_one">
 				<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">发型师管理</span>
-					<div class="checked_info_main">
-						<span></span> <img src="${admin_img}/checked_icon.png" />
-					</div>
+			</div>
+			<div class="input_one">
+				<span>营业时间</span>
+				<div class="input_info_main">
+					<input type="text" id="businessHours"
+						value="${shop.businessHours}" readonly="readonly"/>
 				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>地址</span>
+				<div class="input_info_main">
+					<input type="text" id="fullPathName"
+						value="${shop.fullPathName}" readonly="readonly"/>
+				</div>
+			</div>
+			<div class="input_one">
+				<span></span>
+				<div class="input_info_main">
+					<input type="text" id="address"
+						value="${shop.address}" readonly="readonly" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>图片</span>
+				<div class="input_info_main">
+					<input type="text" id="mainImageUrl"
+						value="${shop.mainImageUrl}" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>状态</span>
+				<div class="input_info_main">
+				<input type="text" id="status"
+						value="${shop.status}" readonly="readonly" />
+				</div>
+			</div>
+		</div>
+		<!--底部固定End-->
+		<div class="fixed_menu">
+			<div class="amount"></div>
+			<a href="/admin/shop/edit" id="edit">
+				<div class="fixed_btn">编辑</div>
 			</a>
 		</div>
 	</div>
