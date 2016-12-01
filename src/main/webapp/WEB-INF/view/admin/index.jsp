@@ -33,7 +33,7 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="javascript:;">
+			</a> <a href="/admin/shop/list">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
@@ -44,7 +44,7 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="javascript:;">
+			</a> <a href="/admin/shop/list">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
@@ -55,7 +55,7 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="javascript:;">
+			</a> <a href="/admin/shop/list">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img

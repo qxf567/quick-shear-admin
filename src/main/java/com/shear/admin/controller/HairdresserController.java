@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.domain.Hairdresser;
-import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.HairdresserQuery;
 import com.quickshear.service.HairdresserService;
 import com.quickshear.service.ShopService;

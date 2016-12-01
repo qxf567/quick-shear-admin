@@ -24,9 +24,6 @@ public class HairdresserVo implements Serializable{
     /** 所属门店 */
     private Long shopName;
 
-    /** 微信id */
-    private String wechatId;
-
     /** 身份证正面照 */
     private String identityCardFacePhoto;
 
@@ -76,15 +73,7 @@ public class HairdresserVo implements Serializable{
 	public void setShopId(Long shopId) {
 		this.shopId = shopId;
 	}
-
-	public String getWechatId() {
-		return wechatId;
-	}
-
-	public void setWechatId(String wechatId) {
-		this.wechatId = wechatId;
-	}
-
+	
 	public String getIdentityCardFacePhoto() {
 		return identityCardFacePhoto;
 	}

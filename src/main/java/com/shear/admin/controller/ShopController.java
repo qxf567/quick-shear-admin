@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,86 +40,94 @@ public class ShopController extends AbstractController {
 	public String list(Model model) {
 		ShopQuery query = new ShopQuery();
 		List<Shop> shopList = null;
-		List<ShopVo> shopVoList = new ArrayList<ShopVo>(); 
+		List<ShopVo> shopVoList = new ArrayList<ShopVo>();
 		try {
 			shopList = shopService.selectByParam(query);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
-        if(shopList!=null){
-        	for(Shop shop : shopList){
-        		ShopVo shopVo =new ShopVo();
-        		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
-        		copier.copy(shop, shopVo, null);
-        		//店铺状态
-        		shopVo.setStatusName(ShopStatusEnum.valueOfCode(shop.getStatus()).getName());
-        		if(shop.getStatus()!=1){
-        			shopVo.setLabelCssName("status rest");
-        		}else{
-        			shopVo.setLabelCssName("status");
-        		}
-        		shopVoList.add(shopVo);
-        	}
-        }
+		if (shopList != null) {
+			for (Shop shop : shopList) {
+				ShopVo shopVo = new ShopVo();
+				BeanCopier copier = BeanCopierUtil.copy(Shop.class,
+						ShopVo.class);
+				copier.copy(shop, shopVo, null);
+				// 店铺状态
+				shopVo.setStatusName(ShopStatusEnum.valueOfCode(
+						shop.getStatus()).getName());
+				if (shop.getStatus() != 1) {
+					shopVo.setLabelCssName("status rest");
+				} else {
+					shopVo.setLabelCssName("status");
+				}
+				shopVoList.add(shopVo);
+			}
+		}
 		model.addAttribute("shopList", shopVoList);
 		return "admin/shop_list";
 	}
 
 	@RequestMapping(value = "/add")
-	public String add(@ModelAttribute("formBean") ShopVo shopVo, Model model) {
+	public String add(Model model) {
 		model.addAttribute("addOrEdit", "add");
 		return "admin/shop_edit";
 	}
 
-	@RequestMapping(value = "/edit")
-	public String edit(@ModelAttribute("formBean") ShopVo shopVo, Model model,
-			@RequestParam Long id) {
+	@RequestMapping(value = "/edit/{id}")
+	public String edit(Model model, @PathVariable(value = "id") Long id) {
 		Shop shop = null;
 		try {
 			shop = shopService.findbyid(id);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
+
+		ShopVo shopVo = new ShopVo();
 		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
 		copier.copy(shop, shopVo, null);
+		
+		model.addAttribute("shop", shopVo);
 		model.addAttribute("addOrEdit", "edit");
 		return "admin/shop_edit";
 	}
 
 	@RequestMapping(value = "/detail/{id}")
-	public String view(@ModelAttribute("formBean") ShopVo shopVo, Model model,
-			 @PathVariable(value = "id") Long id) {
+	public String view(Model model, @PathVariable(value = "id") Long id) {
 		Shop shop = null;
 		try {
 			shop = shopService.findbyid(id);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
+
+		ShopVo shopVo = new ShopVo();
 		BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
 		copier.copy(shop, shopVo, null);
-		//店铺状态
-		shopVo.setStatusName(ShopStatusEnum.valueOfCode(shop.getStatus()).getName());
-		//城市名称
+		// 店铺状态
+		shopVo.setStatusName(ShopStatusEnum.valueOfCode(shop.getStatus())
+				.getName());
+		// 城市名称
 		try {
-			City city=cityService.findbyid(shop.getCityId());
+			City city = cityService.findbyid(shop.getCityId());
 			shopVo.setFullPathName(city.getFullPathName());
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
-		
+
 		model.addAttribute("shop", shopVo);
 		return "admin/shop_detail";
 	}
 
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public String save(@ModelAttribute("formBean") ShopVo shopVo, Model model,
-			@RequestParam Long id) {
+	public String save(Model model, @RequestParam Long id) {
 		String success = "{\"success\": true}";
 		try {
 			Shop shop = new Shop();
-			BeanCopier copier = BeanCopierUtil.copy(ShopVo.class, Shop.class);
-			copier.copy(shopVo, shop, null);
+			/*
+			 * BeanCopier copier = BeanCopierUtil.copy(ShopVo.class,
+			 * Shop.class); copier.copy(shopVo, shop, null);
+			 */
 			// 保存操作
 			int rlt = 0;
 			if (shop.getId() == null) {// 新增

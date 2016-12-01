@@ -130,7 +130,7 @@ span.rest_tips{}
 /*文字明细页样式*/
 .input_list{background: #fff;width: 100%;color: #333333; font-size: 1.2rem}
 .input_list a{color: #333333;}
-.input_one{width:94%; margin: 0 auto; height: 3.2rem;line-height: 3rem; padding: 0 3%;}
+.input_one{width:94%; margin: 0 auto; height: 3.5rem;line-height: 3.2rem; padding: 0 3%;}
 /* .input_one:hover{background-color: rgba(242,242,242,.5);} */
 .input_one img,.input_one img,.input_right img{width: 1.5rem;height: auto; display: inline-block;vertical-align: middle}
 .input_one span,.input_info_main span,.input_one span{height: 100%;display: inline-block;vertical-align: middle;}
@@ -159,4 +159,15 @@ span.input_title{margin-left: 0.5rem;}
 .input_one select option{
 	padding: 0;
 	margin: 0;
+}
+
+.input_one input[type="file"]{
+    opacity: 0;
+    width:1px;
+}
+.input_one img.view_img{
+	height: 6.0rem;
+}
+.input_one img.upload_img{
+	 height: 6.0rem;
 }

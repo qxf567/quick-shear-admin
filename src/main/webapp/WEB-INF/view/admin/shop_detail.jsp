@@ -37,8 +37,8 @@
 			<div class="input_one">
 				<span>价格￥</span>
 				<div class="input_info_main">
-					<input type="text" id="businessHours"
-						value="${shop.businessHours}" readonly="readonly"/>
+					<input type="text" id="price"
+						value="${shop.price}" readonly="readonly"/>
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -65,26 +65,25 @@
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
-			<div class="input_one">
+			<div class="input_one" style="height: 6.5rem;line-height: 6.2rem;">
 				<span>图片</span>
-				<div class="input_info_main">
-					<input type="text" id="mainImageUrl"
-						value="${shop.mainImageUrl}" />
+				<div class="input_info_main" style="height: 6.0rem;">
+				<img src="${shop_img}/${shop.mainImageUrl}" class="view_img"/>
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
 			<div class="input_one">
 				<span>状态</span>
 				<div class="input_info_main">
-				<input type="text" id="status"
-						value="${shop.status}" readonly="readonly" />
+				<input type="text" id="statusName"
+						value="${shop.statusName}" readonly="readonly" />
 				</div>
 			</div>
 		</div>
 		<!--底部固定End-->
 		<div class="fixed_menu">
 			<div class="amount"></div>
-			<a href="/admin/shop/edit" id="edit">
+			<a href="/admin/shop/edit/${shop.id}" id="edit">
 				<div class="fixed_btn">编辑</div>
 			</a>
 		</div>

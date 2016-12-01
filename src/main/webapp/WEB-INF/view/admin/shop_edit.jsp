@@ -17,6 +17,7 @@
 <body>
 	<div class="container">
 		<div class="gap"></div>
+		<input id="id" value="${shop.id}" type="hidden" />
 		<div class="input_list">
 			<div class="input_one">
 				<span>名称</span>
@@ -37,16 +38,16 @@
 			<div class="input_one">
 				<span>价格￥</span>
 				<div class="input_info_main">
-					<input type="text" placeholder="理发价格单位:元" id="businessHours"
-						value="${shop.businessHours}" />
+					<input type="text" placeholder="理发价格单位:元" id="price"
+						value="${shop.price}" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
 			<div class="input_one">
 				<span>营业时间</span>
 				<div class="input_info_main">
-					<input type="text" placeholder="时间格式:10:00-21:00" id="businessHours"
-						value="${shop.businessHours}" />
+					<input type="text" placeholder="时间格式:10:00-21:00"
+						id="businessHours" value="${shop.businessHours}" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -73,11 +74,16 @@
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
-			<div class="input_one">
+			<div class="input_one" style="height: 6.5rem;line-height: 6.2rem;">
 				<span>图片</span>
-				<div class="input_info_main">
-					<input type="text" placeholder="门店主图" id="businessHours"
-						value="${shop.businessHours}" />
+				<div class="input_info_main" style="height: 6.0rem;">
+					<input id="input-upload-img-main" type="file"
+						name="input-upload-img-main"
+						accept="image/jpg, image/jpeg, image/png" /> <img
+						src="${admin_img}/upload01.png" class="upload_img" />
+					<c:if test="${not empty  shop.mainImageUrl}">
+						<img src="${shop_img}/${shop.mainImageUrl}" class="view_img" />
+					</c:if>
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
