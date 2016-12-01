@@ -1,4 +1,4 @@
-package com.shear.admin.controller;
+package com.shear.admin.controller.login;
 
 import java.util.List;
 

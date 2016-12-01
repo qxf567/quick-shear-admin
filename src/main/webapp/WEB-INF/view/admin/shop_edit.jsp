@@ -106,6 +106,14 @@
 			</a>
 		</div>
 	</div>
+	<script type="text/javascript"
+		src="${admin_js}/jQuery-File-Upload-8.2.1/jquery.iframe-transport.min.js"></script>
+	<script type="text/javascript"
+		src="${admin_js}/jQuery-File-Upload-8.2.1/jquery.fileupload.min.js"></script>
+	<script type="text/javascript"
+		src="${admin_js}/jQuery-File-Upload-8.2.1/jquery.fileupload-process.min.js"></script>
+	<script type="text/javascript"
+		src="${admin_js}/jQuery-File-Upload-8.2.1/jquery.fileupload-validate.min.js"></script>
 	<script type="text/javascript">
 	var update_img_main_url = '<c:url value="/fileupload/single"/>';
 	// 主图上传
