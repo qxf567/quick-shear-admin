@@ -77,8 +77,8 @@
 			<div class="input_one" style="height: 6.5rem;line-height: 6.2rem;">
 				<span>图片</span>
 				<div class="input_info_main" style="height: 6.0rem;">
-					<input id="input-upload-img-main" type="file"
-						name="input-upload-img-main"
+					<input id="upload-img-main" type="file"
+						name="upload-img-main"
 						accept="image/jpg, image/jpeg, image/png" /> <img
 						src="${admin_img}/upload01.png" class="upload_img" />
 					<c:if test="${not empty  shop.mainImageUrl}">
@@ -107,7 +107,55 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-
+	var update_img_main_url = '<c:url value="/fileupload/single"/>';
+	// 主图上传
+	$('#update_img_main').fileupload({
+		dataType : 'json',
+		type : "POST",
+		url :  update_img_main_url,
+		autoUpload : true,
+		maxFileSize : 22020096, // Maximum File Size in Bytes - 10 MB
+		minFileSize : 1000, // Minimum File Size in Bytes - 1 KB
+		acceptFileTypes : /(\.|\/)(jpg|png|jpeg)$/i,
+		limitConcurrentUploads : 50,
+		limitMultiFileUploads : 50,
+		forceIframeTransport : true,
+		done : function(e, data) {
+			if (data.result.success) {
+				var imgs = data.result.filePath.split(',');
+	            for (var i = 0; i < imgs.length; i++) {
+	                var info = imgs[i].split('&');
+	                img_url = _showImgUrl+info[0];
+	                html = '<div class="pic_area"><a data-path="' + info[0] + '"data-name="' + info[1] + '" title="点击查看大图" target="_blank" href="' + img_url + '"><button type="button" class="close" data-dismiss="alert">&times;</button><img class="img-polaroid" name = "prourl" value="' + info[0] + '" style="height:140px;width:140px;" src="' + img_url + '"/></a></div>';
+	                $(this).closest("form").find('#div-editor-pics').append(html);
+	                bindClose();
+	            }
+	            if($("#attachmentUrl").val() != null || $("#attachmentUrl").val() != "undefined"){
+	            	$("#attachmentUrl").val($("#attachmentUrl").val()+","+data.result.filePath);
+	            } else {
+	            	$("#attachmentUrl").val(data.result.filePath);
+	            }
+				
+			} else {
+				bootbox.alert(data.result.message);
+			}
+		},
+		fail : function(e, data) {
+			bootbox.alert("上传失败，可能文件太大，请重试");
+		},
+		always: function(e, data) {
+	        $(this).closest("div").find('.progress').fadeOut();
+	        $(this).prop('disabled', false);
+	        $(this).closest("span").removeClass('disabled');
+	    },
+	    progressall: function(e, data) {
+	        $(this).prop('disabled', true);
+	        $(this).closest("span").addClass('disabled');
+	        $(this).closest("div").find('.progress-multi').show();
+	        var progress = parseInt(data.loaded / data.total * 100, 10);
+	        $(this).closest("div").find('.progress-multi .bar').css('width', progress + '%');
+	    }
+	});
 	</script>
 </body>
 </html>
