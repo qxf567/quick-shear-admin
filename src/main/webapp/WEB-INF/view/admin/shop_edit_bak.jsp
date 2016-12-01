@@ -56,17 +56,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".info_one,.list_default").mouseover(function() {
-				$(".info_one,.list_default").removeClass("info_one_active");//移除所有.handle的active类
-				$(this).addClass("info_one_active");//再将滑倒的这个添加上active类
-			});
 
-			$(".info_one,.list_default").mouseout(function() {
-				$(this).removeClass("info_one_active");
-			});
-
-		});
 	</script>
 </body>
 </html>

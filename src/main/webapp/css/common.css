@@ -90,14 +90,14 @@ span.discount_label{color: #f8c4b2;font-size:1rem;margin-left: 0.8rem}
 #bottom_menu a{width: 25%;float: left;margin: 0 auto; height:50px;text-align: center;color: #999;padding-top: 28px}
 #bottom_menu a img{height: 28px; width: auto;margin: 0.5rem auto 0.45rem;}
 .haircut_checked span,.order_checked span,#bottom_menu a.personal_checked span,#bottom_menu a.more_checked span{color: #1c436f}
-.haircut_checked{background: #fff url(/img/common/haircut_checked_icon.png) center 6px no-repeat;background-size:21px auto;}
-.haircut{background: #fff url(/img/common/haircut_icon.png) center 6px no-repeat;background-size:21px auto;}
-.order_checked{background: #fff url(/img/common/order_checked_icon.png) center 6px no-repeat;background-size:21px auto;}
-.order{background: #fff url(/img/common/order_icon.png) center 6px no-repeat;background-size:21px auto;}
-.personal_checked{background: #fff url(/img/common/personal_checked_icon.png) center 6px no-repeat;background-size:21px auto;}
-.personal{background: #fff url(/img/common/personal_icon.png) center 6px no-repeat;background-size:21px auto;}
-.more_checked{background: #fff url(/img/common/more_checked_icon.png) center 6px no-repeat;background-size:21px auto;}
-.more{background: #fff url(/img/common/more_icon.png) center 6px no-repeat;background-size:21px auto;}
+.haircut_checked{background: #fff url(http://60.205.150.77:8180/admin.img/haircut_checked_icon.png) center 6px no-repeat;background-size:21px auto;}
+.haircut{background: #fff url(http://60.205.150.77:8180/admin.img/haircut_icon.png) center 6px no-repeat;background-size:21px auto;}
+.order_checked{background: #fff url(http://60.205.150.77:8180/admin.img/order_checked_icon.png) center 6px no-repeat;background-size:21px auto;}
+.order{background: #fff url(http://60.205.150.77:8180/admin.img/order_icon.png) center 6px no-repeat;background-size:21px auto;}
+.personal_checked{background: #fff url(http://60.205.150.77:8180/admin.img/personal_checked_icon.png) center 6px no-repeat;background-size:21px auto;}
+.personal{background: #fff url(http://60.205.150.77:8180/admin.img/personal_icon.png) center 6px no-repeat;background-size:21px auto;}
+.more_checked{background: #fff url(http://60.205.150.77:8180/admin.img/more_checked_icon.png) center 6px no-repeat;background-size:21px auto;}
+.more{background: #fff url(http://60.205.150.77:8180/admin.img/more_icon.png) center 6px no-repeat;background-size:21px auto;}
 /*首页底部固定的css*/
 /*取消确定37分底部固定的css*/
 .fixed_menu {height: 50px;font-size: 12px;}

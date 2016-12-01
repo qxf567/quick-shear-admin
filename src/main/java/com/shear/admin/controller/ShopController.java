@@ -38,11 +38,11 @@ public class ShopController extends AbstractController {
 
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
-		ShopQuery query = new ShopQuery();
+		ShopQuery queryObj = new ShopQuery();
 		List<Shop> shopList = null;
 		List<ShopVo> shopVoList = new ArrayList<ShopVo>();
 		try {
-			shopList = shopService.selectByParam(query);
+			shopList = shopService.selectByParam(queryObj);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
