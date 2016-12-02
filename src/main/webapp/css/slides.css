@@ -399,9 +399,11 @@ span.input_title {
 
 .input_one input[type="file"] {
 	opacity: 0;
-	width: 6rem;
-	height: 6rem;
-	font-size: 5rem;
+	width: 4rem;
+	height: 4rem;
+	font-size: 3rem;
+	position: absolute;
+	padding-top: 1.1rem;
 }
 
 .input_one img.view_img {
@@ -409,5 +411,5 @@ span.input_title {
 }
 
 .input_one img.upload_img {
-	height: 6.0rem;
+	height: 4.0rem;
 }

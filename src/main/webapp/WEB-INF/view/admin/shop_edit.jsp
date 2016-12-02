@@ -93,7 +93,7 @@
 				<div class="input_info_main">
 					<section>
 						<select id="province" class="gray">
-							<option value="-100">正常营业</option>
+							<option value="-100">选择店铺状态</option>
 						</select>
 					</section>
 				</div>

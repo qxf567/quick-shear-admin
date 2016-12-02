@@ -9,3 +9,4 @@ overlays/
 .idea/
 *.iml
 /target
+src/main/resources/conf/*.properties
