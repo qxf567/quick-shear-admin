@@ -5,6 +5,7 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
+<%@ include file="../common/fileuploadlibs.jsp"%>
 <script type="text/javascript">
 	//移动设备快速响应点击事件
 	$(document).ready(function() {
@@ -77,13 +78,10 @@
 			<div class="input_one" style="height: 6.5rem;line-height: 6.2rem;">
 				<span>图片</span>
 				<div class="input_info_main" style="height: 6.0rem;">
-					<form id="form-upload-img-main" method="post"
-						enctype="multipart/form-data">
 						<input id="input-upload-img-main" type="file"
-							name="input-upload-img-main"
+							name="mf"
 							accept="image/jpg, image/jpeg, image/png" /> <img
 							src="${admin_img}/upload01.png" class="upload_img" />
-					</form>
 					<c:if test="${not empty  shop.mainImageUrl}">
 						<img src="${shop_img}/${shop.mainImageUrl}" class="view_img" />
 					</c:if>
@@ -109,16 +107,7 @@
 			</a>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="${admin_js}/jquery-ui-1.10.3.interactions.min.js"></script>
-	<script type="text/javascript"
-		src="${admin_js}/jQuery-File-Upload-8.2.1/jquery.iframe-transport.min.js"></script>
-	<script type="text/javascript"
-		src="${admin_js}/jQuery-File-Upload-8.2.1/jquery.fileupload.min.js"></script>
-	<script type="text/javascript"
-		src="${admin_js}/jQuery-File-Upload-8.2.1/jquery.fileupload-process.min.js"></script>
-	<script type="text/javascript"
-		src="${admin_js}/jQuery-File-Upload-8.2.1/jquery.fileupload-validate.min.js"></script>
+
 	<script type="text/javascript">
 		var upload_img_main_url = '<c:url value="/fileupload/single"/>';
 		// 主图上传
@@ -127,7 +116,7 @@
 			type : "POST",
 			url : upload_img_main_url,
 			autoUpload : true,
-			maxFileSize : 22020096, // Maximum File Size in Bytes - 10 MB
+			maxFileSize : 5400000, // Maximum File Size in Bytes - 5 MB
 			minFileSize : 1000, // Minimum File Size in Bytes - 1 KB
 			acceptFileTypes : /(\.|\/)(jpg|png|jpeg)$/i,
 			limitConcurrentUploads : 50,
@@ -135,10 +124,10 @@
 			forceIframeTransport : true,
 			done : function(e, data) {
 				if (data.result.success) {
-					alert(data.result.message);
+					pop_up_alert("warning", "上传成功");
 
 				} else {
-					alert(data.result.message);
+					pop_up_alert("warning", "上传失败");
 				}
 			},
 			fail : function(e, data) {

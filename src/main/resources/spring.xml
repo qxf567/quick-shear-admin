@@ -20,6 +20,7 @@
     <context:annotation-config proxy-target-class="true" />
 
 	<import resource="classpath:com/quickshear/common/config/config.xml"/>
+	<import resource="classpath:com/quickshear/common/fileupload/fileupload.xml"/>
 	<import resource="classpath:com/quickshear/common/wechat/wechat.xml"/>
 	
 	<import resource="classpath:com/quickshear/shear-service.xml"/>

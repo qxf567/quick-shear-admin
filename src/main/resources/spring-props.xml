@@ -28,5 +28,4 @@
 		<property name="order" value="1" />
 		<property name="valueSeparator" value="?" />
 	</bean>
-	
 </beans>
