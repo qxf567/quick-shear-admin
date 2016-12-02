@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author brody
  * 
  */
-@RequestMapping("/download")
 @Controller
+@RequestMapping("/download")
 public class FileDownloadController {
 	
 	
