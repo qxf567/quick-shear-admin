@@ -33,18 +33,18 @@ public class FileUploadController {
 
 	@RequestMapping(value = "/single", method = RequestMethod.POST)
 	@ResponseBody
-	public String processSingleUpload(@RequestParam final MultipartFile mf) {
+	public String processSingleUpload(@RequestParam final MultipartFile mf,String folderName) {
 		
-		String result = fileService.uploadSinglePic(mf, false);
+		String result = fileService.uploadSinglePic(mf, false,folderName);
 		logger.info("upload pic result" + result);
 		return result;
 	}
 
 	@RequestMapping(value = "/multi", method = RequestMethod.POST)
 	@ResponseBody
-	public String processMultiUpload(@RequestParam final MultipartFile[] mfs) {
+	public String processMultiUpload(@RequestParam final MultipartFile[] mfs,String folderName) {
 
-		String result = fileService.uploadSinglePic(mfs[0], false);
+		String result = fileService.uploadSinglePic(mfs[0], false,folderName);
 		logger.info("upload pic result" + result);
 		return result;
 	}

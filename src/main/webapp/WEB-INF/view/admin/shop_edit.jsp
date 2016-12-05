@@ -18,7 +18,8 @@
 <body>
 	<div class="container">
 		<div class="gap"></div>
-		<input id="id" value="${shop.id}" type="hidden" />
+		<input id="id" value="${shop.id}" type="hidden" /> <input
+			id="mainImageUrl" value="${shop.mainImageUrl}" type="hidden" />
 		<div class="input_list">
 			<div class="input_one">
 				<span>名称</span>
@@ -78,13 +79,10 @@
 			<div class="input_one" style="height: 6.5rem;line-height: 6.2rem;">
 				<span>图片</span>
 				<div class="input_info_main" style="height: 6.0rem;">
-						<input id="input-upload-img-main" type="file"
-							name="mf"
-							accept="image/jpg, image/jpeg, image/png" /> <img
-							src="${admin_img}/upload01.png" class="upload_img" />
-					<c:if test="${not empty  shop.mainImageUrl}">
-						<img src="${shop_img}/${shop.mainImageUrl}" class="view_img" />
-					</c:if>
+					<input id="input-upload-img-main" type="file" name="mf"
+						accept="image/jpg, image/jpeg, image/png" /> <img
+						src="${admin_img}/upload01.png" class="upload_img" /> <img
+						id="mainImage" src="" class="view_img" style="display:none" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -110,30 +108,48 @@
 
 	<script type="text/javascript">
 		var upload_img_main_url = '<c:url value="/fileupload/single"/>';
-		// 主图上传
-		$('#input-upload-img-main').fileupload({
-			dataType : 'json',
-			type : "POST",
-			url : upload_img_main_url,
-			autoUpload : true,
-			maxFileSize : 5400000, // Maximum File Size in Bytes - 5 MB
-			minFileSize : 1000, // Minimum File Size in Bytes - 1 KB
-			acceptFileTypes : /(\.|\/)(jpg|png|jpeg)$/i,
-			limitConcurrentUploads : 50,
-			limitMultiFileUploads : 50,
-			forceIframeTransport : true,
-			done : function(e, data) {
-				if (data.result.success) {
-					pop_up_alert("warning", "上传成功");
+		
+		$(document).ready(function() {
+					if (${not empty shop.mainImageUrl}) {
+						$("#mainImage").attr("src",'${shop_img}/${shop.mainImageUrl}');
+						$("#mainImage").attr("style", '');
+					} else {
+						$("#mainImage").attr("src", '');
+						$("#mainImage").attr("style", 'display:none');
+					}
 
-				} else {
-					pop_up_alert("warning", "上传失败");
-				}
-			},
-			fail : function(e, data) {
-				pop_up_alert("warning", "上传失败，可能文件太大，请重试");
-			}
-		});
+				});
+		// 主图上传
+		$('#input-upload-img-main').fileupload(
+				{
+					dataType : 'json',
+					type : "POST",
+					url : upload_img_main_url,
+					formData : {
+						folderName : 'shop.img'
+					},
+					autoUpload : true,
+					maxFileSize : 5400000, // Maximum File Size in Bytes - 5 MB
+					minFileSize : 1000, // Minimum File Size in Bytes - 1 KB
+					acceptFileTypes : /(\.|\/)(jpg|png|jpeg)$/i,
+					limitConcurrentUploads : 50,
+					limitMultiFileUploads : 50,
+					forceIframeTransport : true,
+					done : function(e, data) {
+						if (data.result.success) {
+							$("#mainImage").attr('src',
+									'${shop_img}' + '/' + data.result.filePath);
+							$("#mainImageUrl").val(data.result.filePath);
+							$("#mainImage").attr('style', '');
+
+						} else {
+							pop_up_alert("warning", "上传失败");
+						}
+					},
+					fail : function(e, data) {
+						pop_up_alert("warning", "上传失败，可能文件太大，请重试");
+					}
+				});
 	</script>
 </body>
 </html>
