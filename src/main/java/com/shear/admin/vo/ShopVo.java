@@ -2,15 +2,15 @@ package com.shear.admin.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
-public class ShopVo implements Serializable{
+import com.quickshear.domain.City;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** 门店id(自增) */
+public class ShopVo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /** 门店id(自增) */
     private Long id;
 
     /** 门店名称 */
@@ -24,7 +24,7 @@ public class ShopVo implements Serializable{
 
     /** 城市id */
     private Long cityId;
-    
+
     /** 城市全路径id */
     private String fullPathId;
 
@@ -54,169 +54,158 @@ public class ShopVo implements Serializable{
 
     /** 状态(0无效1正常营业2暂停营业) */
     private Integer status;
-    
+
     /** 状态名称(0无效1正常营业2暂停营业) */
     private String statusName;
-    
+
     /** 状态效果(0无效1正常营业2暂停营业) */
     private String labelCssName;
 
-    /** 创建时间 */
-    private String cTime;
+    // 省份列表
+    List<City> provinces;
 
-    /** 最后修改时间 */
-    private String mTime;
+    public Long getId() {
+	return id;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getPhoneNumber() {
+	return phoneNumber;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public void setPhoneNumber(String phoneNumber) {
+	this.phoneNumber = phoneNumber;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public String getBusinessHours() {
+	return businessHours;
+    }
 
-	public String getBusinessHours() {
-		return businessHours;
-	}
+    public void setBusinessHours(String businessHours) {
+	this.businessHours = businessHours;
+    }
 
-	public void setBusinessHours(String businessHours) {
-		this.businessHours = businessHours;
-	}
+    public Long getCityId() {
+	return cityId;
+    }
 
-	public Long getCityId() {
-		return cityId;
-	}
+    public void setCityId(Long cityId) {
+	this.cityId = cityId;
+    }
 
-	public void setCityId(Long cityId) {
-		this.cityId = cityId;
-	}
+    public Double getLongitude() {
+	return longitude;
+    }
 
-	public Double getLongitude() {
-		return longitude;
-	}
+    public void setLongitude(Double longitude) {
+	this.longitude = longitude;
+    }
 
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
+    public Double getLatitude() {
+	return latitude;
+    }
 
-	public Double getLatitude() {
-		return latitude;
-	}
+    public void setLatitude(Double latitude) {
+	this.latitude = latitude;
+    }
 
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
+    public String getAddress() {
+	return address;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setAddress(String address) {
+	this.address = address;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getGeocode() {
+	return geocode;
+    }
 
-	public String getGeocode() {
-		return geocode;
-	}
+    public void setGeocode(String geocode) {
+	this.geocode = geocode;
+    }
 
-	public void setGeocode(String geocode) {
-		this.geocode = geocode;
-	}
+    public String getMainImageUrl() {
+	return mainImageUrl;
+    }
 
-	public String getMainImageUrl() {
-		return mainImageUrl;
-	}
+    public void setMainImageUrl(String mainImageUrl) {
+	this.mainImageUrl = mainImageUrl;
+    }
 
-	public void setMainImageUrl(String mainImageUrl) {
-		this.mainImageUrl = mainImageUrl;
-	}
+    public String getMultiImageUrls() {
+	return multiImageUrls;
+    }
 
-	public String getMultiImageUrls() {
-		return multiImageUrls;
-	}
+    public void setMultiImageUrls(String multiImageUrls) {
+	this.multiImageUrls = multiImageUrls;
+    }
 
-	public void setMultiImageUrls(String multiImageUrls) {
-		this.multiImageUrls = multiImageUrls;
-	}
+    public BigDecimal getPrice() {
+	return price;
+    }
 
-	public BigDecimal getPrice() {
-		return price;
-	}
+    public void setPrice(BigDecimal price) {
+	this.price = price;
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    public Integer getStatus() {
+	return status;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public void setStatus(Integer status) {
+	this.status = status;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public String getStatusName() {
+	return statusName;
+    }
 
-	public String getcTime() {
-		return cTime;
-	}
+    public void setStatusName(String statusName) {
+	this.statusName = statusName;
+    }
 
-	public void setcTime(String cTime) {
-		this.cTime = cTime;
-	}
+    public String getLabelCssName() {
+	return labelCssName;
+    }
 
-	public String getmTime() {
-		return mTime;
-	}
+    public void setLabelCssName(String labelCssName) {
+	this.labelCssName = labelCssName;
+    }
 
-	public void setmTime(String mTime) {
-		this.mTime = mTime;
-	}
+    public String getFullPathId() {
+	return fullPathId;
+    }
 
-	public String getStatusName() {
-		return statusName;
-	}
+    public void setFullPathId(String fullPathId) {
+	this.fullPathId = fullPathId;
+    }
 
-	public void setStatusName(String statusName) {
-		this.statusName = statusName;
-	}
+    public String getFullPathName() {
+	return fullPathName;
+    }
 
-	public String getLabelCssName() {
-		return labelCssName;
-	}
+    public void setFullPathName(String fullPathName) {
+	this.fullPathName = fullPathName;
+    }
 
-	public void setLabelCssName(String labelCssName) {
-		this.labelCssName = labelCssName;
-	}
+    public List<City> getProvinces() {
+	return provinces;
+    }
 
-	public String getFullPathId() {
-		return fullPathId;
-	}
-
-	public void setFullPathId(String fullPathId) {
-		this.fullPathId = fullPathId;
-	}
-
-	public String getFullPathName() {
-		return fullPathName;
-	}
-
-	public void setFullPathName(String fullPathName) {
-		this.fullPathName = fullPathName;
-	}
+    public void setProvinces(List<City> provinces) {
+	this.provinces = provinces;
+    }
 
 }
