@@ -95,6 +95,9 @@ public class ShopController extends AbstractController {
 	BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
 	copier.copy(shop, shopVo, null);
 
+	// 省份
+	// shopVo.setProvinces(selectCity(0L));
+
 	model.addAttribute("shop", shopVo);
 	model.addAttribute("addOrEdit", "edit");
 	return "admin/shop_edit";
@@ -135,7 +138,10 @@ public class ShopController extends AbstractController {
 	resObj.getMessage().setMsg(RetdCodeType.PASS_OK.getMsg());
 	try {
 	    Shop shop = new Shop();
-	    shop.setId(Long.valueOf(request.getParameter("id")));
+	    if (null != request.getParameter("id")
+		    && request.getParameter("id").length() != 0) {
+		shop.setId(Long.valueOf(request.getParameter("id")));
+	    }
 	    shop.setName(request.getParameter("name"));
 	    shop.setPhoneNumber(request.getParameter("phoneNumber"));
 	    shop.setPrice(new BigDecimal(request.getParameter("price")));
@@ -144,6 +150,9 @@ public class ShopController extends AbstractController {
 	    shop.setAddress(request.getParameter("address"));
 	    shop.setMainImageUrl(request.getParameter("mainImageUrl"));
 	    shop.setStatus(Integer.valueOf(request.getParameter("status")));
+	    shop.setLatitude((double) 0);
+	    shop.setLongitude((double) 0);
+	    shop.setGeocode("0");
 	    // 保存操作
 	    int rlt = 0;
 	    if (shop.getId() == null) {// 新增

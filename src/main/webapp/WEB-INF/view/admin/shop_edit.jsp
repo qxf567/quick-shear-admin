@@ -232,7 +232,7 @@
 	
 	//保存
 	$('#save').click(function() {
-	    var id = ${shop.id}; 
+	    var id = $("#id").val();
 	    var name = $("#name").val();
 	    var phoneNumber = $("#phoneNumber").val();
 	    var price = $("#price").val();
