@@ -2,9 +2,6 @@ package com.shear.admin.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
-
-import com.quickshear.domain.City;
 
 public class ShopVo implements Serializable {
 
@@ -60,9 +57,13 @@ public class ShopVo implements Serializable {
 
     /** 状态效果(0无效1正常营业2暂停营业) */
     private String labelCssName;
-
-    // 省份列表
-    List<City> provinces;
+    
+    // 已选择省份id
+    private Long selectProvinceId;
+    // 已选择城市id
+    private Long selectCityId;
+    // 已选择区县id
+    private Long selectTownId;
 
     public Long getId() {
 	return id;
@@ -200,12 +201,28 @@ public class ShopVo implements Serializable {
 	this.fullPathName = fullPathName;
     }
 
-    public List<City> getProvinces() {
-	return provinces;
+    public Long getSelectProvinceId() {
+        return selectProvinceId;
     }
 
-    public void setProvinces(List<City> provinces) {
-	this.provinces = provinces;
+    public void setSelectProvinceId(Long selectProvinceId) {
+        this.selectProvinceId = selectProvinceId;
+    }
+
+    public Long getSelectCityId() {
+        return selectCityId;
+    }
+
+    public void setSelectCityId(Long selectCityId) {
+        this.selectCityId = selectCityId;
+    }
+
+    public Long getSelectTownId() {
+        return selectTownId;
+    }
+
+    public void setSelectTownId(Long selectTownId) {
+        this.selectTownId = selectTownId;
     }
 
 }

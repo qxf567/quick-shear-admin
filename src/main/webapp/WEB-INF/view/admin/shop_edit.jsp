@@ -56,12 +56,11 @@
 					<section>
 						<select id="province" class="gray">
 							<option value="-100">选择省份</option>
-							<c:forEach items="${shop.provinces}" var="city">
-								<option value="${city.id}">${city.name}</option>
-							</c:forEach>
-						</select> <select id="city" class="gray">
+						</select> 
+						<select id="city" class="gray">
 							<option value="-100">选择城市</option>
-						</select> <select id="town" class="gray">
+						</select> 
+						<select id="town" class="gray">
 							<option value="-100">选择区县</option>
 						</select>
 					</section>
@@ -116,15 +115,67 @@
 	var city_select_url = '<c:url value="/admin/shop/citys/"/>';
 	var save_url = '<c:url value="/admin/shop/save"/>';
 
-	$(document).ready(
-		function() {
-		    if (${not empty shop.mainImageUrl}) {
-			$("#mainImage").attr("src",
-				'${shop_img}/${shop.mainImageUrl}');
-			$("#mainImage").attr("style", '');
+	$(document).ready(function() {
+		    if (${addOrEdit eq 'edit'}) {
+			   $("#mainImage").attr("src",'${shop_img}/${shop.mainImageUrl}');
+			   $("#mainImage").attr("style", '');
+			   //添加省份菜单
+			   var provinceSel = document.getElementById("province");
+			   var objData = ajaxCitys(0);
+			   var citys;
+			   if (objData != null && objData.code == 200) {
+			       citys=objData.businessObj;
+			       for (var i = 0; i < citys.length; i++) {
+				       provinceSel.add(new Option(citys[i].name,citys[i].id)); 
+				   }
+			    } else {
+				  pop_up_alert("warning","获取城市列表失败");
+			    } 
+			   //设置选中项
+			   $('#province').attr('value','${shop.selectProvinceId}');
+			   
+			   //添加城市菜单
+			   var citySel = document.getElementById("city");
+			   var objData = ajaxCitys(${shop.selectProvinceId});
+			   if (objData != null && objData.code == 200) {
+			       citys=objData.businessObj;
+			       for (var i = 0; i < citys.length; i++) {
+				   citySel.add(new Option(citys[i].name,citys[i].id)); 
+				   }
+			    } else {
+				  pop_up_alert("warning","获取城市列表失败");
+			    } 
+			   //设置选中项
+			   $('#city').attr('value','${shop.selectCityId}');
+			   
+			   //添加区县菜单
+			   var townSel = document.getElementById("town");
+			   var objData = ajaxCitys(${shop.selectCityId});
+			   if (objData != null && objData.code == 200) {
+			       citys=objData.businessObj;
+			       for (var i = 0; i < citys.length; i++) {
+				   townSel.add(new Option(citys[i].name,citys[i].id)); 
+				   }
+			    } else {
+				  pop_up_alert("warning","获取城市列表失败");
+			    } 
+			   //设置选中项
+			   $('#town').attr('value','${shop.selectTownId}');
+			   
 		    } else {
-			$("#mainImage").attr("src", '');
-			$("#mainImage").attr("style", 'display:none');
+			   $("#mainImage").attr("src", '');
+			   $("#mainImage").attr("style", 'display:none');
+			   //添加省份菜单
+			   var provinceSel = document.getElementById("province");
+			   var objData = ajaxCitys(0);
+			   if (objData != null && objData.code == 200) {
+			       var citys=objData.businessObj;
+			       for (var i = 0; i < citys.length; i++) {
+				       provinceSel.add(new Option(citys[i].name,citys[i].id)); 
+				   }
+			    } else {
+				  pop_up_alert("warning","获取城市列表失败");
+			    } 
 		    }
 		});
 	// 主图上传
@@ -159,76 +210,66 @@
 				}
 			    },
 			    fail : function(e, data) {
-				pop_up_alert("warning", "上传失败，可能文件太大，请重试");
+				    pop_up_alert("warning", "上传失败，可能文件太大，请重试");
 			    }
 	});
 
 	//选择省份
-	$('#province').change(
-			function() {
-			    var cityid = $("#province option:selected").val(); //获得选中的值
-			    $.ajax({
-					type : "post",
-					dataType : "json",
-					url : city_select_url + cityid,
-					data : "",
-					success : function(data) {
-					    if (data != null && data.code == 200) {
-						var citys = data.businessObj;
-						if (citys != null && citys.length >= 0) {
-						   //清空城市菜单
-						   var citySel = document.getElementById("city");
-						   citySel.options.length = 0;
-						   citySel.add(new Option("选择城市","-100"));
-						   //添加城市菜单
-						   for (var i = 0; i < citys.length; i++) {
-						       citySel.add(new Option(citys[i].name,citys[i].id)); 
-						   }
-						   //清空区县菜单
-						   var townSel = document.getElementById("town");
-						   townSel.options.length = 0;
-						   townSel.add(new Option("选择区县","-100"));
-						}
-					    } else {
-						   pop_up_alert("warning","获取城市信息失败");
-					    }
-					},
-					error : function() {
-					    pop_up_alert("warning","获取城市信息失败");
-					}
-			});
+	$('#province').change(function() {
+	    var cityid = $("#province option:selected").val(); //获得选中的值
+	    var objData = ajaxCitys(cityid);
+		if (objData != null && objData.code == 200) {
+			   //清空城市菜单
+			   var citySel = document.getElementById("city");
+			   citySel.options.length = 0;
+			   citySel.add(new Option("选择城市","-100"));
+			   //添加城市菜单
+			   for (var i = 0; i < citys.length; i++) {
+			       citySel.add(new Option(citys[i].name,citys[i].id)); 
+			   }
+			   //清空区县菜单
+			   var townSel = document.getElementById("town");
+			   townSel.options.length = 0;
+			   townSel.add(new Option("选择区县","-100"));
+		} else {
+			  pop_up_alert("warning","获取城市列表失败");
+	    } 
 	});
 	
 	//选择城市
 	$('#city').change(function() {
 	    var cityid = $("#city option:selected").val(); //获得选中的值
-	    $.ajax({
-			type : "post",
-			dataType : "json",
-			url : city_select_url + cityid,
-			data : "",
-			success : function(data) {
-			    if (data != null && data.code == 200) {
-				var citys = data.businessObj;
-				if (citys != null && citys.length >= 0) {
-				   //清空区县菜单
-				   var townSel = document.getElementById("town");
-				   townSel.options.length = 0;
-				   townSel.add(new Option("选择区县","-100"));
-				   //添加区县菜单
-				   for (var i = 0; i < citys.length; i++) {
-				       townSel.add(new Option(citys[i].name,citys[i].id)); 
-				   }
-				}
-			    } else {
-				  pop_up_alert("warning","获取区县信息失败");
-			    }
-			},
-			error : function() {
-			    pop_up_alert("warning","获取区县信息失败");
-			}
-		});
+	    var objData = ajaxCitys(cityid);
+		if (objData != null && objData.code == 200) {
+		   //清空区县菜单
+		   var townSel = document.getElementById("town");
+		   townSel.options.length = 0;
+		   townSel.add(new Option("选择区县","-100"));
+		   //添加区县菜单
+		   for (var i = 0; i < citys.length; i++) {
+		       townSel.add(new Option(citys[i].name,citys[i].id)); 
+		   }
+		} else {
+			  pop_up_alert("warning","获取城市列表失败");
+		} 
 	});
+	
+	function ajaxCitys(pid){
+	    var objData=null;
+	    $.ajax({
+		type : "post",
+		dataType : "json",
+		url : city_select_url + pid,
+		data : "",
+		async: false, 
+		success : function(data) {
+		    objData = data;
+		},
+		error : function() {
+		}
+	 });
+	    return objData;
+   };
 	
 	//保存
 	$('#save').click(function() {

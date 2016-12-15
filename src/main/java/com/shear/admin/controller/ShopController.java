@@ -76,7 +76,6 @@ public class ShopController extends AbstractController {
     @RequestMapping(value = "/add")
     public String add(Model model) {
 	ShopVo shopVo = new ShopVo();
-	shopVo.setProvinces(selectCity(0L));
 	model.addAttribute("shop", shopVo);
 	model.addAttribute("addOrEdit", "add");
 	return "admin/shop_edit";
@@ -92,12 +91,26 @@ public class ShopController extends AbstractController {
 	}
 
 	ShopVo shopVo = new ShopVo();
-	BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
-	copier.copy(shop, shopVo, null);
+	if (shop != null) {
+	    BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
+	    copier.copy(shop, shopVo, null);
 
-	// 省份
-	// shopVo.setProvinces(selectCity(0L));
+	    try {
+		City city = cityService.findbyid(shop.getCityId());
+		if (city != null) {
+		    String[] cityIdStrs = city.getFullPathId().split("\\|");
+		    // 已选省份
+		    shopVo.setSelectProvinceId(Long.valueOf(cityIdStrs[0]));
+		    // 已选城市
+		    shopVo.setSelectCityId(Long.valueOf(cityIdStrs[1]));
+		    // 已选区县
+		    shopVo.setSelectTownId(Long.valueOf(cityIdStrs[2]));
+		}
+	    } catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	    }
 
+	}
 	model.addAttribute("shop", shopVo);
 	model.addAttribute("addOrEdit", "edit");
 	return "admin/shop_edit";
@@ -156,7 +169,7 @@ public class ShopController extends AbstractController {
 	    // 保存操作
 	    int rlt = 0;
 	    if (shop.getId() == null) {// 新增
-		shop.setStatus(0);
+		// shop.setStatus(0);
 		rlt = shopService.save(shop);
 	    } else {
 		rlt = shopService.update(shop);
@@ -179,7 +192,7 @@ public class ShopController extends AbstractController {
     @ResponseBody
     public ResObj<List<City>> ajaxCitys(@PathVariable(value = "pid") Long pid) {
 	ResObj<List<City>> resObj = new ResObj<List<City>>();
-	List<City> citys = selectCity(pid);
+	List<City> citys = selectCityByPid(pid);
 	if (citys == null) {
 	    resObj.setCode(RetdCodeType.EX_APP.getCode());
 	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
@@ -191,7 +204,7 @@ public class ShopController extends AbstractController {
 	return resObj;
     }
 
-    private List<City> selectCity(Long pid) {
+    private List<City> selectCityByPid(Long pid) {
 	CityQuery queryObj = new CityQuery();
 	queryObj.setStatus(1);
 	queryObj.setPid(pid);
