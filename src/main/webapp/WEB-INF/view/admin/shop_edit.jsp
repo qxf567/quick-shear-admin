@@ -13,7 +13,7 @@
 	FastClick.attach(document.body);
     });
 </script>
-<title><c:if test="${addOrEdit eq 'add'}">新增店铺</c:if> <c:if test="${addOrEdit eq 'add'}">编辑店铺</c:if></title>
+<title><c:if test="${addOrEdit eq 'add'}">新增店铺</c:if> <c:if test="${addOrEdit eq 'edit'}">编辑店铺</c:if></title>
 </head>
 <body>
 	<div class="container">
