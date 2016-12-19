@@ -5,63 +5,31 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
-<script type="text/javascript">
-	//移动设备快速响应点击事件
-	$(document).ready(function() {
-		FastClick.attach(document.body);
-	});
-</script>
+
 <title>发型师列表</title>
 </head>
 <body>
 	<div class="container">
 		<div class="gap"></div>
 		<div class="info_list">
-			<a href="/admin/shop/list">
+		  <c:forEach items="${hairdresserList}" var="hairdresser">
+			<a href="/admin/hairdresser/detail/${hairdresserList.id}">
 				<div class="info_one">
-					<span></span> <img src="${admin_img}/order_icon.png" /> <span
-						class="checked_title">店铺管理</span>
+					<span></span> <img src="${user_img}/${hairdresser.photo}" /> <span
+						class="checked_title">${hairdresser.name} - ${hairdresser.shopName}</span>
 					<div class="checked_info_main">
 						<span></span> <img
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
 			</a> 
-			<a href="/admin/shop/list">
-				<div class="info_one">
-					<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img
-						src="${admin_img}/order_icon.png" />
-					<span class="checked_title">发型管理</span>
-					<div class="checked_info_main">
-						<span></span> <img
-							src="${admin_img}/checked_icon.png" />
-					</div>
-				</div>
-			</a> 
-			<a href="/admin/shop/list">
-				<div class="info_one">
-					<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img
-						src="${admin_img}/order_icon.png" />
-					<span class="checked_title">订单管理</span>
-					<div class="checked_info_main">
-						<span></span> <img
-							src="${admin_img}/checked_icon.png" />
-					</div>
-				</div>
-			</a> 
-			<a href="/admin/shop/list">
-				<div class="info_one">
-					<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img
-						src="${admin_img}/order_icon.png" />
-					<span class="checked_title">发型师管理</span>
-					<div class="checked_info_main">
-						<span></span> <img
-							src="${admin_img}/checked_icon.png" />
-					</div>
-				</div>
+		  </c:forEach>
+		</div>
+		<!--底部固定End-->
+		<div class="fixed_menu">
+			<div class="amount"></div>
+			<a href="/admin/hairdresser/add" id="addnew">
+				<div class="fixed_btn">新增发型师</div>
 			</a>
 		</div>
 	</div>

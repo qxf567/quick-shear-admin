@@ -7,12 +7,7 @@
 <%@ include file="../common/taglibs.jsp"%>
 <%@ include file="../common/fileuploadlibs.jsp"%>
 <c:set var="shopStatusEnum" value="<%=ShopStatusEnum.values()%>" />
-<script type="text/javascript">
-    //移动设备快速响应点击事件
-    $(document).ready(function() {
-	FastClick.attach(document.body);
-    });
-</script>
+
 <title><c:if test="${addOrEdit eq 'add'}">新增店铺</c:if> <c:if test="${addOrEdit eq 'edit'}">编辑店铺</c:if></title>
 </head>
 <body>

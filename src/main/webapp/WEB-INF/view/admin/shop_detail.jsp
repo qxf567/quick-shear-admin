@@ -5,12 +5,7 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
-<script type="text/javascript">
-	//移动设备快速响应点击事件
-	$(document).ready(function() {
-		FastClick.attach(document.body);
-	});
-</script>
+
 <title>店铺详情</title>
 </head>
 <body>

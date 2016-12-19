@@ -6,76 +6,42 @@
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
 <%@ include file="../common/fileuploadlibs.jsp"%>
-<c:set var="shopStatusEnum" value="<%=ShopStatusEnum.values()%>" />
-<script type="text/javascript">
-    //移动设备快速响应点击事件
-    $(document).ready(function() {
-	FastClick.attach(document.body);
-    });
-</script>
+<c:set var="hairdresserStatusEnum" value="<%=HairdresserStatusEnum.values()%>" />
+
 <title><c:if test="${addOrEdit eq 'add'}">新增发型师</c:if> <c:if test="${addOrEdit eq 'edit'}">编辑发型师</c:if></title>
 </head>
 <body>
 	<div class="container">
 		<div class="gap"></div>
-		<input id="id" value="${shop.id}" type="hidden" /> 
-		<input id="mainImageUrl" value="${shop.mainImageUrl}" type="hidden" />
+		<input id="id" value="${hairdresser.id}" type="hidden" /> 
+		<input id="mainImageUrl" value="${hairdresser.photo}" type="hidden" />
 		<div class="input_list">
 			<div class="input_one">
-				<span>名称</span>
+				<span>姓名</span>
 				<div class="input_info_main">
-					<input type="text" placeholder="输入门店名称" id="name" value="${shop.name}" />
+					<input type="text" placeholder="输入发型师姓名" id="name" value="${hairdresser.name}" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
 			<div class="input_one">
 				<span>电话</span>
 				<div class="input_info_main">
-					<input type="text" placeholder="输入联系电话" id="phoneNumber" value="${shop.phoneNumber}" />
+					<input type="text" placeholder="输入联系电话" id="phoneNumber" value="${hairdresser.phoneNumber}" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
 			<div class="input_one">
-				<span>价格￥</span>
-				<div class="input_info_main">
-					<input type="text" placeholder="理发价格单位:元" id="price" value="${shop.price}" />
-				</div>
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-			</div>
-			<div class="input_one">
-				<span>营业时间</span>
-				<div class="input_info_main">
-					<input type="text" placeholder="时间格式:10:00-21:00" id="businessHours"
-						value="${shop.businessHours}" />
-				</div>
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-			</div>
-			<div class="input_one">
-				<span>地址</span>
+				<span>店铺</span>
 				<div class="input_info_main">
 					<section>
-						<select id="province" class="gray">
-							<option value="-100">选择省份</option>
-						</select> 
-						<select id="city" class="gray">
-							<option value="-100">选择城市</option>
-						</select> 
-						<select id="town" class="gray">
-							<option value="-100">选择区县</option>
+						<select id="shop" class="gray">
+							<option value="-100">选择店铺</option>
 						</select>
 					</section>
 				</div>
 			</div>
-			<div class="input_one">
-				<span></span>
-				<div class="input_info_main">
-					<input type="text" placeholder="输入详细地址" id="address" value="${shop.address}"
-						readonly="readonly" /> <img src="${admin_img}/checked_icon.png" />
-				</div>
-				<hr style="background: #f2f2f2;height: 1px;border: none">
-			</div>
 			<div class="input_one" style="height: 6.5rem;line-height: 6.2rem;">
-				<span>图片</span>
+				<span>照片</span>
 				<div class="input_info_main" style="height: 6.0rem;">
 					<input id="input-upload-img-main" type="file" name="mf"
 						accept="image/jpg, image/jpeg, image/png" /> 
@@ -85,16 +51,24 @@
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
 			<div class="input_one">
+				<span></span>
+				<div class="input_info_main">
+					<input type="text" placeholder="输入休息日" id="address" value="${hairdresser.address}"
+						readonly="readonly" /> <img src="${admin_img}/checked_icon.png" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
 				<span>状态</span>
 				<div class="input_info_main">
 					<section>
-						<select id="shopStatus" class="gray">
-							<c:if test="${empty shop.status}">
-								<option value="-100">选择店铺状态</option>
+						<select id="hairdresserStatus" class="gray">
+							<c:if test="${empty hairdresser.status}">
+								<option value="-100">选择状态</option>
 							</c:if>
-							<c:forEach items="${shopStatusEnum}" var="shopStatus">
-								<option value="${shopStatus.code}"
-									<c:if test="${shopStatus.code eq shop.status}"> selected="selected"</c:if>>${shopStatus.name}</option>
+							<c:forEach items="${hairdresserStatusEnum}" var="hairdresserStatus">
+								<option value="${hairdresserStatus.code}"
+									<c:if test="${hairdresserStatus.code eq hairdresser.status}"> selected="selected"</c:if>>${hairdresserStatus.name}</option>
 							</c:forEach>
 						</select>
 					</section>

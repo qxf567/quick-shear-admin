@@ -10,7 +10,12 @@
 <script type="text/javascript" src="${admin_js}/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="${admin_js}/common.js"></script>
 <script type="text/javascript" src="${admin_js}/fastclick.js"></script>
-
+<script type="text/javascript">
+        //移动设备快速响应点击事件
+        $(document).ready(function(){
+            FastClick.attach(document.body);
+        });
+</script>
 <link type="text/css" rel="stylesheet" href="${admin_css}/common.css">
 <link type="text/css" rel="stylesheet" href="${admin_css}/user_center.css">
 <link type="text/css" rel="stylesheet" href="${admin_css}/order_list.css">

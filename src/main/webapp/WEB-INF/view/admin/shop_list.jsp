@@ -5,12 +5,7 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
-<script type="text/javascript">
-	//移动设备快速响应点击事件
-	$(document).ready(function() {
-		FastClick.attach(document.body);
-	});
-</script>
+
 <title>店铺列表</title>
 </head>
 <body>
@@ -21,7 +16,7 @@
 				<div class="bj_store">
 					<div class="${shop.labelCssName}">${shop.statusName}</div>
 					<a class="" href="/admin/shop/detail/${shop.id}"> <img
-						src="${admin_img}/dianpu.png"
+						src="${admin_img}/${shop.mainImageUrl}"
 						class="store_list_img" />
 					</a>
 					<p class="store_name">${shop.name}</p>

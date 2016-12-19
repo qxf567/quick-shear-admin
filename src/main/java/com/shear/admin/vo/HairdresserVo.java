@@ -2,14 +2,11 @@ package com.shear.admin.vo;
 
 import java.io.Serializable;
 
-public class HairdresserVo implements Serializable{
+public class HairdresserVo implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** id(自增) */
+    private static final long serialVersionUID = 1L;
+
+    /** id(自增) */
     private Long id;
 
     /** 姓名 */
@@ -20,9 +17,12 @@ public class HairdresserVo implements Serializable{
 
     /** 所属门店 */
     private Long shopId;
-    
+
     /** 所属门店 */
     private Long shopName;
+    
+    /** 照片 */
+    private String photo;
 
     /** 身份证正面照 */
     private String identityCardFacePhoto;
@@ -42,92 +42,100 @@ public class HairdresserVo implements Serializable{
     /** 最后修改时间 */
     private String mTime;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public String getPhoneNumber() {
+	return phoneNumber;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public void setPhoneNumber(String phoneNumber) {
+	this.phoneNumber = phoneNumber;
+    }
 
-	public Long getShopId() {
-		return shopId;
-	}
+    public Long getShopId() {
+	return shopId;
+    }
 
-	public void setShopId(Long shopId) {
-		this.shopId = shopId;
-	}
-	
-	public String getIdentityCardFacePhoto() {
-		return identityCardFacePhoto;
-	}
+    public void setShopId(Long shopId) {
+	this.shopId = shopId;
+    }
 
-	public void setIdentityCardFacePhoto(String identityCardFacePhoto) {
-		this.identityCardFacePhoto = identityCardFacePhoto;
-	}
+    public String getIdentityCardFacePhoto() {
+	return identityCardFacePhoto;
+    }
 
-	public String getIdentityCardBackPhoto() {
-		return identityCardBackPhoto;
-	}
+    public void setIdentityCardFacePhoto(String identityCardFacePhoto) {
+	this.identityCardFacePhoto = identityCardFacePhoto;
+    }
 
-	public void setIdentityCardBackPhoto(String identityCardBackPhoto) {
-		this.identityCardBackPhoto = identityCardBackPhoto;
-	}
+    public String getIdentityCardBackPhoto() {
+	return identityCardBackPhoto;
+    }
 
-	public String getRestday() {
-		return restday;
-	}
+    public void setIdentityCardBackPhoto(String identityCardBackPhoto) {
+	this.identityCardBackPhoto = identityCardBackPhoto;
+    }
 
-	public void setRestday(String restday) {
-		this.restday = restday;
-	}
+    public String getRestday() {
+	return restday;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public void setRestday(String restday) {
+	this.restday = restday;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public Integer getStatus() {
+	return status;
+    }
 
-	public String getcTime() {
-		return cTime;
-	}
+    public void setStatus(Integer status) {
+	this.status = status;
+    }
 
-	public void setcTime(String cTime) {
-		this.cTime = cTime;
-	}
+    public String getcTime() {
+	return cTime;
+    }
 
-	public String getmTime() {
-		return mTime;
-	}
+    public void setcTime(String cTime) {
+	this.cTime = cTime;
+    }
 
-	public void setmTime(String mTime) {
-		this.mTime = mTime;
-	}
+    public String getmTime() {
+	return mTime;
+    }
 
-	public Long getShopName() {
-		return shopName;
-	}
+    public void setmTime(String mTime) {
+	this.mTime = mTime;
+    }
 
-	public void setShopName(Long shopName) {
-		this.shopName = shopName;
-	}
+    public Long getShopName() {
+	return shopName;
+    }
+
+    public void setShopName(Long shopName) {
+	this.shopName = shopName;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
 }
