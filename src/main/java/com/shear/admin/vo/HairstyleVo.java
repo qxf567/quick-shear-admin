@@ -3,14 +3,14 @@ package com.shear.admin.vo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class HairstyleVo implements Serializable{
+public class HairstyleVo implements Serializable {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** id(自增) */
+    private static final long serialVersionUID = 1L;
+
+    /** id(自增) */
     private Long id;
 
     /** 发型名称 */
@@ -37,76 +37,76 @@ public class HairstyleVo implements Serializable{
     /** 最后修改时间 */
     private String mTime;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public String getDetail() {
-		return detail;
-	}
+    public String getDetail() {
+	return detail;
+    }
 
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
+    public void setDetail(String detail) {
+	this.detail = detail;
+    }
 
-	public String getMainImageUrl() {
-		return mainImageUrl;
-	}
+    public String getMainImageUrl() {
+	return mainImageUrl;
+    }
 
-	public void setMainImageUrl(String mainImageUrl) {
-		this.mainImageUrl = mainImageUrl;
-	}
+    public void setMainImageUrl(String mainImageUrl) {
+	this.mainImageUrl = mainImageUrl;
+    }
 
-	public String getMultiImageUrls() {
-		return multiImageUrls;
-	}
+    public String getMultiImageUrls() {
+	return multiImageUrls;
+    }
 
-	public void setMultiImageUrls(String multiImageUrls) {
-		this.multiImageUrls = multiImageUrls;
-	}
+    public void setMultiImageUrls(String multiImageUrls) {
+	this.multiImageUrls = multiImageUrls;
+    }
 
-	public BigDecimal getPrice() {
-		return price;
-	}
+    public BigDecimal getPrice() {
+	return price;
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    public void setPrice(BigDecimal price) {
+	this.price = price;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public Integer getStatus() {
+	return status;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public void setStatus(Integer status) {
+	this.status = status;
+    }
 
-	public String getcTime() {
-		return cTime;
-	}
+    public String getcTime() {
+	return cTime;
+    }
 
-	public void setcTime(String cTime) {
-		this.cTime = cTime;
-	}
+    public void setcTime(String cTime) {
+	this.cTime = cTime;
+    }
 
-	public String getmTime() {
-		return mTime;
-	}
+    public String getmTime() {
+	return mTime;
+    }
 
-	public void setmTime(String mTime) {
-		this.mTime = mTime;
-	}
+    public void setmTime(String mTime) {
+	this.mTime = mTime;
+    }
 
 }

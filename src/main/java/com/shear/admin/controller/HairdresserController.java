@@ -2,18 +2,22 @@ package com.shear.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.util.BeanCopierUtil;
+import com.quickshear.common.util.RetdCodeType;
+import com.quickshear.common.vo.ResObj;
 import com.quickshear.domain.Hairdresser;
 import com.quickshear.domain.query.HairdresserQuery;
 import com.quickshear.service.HairdresserService;
@@ -25,90 +29,113 @@ import com.shear.admin.vo.HairdresserVo;
 @RequestMapping("/admin/hairdresser")
 public class HairdresserController extends AbstractController {
 
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(HairdresserController.class);
+    private static final Logger LOGGER = LoggerFactory
+	    .getLogger(HairdresserController.class);
 
-	@Autowired
-	private HairdresserService hairdresserService;
-	@Autowired
-	private ShopService shopService;
+    @Autowired
+    private HairdresserService hairdresserService;
+    @Autowired
+    private ShopService shopService;
 
-	@RequestMapping(value = "/list")
-	public String list(Model model) {
-		HairdresserQuery query = new HairdresserQuery();
-		List<Hairdresser> hairdresserList = null;
-		query.setSort( "shop_id");
-		try {
-			hairdresserList = hairdresserService.selectByParam(query);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
-
-		model.addAttribute("hairdresserList", hairdresserList);
-		return "admin/hairdresser_list";
+    @RequestMapping(value = "/list")
+    public String list(Model model) {
+	HairdresserQuery query = new HairdresserQuery();
+	List<Hairdresser> hairdresserList = null;
+	query.setSort("shop_id");
+	try {
+	    hairdresserList = hairdresserService.selectByParam(query);
+	} catch (Exception e) {
+	    LOGGER.error(e.getMessage());
 	}
 
-	@RequestMapping(value = "/add")
-	public String add(@ModelAttribute("formBean") HairdresserVo hairdresserVo, Model model) {
-		model.addAttribute("addOrEdit", "add");
-		return "admin/hairdresser_edit";
+	model.addAttribute("hairdresserList", hairdresserList);
+	return "admin/hairdresser_list";
+    }
+
+    @RequestMapping(value = "/add")
+    public String add(Model model) {
+	HairdresserVo hairdresserVo = new HairdresserVo();
+	model.addAttribute("hairdresser", hairdresserVo);
+	model.addAttribute("addOrEdit", "add");
+	return "admin/hairdresser_edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}")
+    public String edit(Model model, @PathVariable(value = "id") Long id) {
+	Hairdresser hairdresser = null;
+	try {
+	    hairdresser = hairdresserService.findbyid(id);
+	} catch (Exception e) {
+	    LOGGER.error(e.getMessage());
+	}
+	HairdresserVo hairdresserVo = new HairdresserVo();
+	if (hairdresser != null) {
+	    BeanCopier copier = BeanCopierUtil.copy(Hairdresser.class,
+		    HairdresserVo.class);
+	    copier.copy(hairdresser, hairdresserVo, null);
+	}
+	model.addAttribute("hairdresser", hairdresserVo);
+	model.addAttribute("addOrEdit", "edit");
+	return "admin/hairdresser_edit";
+    }
+
+    @RequestMapping(value = "/detail/{id}")
+    public String view(Model model, @PathVariable(value = "id") Long id) {
+	Hairdresser hairdresser = null;
+	try {
+	    hairdresser = hairdresserService.findbyid(id);
+	} catch (Exception e) {
+	    LOGGER.error(e.getMessage());
+	}
+	HairdresserVo hairdresserVo = new HairdresserVo();
+	if (hairdresser != null) {
+	    BeanCopier copier = BeanCopierUtil.copy(Hairdresser.class,
+		    HairdresserVo.class);
+	    copier.copy(hairdresser, hairdresserVo, null);
+	}
+	model.addAttribute("hairdresser", hairdresserVo);
+	return "admin/hairdresser_detail";
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObj<String> save(HttpServletRequest request) {
+	ResObj<String> resObj = new ResObj<String>();
+	resObj.setCode(RetdCodeType.PASS_OK.getCode());
+	resObj.getMessage().setMsg(RetdCodeType.PASS_OK.getMsg());
+	try {
+	    Hairdresser hairdresser = new Hairdresser();
+	    if (null != request.getParameter("id")
+		    && request.getParameter("id").length() != 0) {
+		hairdresser.setId(Long.valueOf(request.getParameter("id")));
+	    }
+	    hairdresser.setName(request.getParameter("name"));
+	    hairdresser.setPhoneNumber(request.getParameter("phoneNumber"));
+	    hairdresser.setShopId(Long.valueOf(request.getParameter("shopId")));
+	    hairdresser.setShopName(request.getParameter("shopName"));
+	    hairdresser.setPhoto(request.getParameter("photo"));
+	    hairdresser.setRestday(request.getParameter("restday"));
+	    hairdresser.setStatus(Integer.valueOf(request.getParameter("status")));
+	    hairdresser.setCardFacePhoto("");
+	    hairdresser.setCardBackPhoto("");
+	    // 保存操作
+	    int rlt = 0;
+	    if (hairdresser.getId() == null) {// 新增
+		rlt = hairdresserService.save(hairdresser);
+	    } else {
+		rlt = hairdresserService.update(hairdresser);
+	    }
+
+	    if (rlt < 0) {
+		resObj.setCode(RetdCodeType.EX_APP.getCode());
+		resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+	    }
+	} catch (Exception e) {
+	    resObj.setCode(RetdCodeType.EX_APP.getCode());
+	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+	    LOGGER.error(e.getMessage());
 	}
 
-	@RequestMapping(value = "/edit")
-	public String edit(@ModelAttribute("formBean") HairdresserVo hairdresserVo, Model model,
-			@RequestParam Long id) {
-		Hairdresser hairdresser = null;
-		try {
-			hairdresser = hairdresserService.findbyid(id);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
-		BeanCopier copier = BeanCopierUtil.copy(Hairdresser.class, HairdresserVo.class);
-		copier.copy(hairdresser, hairdresserVo, null);
-		model.addAttribute("addOrEdit", "edit");
-		return "admin/hairdresser_edit";
-	}
-
-	@RequestMapping(value = "/view")
-	public String view(@ModelAttribute("formBean") HairdresserVo hairdresserVo, Model model,
-			@RequestParam Long id) {
-		Hairdresser hairdresser = null;
-		try {
-			hairdresser = hairdresserService.findbyid(id);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
-		BeanCopier copier = BeanCopierUtil.copy(Hairdresser.class, HairdresserVo.class);
-		copier.copy(hairdresser, hairdresserVo, null);
-		return "admin/hairdresser_view";
-	}
-
-	@RequestMapping(value = "/save")
-	@ResponseBody
-	public String save(@ModelAttribute("formBean") HairdresserVo hairdresserVo, Model model,
-			@RequestParam Long id) {
-		String success = "{\"success\": true}";
-		try {
-			Hairdresser hairdresser = new Hairdresser();
-			BeanCopier copier = BeanCopierUtil.copy(HairdresserVo.class, Hairdresser.class);
-			copier.copy(hairdresserVo, hairdresser, null);
-			// 保存操作
-			int rlt = 0;
-			if (hairdresser.getId() == null) {// 新增
-				hairdresser.setStatus(0);
-				rlt = hairdresserService.save(hairdresser);
-			} else {
-				rlt = hairdresserService.update(hairdresser);
-			}
-
-			if (rlt < 0) {
-				success = "{\"success\": false, \"exception\": \"保存失败\"}";
-			}
-		} catch (Exception e) {
-			success = "{\"success\": false, \"exception\": \"保存失败\"}";
-			LOGGER.error(e.getMessage());
-		}
-
-		return success;
-	}
+	return resObj;
+    }
 }

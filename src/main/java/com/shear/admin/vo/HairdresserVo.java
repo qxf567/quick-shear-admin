@@ -25,10 +25,10 @@ public class HairdresserVo implements Serializable {
     private String photo;
 
     /** 身份证正面照 */
-    private String identityCardFacePhoto;
+    private String cardFacePhoto;
 
     /** 身份证背面照 */
-    private String identityCardBackPhoto;
+    private String cardBackPhoto;
 
     /** 休息日 */
     private String restday;
@@ -72,22 +72,6 @@ public class HairdresserVo implements Serializable {
 
     public void setShopId(Long shopId) {
 	this.shopId = shopId;
-    }
-
-    public String getIdentityCardFacePhoto() {
-	return identityCardFacePhoto;
-    }
-
-    public void setIdentityCardFacePhoto(String identityCardFacePhoto) {
-	this.identityCardFacePhoto = identityCardFacePhoto;
-    }
-
-    public String getIdentityCardBackPhoto() {
-	return identityCardBackPhoto;
-    }
-
-    public void setIdentityCardBackPhoto(String identityCardBackPhoto) {
-	this.identityCardBackPhoto = identityCardBackPhoto;
     }
 
     public String getRestday() {
@@ -136,6 +120,22 @@ public class HairdresserVo implements Serializable {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getCardFacePhoto() {
+        return cardFacePhoto;
+    }
+
+    public void setCardFacePhoto(String cardFacePhoto) {
+        this.cardFacePhoto = cardFacePhoto;
+    }
+
+    public String getCardBackPhoto() {
+        return cardBackPhoto;
+    }
+
+    public void setCardBackPhoto(String cardBackPhoto) {
+        this.cardBackPhoto = cardBackPhoto;
     }
 
 }
