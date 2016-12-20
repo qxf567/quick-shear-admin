@@ -13,7 +13,7 @@
 		<div class="gap"></div>
 		<div class="info_list">
 		  <c:forEach items="${hairdresserList}" var="hairdresser">
-			<a href="/admin/hairdresser/detail/${hairdresserList.id}">
+			<a href="/admin/hairdresser/detail/${hairdresser.id}">
 				<div class="info_one">
 					<span></span> <img src="${user_img}/${hairdresser.photo}" /> <span
 						class="checked_title">${hairdresser.name} - ${hairdresser.shopName}</span>

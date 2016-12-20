@@ -162,6 +162,7 @@ public class ShopController extends AbstractController {
 	    shop.setCityId(Long.valueOf(request.getParameter("cityId")));
 	    shop.setAddress(request.getParameter("address"));
 	    shop.setMainImageUrl(request.getParameter("mainImageUrl"));
+	    shop.setMultiImageUrls("");
 	    shop.setStatus(Integer.valueOf(request.getParameter("status")));
 	    shop.setLatitude((double) 0);
 	    shop.setLongitude((double) 0);
