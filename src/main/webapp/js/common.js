@@ -22,11 +22,11 @@ function pop_up_alert(type,msg)
 {
     if( type == 'warning' )
     {
-        var img_src = 'http://60.205.150.77:8180/admin.img/warning.png';
+        var img_src = 'http://www.qiansishun.com:8180/admin.img/warning.png';
     }
     else
     {
-        var img_src = 'http://60.205.150.77:8180/admin.img/loading.gif';
+        var img_src = 'http://www.qiansishun.com:8180/admin.img/loading.gif';
     }
 
     var html =

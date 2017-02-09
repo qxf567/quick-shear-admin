@@ -5,6 +5,8 @@
 <html>
 <head>
 <%@ include file="../common/meta.jsp"%>
+<%@ include file="../common/taglibs.jsp"%>
+<link type="text/css" rel="stylesheet" href="${admin_css}/user_center.css">
 <title>员工自助</title>
 <script type="text/javascript" src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="http://qiansishun.oss-cn-beijing.aliyuncs.com/admin.js/common.js"></script>

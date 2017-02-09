@@ -5,6 +5,7 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
+<link type="text/css" rel="stylesheet" href="${admin_css}/user_center.css">
 
 <title>后台管理</title>
 </head>

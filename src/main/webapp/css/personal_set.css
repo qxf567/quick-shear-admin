@@ -1,0 +1,16 @@
+.container{height:100%;padding: 6rem 0px 3rem;}
+img.personal_bottom{position: fixed;bottom: 0;z-index: -999;max-width: 640px;}
+.one_question{display: none}
+.title_box{padding: 0 8%;font-size: 1.5rem;color: #333333}
+.title_box span{color: #f8c4b2;font-size: 1.5rem;font-weight:normal;margin-right: 5px;}
+.option_box,.style{color: #999; padding: 3rem 0;}
+.option_box p,.style p{display: flex;margin: 3.5rem auto;}
+.option_box p span,.style p span{border: 1px solid #dadada;border-radius: 1.2rem;text-align: center;  padding: 0.3rem 2rem;margin: 0 auto;font-size: 1.1rem;letter-spacing: 2px;min-width: 32%;cursor:pointer}
+.work_label p span{min-width: 55%;}
+.option_box p span.active,.style p span.active{border: 1px solid #1c436f;color: #1c436f}
+.next_box{font-size: 1.3rem;color: #1c436f;letter-spacing: 3px;text-align: center;cursor:pointer}
+.last{text-align: center;font-size: 1.5rem;margin-top: 30%}
+.last img{width: 20%;margin: 0 auto 15px;}
+.tips_box{position: absolute;display: block;}
+.tips_box img{width: 80%;position: relative;z-index: -999;margin-left: 10%;}
+.tips{position: absolute;bottom: 8%;left:0;right:0;color: #fff;font-size: 1.2rem;}

@@ -19,8 +19,9 @@
         .voice span{color: #1c436f}
         .field_set input{font-size: 0.8rem;}
 </style>
-</head>
 
+<title>系统用户登录</title>
+</head>
 
 <body>
 <div class="container">
@@ -63,14 +64,10 @@ $('#save').click(function() {
 		url : save_url,
 		data : {'phoneNumber':phoneNumber},
 		success : function(data) {
-		    if (data != null && data.code == 200) {
-			  window.location.href='<c:url value="/admin/login"/>';
-		    } else {
-			  pop_up_alert("warning","提交失败");
-		    }
+		    window.location.href='<c:url value="/admin/login/${openid}"/>';
 		},
 		error : function() {
-		    pop_up_alert("warning","提交失败");
+		    window.location.href='<c:url value="/admin/login/${openid}"/>';
 		}
 	});
 });

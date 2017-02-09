@@ -6,6 +6,8 @@
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
 <%@ include file="../common/fileuploadlibs.jsp"%>
+<link type="text/css" rel="stylesheet" href="${admin_css}/order_list.css">
+<link type="text/css" rel="stylesheet" href="${admin_css}/slides.css">
 <c:set var="shopStatusEnum" value="<%=ShopStatusEnum.values()%>" />
 
 <title><c:if test="${addOrEdit eq 'add'}">新增店铺</c:if> <c:if test="${addOrEdit eq 'edit'}">编辑店铺</c:if></title>

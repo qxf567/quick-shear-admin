@@ -5,7 +5,8 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
-
+<link type="text/css" rel="stylesheet" href="${admin_css}/order_list.css">
+<link type="text/css" rel="stylesheet" href="${admin_css}/slides.css">
 <title>发型师详情</title>
 </head>
 <body>
