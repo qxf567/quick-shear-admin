@@ -18,7 +18,7 @@
 		</div>
 		<div class="gap"></div>
 		<div class="info_list">
-			<a href="/admin/shop/list">
+			<a href="${shear_admin_url}/admin/shop/list">
 				<div class="info_one">
 					<span></span> <img src="${admin_img}/order_icon.png" /> <span
 						class="checked_title">店铺管理</span>
@@ -27,7 +27,7 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="/admin/order/list">
+			</a> <a href="${shear_admin_url}/admin/order/list">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
@@ -38,7 +38,7 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="/admin/hairdresser/list">
+			</a> <a href="${shear_admin_url}/admin/hairdresser/list">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
@@ -49,7 +49,7 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="/admin/hairstyle/list">
+			</a> <a href="${shear_admin_url}/admin/hairstyle/list">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img

@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quickshear.common.config.ShearConfig;
 import com.quickshear.common.enumeration.ShopStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.RetdCodeType;
 import com.quickshear.common.vo.ResObj;
+import com.quickshear.common.wechat.WechatManager;
 import com.quickshear.domain.City;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.CityQuery;
@@ -41,6 +43,12 @@ public class ShopController extends AbstractController {
     private ShopService shopService;
     @Autowired
     private CityService cityService;
+    @Autowired
+    private ShearConfig shearConfig;
+    @Autowired
+    private WechatManager wechatManager;
+    // 当前网页的URL，不包含参数部分
+    private String url = "http://m.qiansishun.com/v1/admin/shop";
 
     @RequestMapping(value = "/list")
     public String list(Model model) {
@@ -76,6 +84,7 @@ public class ShopController extends AbstractController {
     @RequestMapping(value = "/add")
     public String add(Model model) {
 	ShopVo shopVo = new ShopVo();
+	setWxJsApiToModel(model,url+"/add");
 	model.addAttribute("shop", shopVo);
 	model.addAttribute("addOrEdit", "add");
 	return "admin/shop_edit";
@@ -111,6 +120,7 @@ public class ShopController extends AbstractController {
 	    }
 
 	}
+	setWxJsApiToModel(model,url+"/edit/"+id);
 	model.addAttribute("shop", shopVo);
 	model.addAttribute("addOrEdit", "edit");
 	return "admin/shop_edit";
@@ -215,5 +225,19 @@ public class ShopController extends AbstractController {
 	    LOGGER.error(e.getMessage());
 	}
 	return null;
+    }
+    
+    /**
+     * 设置微信jsApi页面授权参数
+     */
+    private void setWxJsApiToModel(Model model,String url){
+
+	String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
+	String nonceStr = "Wm3WZY" + timestamp;
+	String sign = wechatManager.getSign(timestamp, nonceStr, url);
+	model.addAttribute("appid", shearConfig.getAppId());
+	model.addAttribute("timestamp", timestamp);
+	model.addAttribute("nonceStr", nonceStr);
+	model.addAttribute("sign", sign);
     }
 }

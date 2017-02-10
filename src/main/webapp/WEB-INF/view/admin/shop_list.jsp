@@ -16,7 +16,7 @@
 			<c:forEach items="${shopList}" var="shop">
 				<div class="bj_store">
 					<div class="${shop.labelCssName}">${shop.statusName}</div>
-					<a class="" href="/admin/shop/detail/${shop.id}"> <img
+					<a class="" href="${shear_admin_url}/admin/shop/detail/${shop.id}"> <img
 						src="${admin_img}/${shop.mainImageUrl}"
 						class="store_list_img" />
 					</a>
@@ -29,7 +29,7 @@
 		<!--底部固定End-->
 		<div class="fixed_menu">
 			<div class="amount"></div>
-			<a href="/admin/shop/add" id="addnew">
+			<a href="${shear_admin_url}/admin/shop/add" id="addnew">
 				<div class="fixed_btn">新增店铺</div>
 			</a>
 		</div>
