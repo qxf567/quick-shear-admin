@@ -13,10 +13,8 @@
 	<div class="container">
 		<div class="head" align="center"
 			style="background-image:url(${admin_img}/user_bg.jpg);">
-			<img
-				src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEKJMd8lLra88qsIJIdYcWdSKwx4t6foBuwRr4ef58gTC0BxnKDlGjaoABKWfc4WiaNQGhl09RIicpeQ/0"
-				style="" />
-			<div class="name">Den</div>
+			<img src="${headimgurl}" style="" />
+			<div class="name">${nickname}</div>
 		</div>
 		<div class="gap"></div>
 		<div class="info_list">
@@ -29,18 +27,7 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="/admin/shop/list">
-				<div class="info_one">
-					<hr style="background: #f2f2f2;height: 1px;border: none">
-					<span></span> <img
-						src="${admin_img}/order_icon.png" />
-					<span class="checked_title">发型管理</span>
-					<div class="checked_info_main">
-						<span></span> <img
-							src="${admin_img}/checked_icon.png" />
-					</div>
-				</div>
-			</a> <a href="/admin/shop/list">
+			</a> <a href="/admin/order/list">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
@@ -51,7 +38,7 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a> <a href="/admin/shop/list">
+			</a> <a href="/admin/hairdresser/list">
 				<div class="info_one">
 					<hr style="background: #f2f2f2;height: 1px;border: none">
 					<span></span> <img
@@ -62,7 +49,18 @@
 							src="${admin_img}/checked_icon.png" />
 					</div>
 				</div>
-			</a>
+			</a> <a href="/admin/hairstyle/list">
+				<div class="info_one">
+					<hr style="background: #f2f2f2;height: 1px;border: none">
+					<span></span> <img
+						src="${admin_img}/order_icon.png" />
+					<span class="checked_title">发型管理</span>
+					<div class="checked_info_main">
+						<span></span> <img
+							src="${admin_img}/checked_icon.png" />
+					</div>
+				</div>
+			</a> 
 		</div>
 	</div>
 	<script type="text/javascript">

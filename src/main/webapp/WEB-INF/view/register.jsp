@@ -26,6 +26,7 @@
 <body>
 <div class="container">
 <div class="one_question" id="first" style="display: block;">
+<input id="vertify_code" value="" type="hidden" /> 
         <div class="title_box">
             <span>${message}</span>
         </div>
@@ -55,19 +56,129 @@
 
 <script type="text/javascript">
 var save_url = '<c:url value="/admin/user/save"/>';
+var second_count = 60;  //倒数计时
+var counting = 0;  //是否正在倒计时中
+var timer;  //定时器
+//点击获取验证码事件
+function do_get_code( obj ){
+    var phoneNumber   = $("#sign_up_mobile").val();
+    if(phoneNumber == '')
+    {
+	    pop_up_alert("warning","请填写手机号码！");
+        return false;
+    }
+    if(!(/^[1][34578][0-9]{9}$/.test(phoneNumber)))
+    {
+	    pop_up_alert("warning","请填写正确的手机号码！");
+        return false;
+    }
+
+    var _this = obj;
+    $.ajax({
+        url         :   '<c:url value="/admin/user/sendvertifycode"/>',
+        type        :   'post',
+        dataType    :   'json',
+        data        :   {"phoneNumber":phoneNumber},
+        beforeSend  :   function()
+        {
+            _this.unbind("click");
+            _this.html("获取中...");
+            _this.css("color","gray");
+        },
+        success     :   function(data)
+        {
+            if(data != null && data.code == 200)
+            {
+                var i = second_count;
+                //验证码60秒后重新获取
+                timer = setInterval(function(){
+                    counting = 1;
+                    _this.val(i+'秒后重试');
+                    i--;
+                    if(i < 0)
+                    {
+                        _this
+                            .val("获取验证码")
+                            .css("color",'#1c436f');
+                        $("#J_code_btn").unbind().bind("click",function(){do_get_code($("#J_code_btn"));})
+                        counting = 0;
+                        clearInterval(timer);
+                    }
+                },1000);
+                $("#vertify_code").val(data.message.msg);
+            }
+            else
+            {
+                _this.val("获取验证码");
+                _this.css("color","#1c436f");
+                $("#J_code_btn").unbind().bind("click",function(){do_get_code($("#J_code_btn"));})
+                alert(data.message.msg);
+            }
+        }
+    });
+}
+//发送验证码
+$("#sign_up_mobile")
+    .keyup(function(){
+        mobile_keyup_act();
+    })
+    .blur(function(){
+        mobile_keyup_act();
+    });
+
+//电话号码keyup、blur事件
+function mobile_keyup_act()
+{
+    var phoneNumber = $("#sign_up_mobile").val();
+
+    //验证手机号码是否符合规范
+    if((/^[1][34578][0-9]{9}$/.test(phoneNumber)))
+    {
+        $("#J_code_btn").css("color","#1c436f").unbind().bind("click",function(){do_get_code($("#J_code_btn"));})
+    }
+    else
+    {
+        if(counting == 0)
+        {
+            $("#J_code_btn").css("color","#999").unbind("click");
+        }
+    }
+}
+
 //保存
 $('#save').click(function() {
     var phoneNumber = $("#sign_up_mobile").val();
+    var vertifyCode = $("#vertify_code").val();
+    var identifyingCode = $("#sign_up_identifying").val();
+    if(phoneNumber == '')
+    {
+	    pop_up_alert("warning","请填写手机号码！");
+        return false;
+    }
+    if(!(/^[1][34578][0-9]{9}$/.test(phoneNumber)))
+    {
+	    pop_up_alert("warning","请填写正确的手机号码！");
+        return false;
+    }
+    if(identifyingCode == '')
+    {
+	    pop_up_alert("warning","请填写验证码！");
+        return false;
+    }
     $.ajax({
 		type : "post",
 		dataType : "json",
 		url : save_url,
-		data : {'phoneNumber':phoneNumber},
+		data : {'phoneNumber':phoneNumber,'vertifyCode':vertifyCode,'identifyingCode':identifyingCode},
 		success : function(data) {
-		    window.location.href='<c:url value="/admin/login/${openid}"/>';
+		    if (data != null && data.code == 200) {
+			    window.location.href='<c:url value="/admin/login/${openid}"/>';
+		    } else {
+			   pop_up_alert("warning",data.message.msg);
+		    }
 		},
 		error : function() {
-		    window.location.href='<c:url value="/admin/login/${openid}"/>';
+		    pop_up_alert("warning",data.message.msg);
 		}
 	});
 });

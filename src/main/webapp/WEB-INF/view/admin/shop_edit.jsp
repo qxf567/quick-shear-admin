@@ -213,6 +213,7 @@
 
 	//选择省份
 	$('#province').change(function() {
+	    var citys;
 	    var cityid = $("#province option:selected").val(); //获得选中的值
 	    var objData = ajaxCitys(cityid);
 		if (objData != null && objData.code == 200) {
@@ -221,6 +222,7 @@
 			   citySel.options.length = 0;
 			   citySel.add(new Option("选择城市","-100"));
 			   //添加城市菜单
+			   citys=objData.businessObj;
 			   for (var i = 0; i < citys.length; i++) {
 			       citySel.add(new Option(citys[i].name,citys[i].id)); 
 			   }
@@ -235,6 +237,7 @@
 	
 	//选择城市
 	$('#city').change(function() {
+	    var citys;
 	    var cityid = $("#city option:selected").val(); //获得选中的值
 	    var objData = ajaxCitys(cityid);
 		if (objData != null && objData.code == 200) {
@@ -243,6 +246,7 @@
 		   townSel.options.length = 0;
 		   townSel.add(new Option("选择区县","-100"));
 		   //添加区县菜单
+		   citys=objData.businessObj;
 		   for (var i = 0; i < citys.length; i++) {
 		       townSel.add(new Option(citys[i].name,citys[i].id)); 
 		   }
