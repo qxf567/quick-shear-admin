@@ -18,7 +18,7 @@
 			<a href="${shear_admin_url}/admin/hairstyle/detail/${hairstyle.id}">
 				<div class="info_one">
 					<span></span> <img src="${hairstyle_img}/${hairstyle.mainImageUrl}" /> <span
-						class="checked_title">${hairstyle.name} - ${hairstyle.price}</span>
+						class="checked_title">${hairstyle.name}</span>
 					<div class="checked_info_main">
 						<span></span> <img
 							src="${admin_img}/checked_icon.png" />

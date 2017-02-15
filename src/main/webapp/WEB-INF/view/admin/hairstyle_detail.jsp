@@ -25,8 +25,8 @@
 			<div class="input_one">
 				<span>性别</span>
 				<div class="input_info_main">
-					<input type="text" id="sex"
-						value="${hairstyle.sexName}" readonly="readonly"/>
+					<input type="radio" name="sex" value="0" checked="checked" disabled="disabled"/>男士
+					<input type="radio" name="sex" value="1" disabled="disabled"/>女士
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -70,7 +70,15 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-
+	$(document).ready(function() {
+		if(${hairstyle.sex eq '0'}){
+			$("input[name='sex']").eq(0).attr("checked","checked");
+			$("input[name='sex']").eq(1).removeAttr("checked");
+		}else{
+			$("input[name='sex']").eq(0).removeAttr("checked");
+			$("input[name='sex']").eq(1).attr("checked","checked");
+		}
+	});
 	</script>
 </body>
 </html>

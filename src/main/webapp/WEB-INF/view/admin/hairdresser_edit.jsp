@@ -5,6 +5,7 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <link type="text/css" rel="stylesheet" href="${admin_css}/order_list.css">
 <link type="text/css" rel="stylesheet" href="${admin_css}/slides.css">
 <c:set var="hairdresserStatusEnum" value="<%=HairdresserStatusEnum.values()%>" />
@@ -36,7 +37,13 @@
 				<div class="input_info_main">
 					<section>
 						<select id="shop" class="gray">
-							<option value="-100">选择店铺</option>
+						    <c:if test="${empty hairdresser.shopId}">
+								<option value="-100">选择店铺</option>
+							</c:if>
+							<c:forEach items="${hairdresser.shopList}" var="shop">
+								<option value="${shop.id}"
+									<c:if test="${hairdresser.shopId eq shop.id}"> selected="selected"</c:if>>${shop.name}</option>
+							</c:forEach>
 						</select>
 					</section>
 				</div>
@@ -84,7 +91,7 @@
 	</div>
 
 	<script type="text/javascript">
-	var save_url = '<c:url value="/admin/shop/save"/>';
+	var save_url = '<c:url value="/admin/hairdresser/save"/>';
 
 	$(document).ready(function() {
 		    if (${addOrEdit eq 'edit'}) {
@@ -93,6 +100,7 @@
 		    } else {
 			   $("#mainImage").attr("src", '');
 			   $("#mainImage").attr("style", 'display:none');
+			  
 		    }
 		});
 	//微信jsApi授权
@@ -144,8 +152,7 @@
 	    var id = $("#id").val();
 	    var name = $("#name").val();
 	    var phoneNumber = $("#phoneNumber").val();
-	    var shopId = $("#shopId").val();
-	    var shopName = $("#shopName").val();
+	    var shopId = $("#shop option:selected").val();
 	    var restday = $("restday").val();
 	    var mainImageUrl = $("#mainImageUrl").val();
 	    var status = $("#hairdresserStatus option:selected").val();
@@ -157,7 +164,6 @@
 			    	'name':name,
 			    	'phoneNumber':phoneNumber,
 			    	'shopId':shopId,
-			    	'shopName':shopName,
 			    	'restday':restday,
 			    	'mainImageUrl':mainImageUrl,
 			    	'status':status},

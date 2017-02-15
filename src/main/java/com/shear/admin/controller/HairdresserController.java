@@ -21,7 +21,9 @@ import com.quickshear.common.util.RetdCodeType;
 import com.quickshear.common.vo.ResObj;
 import com.quickshear.common.wechat.utils.WechatJsApiUtil;
 import com.quickshear.domain.Hairdresser;
+import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.HairdresserQuery;
+import com.quickshear.domain.query.ShopQuery;
 import com.quickshear.service.HairdresserService;
 import com.quickshear.service.ShopService;
 import com.shear.admin.controller.base.AbstractController;
@@ -63,6 +65,7 @@ public class HairdresserController extends AbstractController {
     @RequestMapping(value = "/add")
     public String add(Model model) {
 	HairdresserVo hairdresserVo = new HairdresserVo();
+	hairdresserVo.setShopList(selectShops(null));
 	wechatJsApiUtil.setWxJsApiToModel(model,url+"/add");
 	model.addAttribute("hairdresser", hairdresserVo);
 	model.addAttribute("addOrEdit", "add");
@@ -83,7 +86,7 @@ public class HairdresserController extends AbstractController {
 		    HairdresserVo.class);
 	    copier.copy(hairdresser, hairdresserVo, null);
 	}
-	
+	hairdresserVo.setShopList(selectShops(null));
 	wechatJsApiUtil.setWxJsApiToModel(model,url+"/edit/"+id);
 	model.addAttribute("hairdresser", hairdresserVo);
 	model.addAttribute("addOrEdit", "edit");
@@ -123,8 +126,13 @@ public class HairdresserController extends AbstractController {
 	    }
 	    hairdresser.setName(request.getParameter("name"));
 	    hairdresser.setPhoneNumber(request.getParameter("phoneNumber"));
-	    hairdresser.setShopId(Long.valueOf(request.getParameter("shopId")));
-	    hairdresser.setShopName(request.getParameter("shopName"));
+	    Long shopId=Long.valueOf(request.getParameter("shopId"));
+	    hairdresser.setShopId(shopId);
+	    hairdresser.setShopName("");
+        List<Shop> shops = selectShops(shopId);
+        if(shops != null && shops.size()>0){
+        	hairdresser.setShopName(shops.get(0).getName());
+        }
 	    hairdresser.setPhoto(request.getParameter("photo"));
 	    hairdresser.setRestday(request.getParameter("restday"));
 	    hairdresser.setStatus(Integer.valueOf(request.getParameter("status")));
@@ -151,4 +159,18 @@ public class HairdresserController extends AbstractController {
 
 	return resObj;
     }
+    
+	private List<Shop> selectShops(Long shopId) {
+		ShopQuery queryObj = new ShopQuery();
+		if(shopId != null){
+			queryObj.setId(shopId);
+		}
+		queryObj.setStatus(1);
+		try {
+			return shopService.selectByParam(queryObj);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
 }

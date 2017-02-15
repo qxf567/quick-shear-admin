@@ -29,7 +29,6 @@
 				<span>性别</span>
 				<div class="input_info_main">
 					<input type="radio" name="sex" value="0" checked="checked" />男士
-					<br>
 					<input type="radio" name="sex" value="1" />女士
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
@@ -87,10 +86,15 @@
 
 	$(document).ready(function() {
 		    if (${addOrEdit eq 'edit'}) {
-			   $("#mainImage").attr("src",'${user_img}/${hairstyle.mainImageUrl}');
+			   $("#mainImage").attr("src",'${hairstyle_img}/${hairstyle.mainImageUrl}');
 			   $("#mainImage").attr("style", '');
-			   $('input:radio[name="sex"]:checked').val() == '${hairstyle.sex}';
-			   
+			   if(${hairstyle.sex eq '0'}){
+					$("input[name='sex']").eq(0).attr("checked","checked");
+					$("input[name='sex']").eq(1).removeAttr("checked");
+				}else{
+					$("input[name='sex']").eq(0).removeAttr("checked");
+					$("input[name='sex']").eq(1).attr("checked","checked");
+				}
 		    } else {
 			   $("#mainImage").attr("src", '');
 			   $("#mainImage").attr("style", 'display:none');
@@ -155,7 +159,6 @@
 			data : {'id':id,
 			    	'name':name,
 			    	'detail':detail,
-			    	'price':price,
 			    	'sex':sex,
 			    	'mainImageUrl':mainImageUrl,
 			    	'status':status},

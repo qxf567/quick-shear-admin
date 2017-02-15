@@ -1,6 +1,9 @@
 package com.shear.admin.vo;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.quickshear.domain.Shop;
 
 public class HairdresserVo implements Serializable {
 
@@ -44,6 +47,8 @@ public class HairdresserVo implements Serializable {
 
     /** 最后修改时间 */
     private String mTime;
+    
+    private List<Shop> shopList;
 
     public Long getId() {
 	return id;
@@ -147,6 +152,14 @@ public class HairdresserVo implements Serializable {
 
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
+	}
+
+	public List<Shop> getShopList() {
+		return shopList;
+	}
+
+	public void setShopList(List<Shop> shopList) {
+		this.shopList = shopList;
 	}
 
 }

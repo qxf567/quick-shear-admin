@@ -202,7 +202,7 @@ public class ShopController extends AbstractController {
     @ResponseBody
     public ResObj<List<City>> ajaxCitys(@PathVariable(value = "pid") Long pid) {
 	ResObj<List<City>> resObj = new ResObj<List<City>>();
-	List<City> citys = selectCityByPid(pid);
+	List<City> citys = selectCitysByPid(pid);
 	if (citys == null) {
 	    resObj.setCode(RetdCodeType.EX_APP.getCode());
 	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
@@ -214,7 +214,7 @@ public class ShopController extends AbstractController {
 	return resObj;
     }
 
-    private List<City> selectCityByPid(Long pid) {
+    private List<City> selectCitysByPid(Long pid) {
 	CityQuery queryObj = new CityQuery();
 	queryObj.setStatus(1);
 	queryObj.setPid(pid);
