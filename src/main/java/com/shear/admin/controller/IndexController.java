@@ -13,7 +13,7 @@ import com.shear.admin.controller.base.AbstractController;
 public class IndexController extends AbstractController {
 	
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
-
+    
 	@RequestMapping(value = "/index")
 	public String index(Model model) {
 		

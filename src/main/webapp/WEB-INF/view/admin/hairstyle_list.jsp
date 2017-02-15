@@ -15,7 +15,7 @@
 		<div class="gap"></div>
 		<div class="info_list">
 		  <c:forEach items="${hairstyleList}" var="hairstyle">
-			<a href="/admin/hairstyle/detail/${hairstyle.id}">
+			<a href="${shear_admin_url}/admin/hairstyle/detail/${hairstyle.id}">
 				<div class="info_one">
 					<span></span> <img src="${hairstyle_img}/${hairstyle.mainImageUrl}" /> <span
 						class="checked_title">${hairstyle.name} - ${hairstyle.price}</span>
@@ -30,7 +30,7 @@
 		<!--底部固定End-->
 		<div class="fixed_menu">
 			<div class="amount"></div>
-			<a href="/admin/hairstyle/add" id="addnew">
+			<a href="${shear_admin_url}/admin/hairstyle/add" id="addnew">
 				<div class="fixed_btn">新增发型</div>
 			</a>
 		</div>

@@ -18,6 +18,12 @@ public class HairstyleVo implements Serializable {
 
     /** 介绍明细 */
     private String detail;
+    
+    /** 男（0）女(1) */
+    private Integer sex;
+    
+    /** 男（0）女(1) */
+    private String sexName;
 
     /** 图片(主图) */
     private String mainImageUrl;
@@ -30,6 +36,9 @@ public class HairstyleVo implements Serializable {
 
     /** 状态(0无效1有效) */
     private Integer status;
+    
+    /** 状态名称(0无效1有效) */
+    private String statusName;
 
     /** 创建时间 */
     private String cTime;
@@ -108,5 +117,29 @@ public class HairstyleVo implements Serializable {
     public void setmTime(String mTime) {
 	this.mTime = mTime;
     }
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	public String getSexName() {
+		return sexName;
+	}
+
+	public void setSexName(String sexName) {
+		this.sexName = sexName;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
 
 }

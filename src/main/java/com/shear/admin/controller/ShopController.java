@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.quickshear.common.config.ShearConfig;
 import com.quickshear.common.enumeration.ShopStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.RetdCodeType;
 import com.quickshear.common.vo.ResObj;
-import com.quickshear.common.wechat.WechatManager;
+import com.quickshear.common.wechat.utils.WechatJsApiUtil;
 import com.quickshear.domain.City;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.CityQuery;
@@ -44,9 +43,7 @@ public class ShopController extends AbstractController {
     @Autowired
     private CityService cityService;
     @Autowired
-    private ShearConfig shearConfig;
-    @Autowired
-    private WechatManager wechatManager;
+    private WechatJsApiUtil wechatJsApiUtil;
     // 当前网页的URL，不包含参数部分
     private String url = "http://m.qiansishun.com/v1/admin/shop";
 
@@ -84,7 +81,7 @@ public class ShopController extends AbstractController {
     @RequestMapping(value = "/add")
     public String add(Model model) {
 	ShopVo shopVo = new ShopVo();
-	setWxJsApiToModel(model,url+"/add");
+	wechatJsApiUtil.setWxJsApiToModel(model,url+"/add");
 	model.addAttribute("shop", shopVo);
 	model.addAttribute("addOrEdit", "add");
 	return "admin/shop_edit";
@@ -120,7 +117,8 @@ public class ShopController extends AbstractController {
 	    }
 
 	}
-	setWxJsApiToModel(model,url+"/edit/"+id);
+	
+	wechatJsApiUtil.setWxJsApiToModel(model,url+"/edit/"+id);
 	model.addAttribute("shop", shopVo);
 	model.addAttribute("addOrEdit", "edit");
 	return "admin/shop_edit";
@@ -178,6 +176,7 @@ public class ShopController extends AbstractController {
 	    shop.setLongitude((double) 0);
 	    shop.setGeocode("0");
 	    // 保存操作
+	    wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"shop.img");
 	    int rlt = 0;
 	    if (shop.getId() == null) {// 新增
 		// shop.setStatus(0);
@@ -227,17 +226,4 @@ public class ShopController extends AbstractController {
 	return null;
     }
     
-    /**
-     * 设置微信jsApi页面授权参数
-     */
-    private void setWxJsApiToModel(Model model,String url){
-
-	String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
-	String nonceStr = "Wm3WZY" + timestamp;
-	String sign = wechatManager.getSign(timestamp, nonceStr, url);
-	model.addAttribute("appid", shearConfig.getAppId());
-	model.addAttribute("timestamp", timestamp);
-	model.addAttribute("nonceStr", nonceStr);
-	model.addAttribute("sign", sign);
-    }
 }

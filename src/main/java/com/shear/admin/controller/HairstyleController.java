@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quickshear.common.enumeration.HairstyleStatusEnum;
+import com.quickshear.common.enumeration.SexEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.RetdCodeType;
 import com.quickshear.common.vo.ResObj;
+import com.quickshear.common.wechat.utils.WechatJsApiUtil;
 import com.quickshear.domain.Hairstyle;
 import com.quickshear.domain.query.HairstyleQuery;
 import com.quickshear.service.HairstyleService;
@@ -34,6 +37,11 @@ public class HairstyleController extends AbstractController {
 
     @Autowired
     private HairstyleService hairstyleService;
+    @Autowired
+    private WechatJsApiUtil wechatJsApiUtil;
+
+    // 当前网页的URL，不包含参数部分
+    private String url = "http://m.qiansishun.com/v1/admin/hairstyle";
 
     @RequestMapping(value = "/list")
     public String list(Model model) {
@@ -52,6 +60,7 @@ public class HairstyleController extends AbstractController {
     @RequestMapping(value = "/add")
     public String add(Model model) {
 	HairstyleVo hairstyleVo = new HairstyleVo();
+	wechatJsApiUtil.setWxJsApiToModel(model,url+"/add");
 	model.addAttribute("hairstyle", hairstyleVo);
 	model.addAttribute("addOrEdit", "add");
 	return "admin/hairstyle_edit";
@@ -71,6 +80,7 @@ public class HairstyleController extends AbstractController {
 		    HairstyleVo.class);
 	    copier.copy(hairstyle, hairstyleVo, null);
 	}
+	wechatJsApiUtil.setWxJsApiToModel(model,url+"/edit/"+id);
 	model.addAttribute("hairstyle", hairstyleVo);
 	model.addAttribute("addOrEdit", "edit");
 	return "admin/hairstyle_edit";
@@ -90,6 +100,8 @@ public class HairstyleController extends AbstractController {
 		    HairstyleVo.class);
 	    copier.copy(hairstyle, hairstyleVo, null);
 	}
+	hairstyleVo.setSexName(SexEnum.valueOfCode(hairstyle.getSex()).getName());
+	hairstyleVo.setStatusName(HairstyleStatusEnum.valueOfCode(hairstyle.getStatus()).getName());
 	model.addAttribute("hairstyle", hairstyleVo);
 	return "admin/hairstyle_detail";
     }
@@ -107,12 +119,14 @@ public class HairstyleController extends AbstractController {
 		hairstyle.setId(Long.valueOf(request.getParameter("id")));
 	    }
 	    hairstyle.setName(request.getParameter("name"));
-	    hairstyle.setPrice(new BigDecimal(request.getParameter("price")));
+	    hairstyle.setPrice(BigDecimal.ZERO);
+	    hairstyle.setSex(Integer.valueOf(request.getParameter("sex")));
 	    hairstyle.setMainImageUrl(request.getParameter("mainImageUrl"));
 	    hairstyle.setMultiImageUrls("");
 	    hairstyle.setDetail(request.getParameter("detail"));
 	    hairstyle.setStatus(Integer.valueOf(request.getParameter("status")));
 	    // 保存操作
+	    wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"hairstyle.img");
 	    int rlt = 0;
 	    if (hairstyle.getId() == null) {// 新增
 		rlt = hairstyleService.save(hairstyle);
@@ -132,4 +146,6 @@ public class HairstyleController extends AbstractController {
 
 	return resObj;
     }
+    
+
 }

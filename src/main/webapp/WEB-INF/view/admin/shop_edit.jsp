@@ -108,7 +108,6 @@
 	</div>
 
 	<script type="text/javascript">
-	var upload_img_main_url = '<c:url value="/fileupload/single"/>';
 	var city_select_url = '<c:url value="/admin/shop/citys/"/>';
 	var save_url = '<c:url value="/admin/shop/save"/>';
 	//微信jsApi授权
@@ -226,42 +225,7 @@
 			}
 		    }
 		});
-/* 	// 主图上传
-	$('#input-upload-img-main')
-		.fileupload(
-			{
-			    dataType : 'json',
-			    type : "POST",
-			    url : upload_img_main_url,
-			    formData : {
-				folderName : 'shop.img'
-			    },
-			    autoUpload : true,
-			    maxFileSize : 5400000, // Maximum File Size in Bytes - 5 MB
-			    minFileSize : 1000, // Minimum File Size in Bytes - 1 KB
-			    acceptFileTypes : /(\.|\/)(jpg|png|jpeg)$/i,
-			    limitConcurrentUploads : 50,
-			    limitMultiFileUploads : 50,
-			    forceIframeTransport : true,
-			    done : function(e, data) {
-				if (data.result.success) {
-				    $("#mainImage").attr(
-					    'src',
-					    '${shop_img}' + '/'
-						    + data.result.filePath);
-				    $("#mainImageUrl")
-					    .val(data.result.filePath);
-				    $("#mainImage").attr('style', '');
-
-				} else {
-				    pop_up_alert("warning", "上传失败");
-				}
-			    },
-			    fail : function(e, data) {
-				pop_up_alert("warning", "上传失败，可能文件太大，请重试");
-			    }
-			}); */
-
+	
 	//选择省份
 	$('#province').change(function() {
 	    var citys;

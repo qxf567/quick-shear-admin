@@ -17,7 +17,7 @@
 				<div class="bj_store">
 					<div class="${shop.labelCssName}">${shop.statusName}</div>
 					<a class="" href="${shear_admin_url}/admin/shop/detail/${shop.id}"> <img
-						src="${admin_img}/${shop.mainImageUrl}"
+						src="${shop_img}/${shop.mainImageUrl}"
 						class="store_list_img" />
 					</a>
 					<p class="store_name">${shop.name}</p>

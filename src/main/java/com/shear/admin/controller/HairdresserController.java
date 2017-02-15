@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quickshear.common.enumeration.HairdresserStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.RetdCodeType;
 import com.quickshear.common.vo.ResObj;
+import com.quickshear.common.wechat.utils.WechatJsApiUtil;
 import com.quickshear.domain.Hairdresser;
 import com.quickshear.domain.query.HairdresserQuery;
 import com.quickshear.service.HairdresserService;
@@ -36,6 +38,12 @@ public class HairdresserController extends AbstractController {
     private HairdresserService hairdresserService;
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private WechatJsApiUtil wechatJsApiUtil;
+
+    // 当前网页的URL，不包含参数部分
+    private String url = "http://m.qiansishun.com/v1/admin/hairdresser";
+
 
     @RequestMapping(value = "/list")
     public String list(Model model) {
@@ -55,6 +63,7 @@ public class HairdresserController extends AbstractController {
     @RequestMapping(value = "/add")
     public String add(Model model) {
 	HairdresserVo hairdresserVo = new HairdresserVo();
+	wechatJsApiUtil.setWxJsApiToModel(model,url+"/add");
 	model.addAttribute("hairdresser", hairdresserVo);
 	model.addAttribute("addOrEdit", "add");
 	return "admin/hairdresser_edit";
@@ -74,6 +83,8 @@ public class HairdresserController extends AbstractController {
 		    HairdresserVo.class);
 	    copier.copy(hairdresser, hairdresserVo, null);
 	}
+	
+	wechatJsApiUtil.setWxJsApiToModel(model,url+"/edit/"+id);
 	model.addAttribute("hairdresser", hairdresserVo);
 	model.addAttribute("addOrEdit", "edit");
 	return "admin/hairdresser_edit";
@@ -93,6 +104,7 @@ public class HairdresserController extends AbstractController {
 		    HairdresserVo.class);
 	    copier.copy(hairdresser, hairdresserVo, null);
 	}
+	hairdresserVo.setStatusName(HairdresserStatusEnum.valueOfCode(hairdresser.getStatus()).getName());
 	model.addAttribute("hairdresser", hairdresserVo);
 	return "admin/hairdresser_detail";
     }
@@ -119,6 +131,7 @@ public class HairdresserController extends AbstractController {
 	    hairdresser.setCardFacePhoto("");
 	    hairdresser.setCardBackPhoto("");
 	    // 保存操作
+	    wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"user.img");
 	    int rlt = 0;
 	    if (hairdresser.getId() == null) {// 新增
 		rlt = hairdresserService.save(hairdresser);

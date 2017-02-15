@@ -64,7 +64,7 @@
 		<!--底部固定End-->
 		<div class="fixed_menu">
 			<div class="amount"></div>
-			<a href="/admin/hairdresser/edit/${hairdresser.id}" id="edit">
+			<a href="${shear_admin_url}/admin/hairdresser/edit/${hairdresser.id}" id="edit">
 				<div class="fixed_btn">编辑</div>
 			</a>
 		</div>

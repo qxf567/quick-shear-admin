@@ -33,8 +33,11 @@ public class HairdresserVo implements Serializable {
     /** 休息日 */
     private String restday;
 
-    /** 状态(0待审核1有效2无效) */
+    /** 状态(0无效1有效300待审核) */
     private Integer status;
+    
+    /** 状态(0无效1有效300待审核) */
+    private String statusName;
 
     /** 创建时间 */
     private String cTime;
@@ -137,5 +140,13 @@ public class HairdresserVo implements Serializable {
     public void setCardBackPhoto(String cardBackPhoto) {
         this.cardBackPhoto = cardBackPhoto;
     }
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
 
 }
