@@ -26,14 +26,14 @@
 				<span>电话</span>
 				<div class="input_info_main">
 					<input type="text" id="phoneNumber"
-						value="${shop.phoneNumber}" readonly="readonly"/>
+						value="${hairdresser.phoneNumber}" readonly="readonly"/>
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
 			<div class="input_one">
 				<span>店铺</span>
 				<div class="input_info_main">
-					<input type="text" id="price"
+					<input type="text" id="shopName"
 						value="${hairdresser.shopName}" readonly="readonly"/>
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
@@ -41,18 +41,18 @@
 			<div class="input_one" style="height: 6.5rem;line-height: 6.2rem;">
 				<span>照片</span>
 				<div class="input_info_main" style="height: 6.0rem;">
-				<img src="${user_img}/${hairdresser.poto}" class="view_img"/>
+				<img src="${user_img}/${hairdresser.photo}" class="view_img"/>
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
-			<div class="input_one">
+			<%-- <div class="input_one">
 				<span>休息日</span>
 				<div class="input_info_main">
-					<input type="text" id="address"
+					<input type="text" id="restday"
 						value="${hairdresser.restday}" readonly="readonly" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
-			</div>
+			</div> --%>
 			<div class="input_one">
 				<span>状态</span>
 				<div class="input_info_main">

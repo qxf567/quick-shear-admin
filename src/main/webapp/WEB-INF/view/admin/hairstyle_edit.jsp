@@ -17,6 +17,7 @@
 		<div class="gap"></div>
 		<input id="id" value="${hairstyle.id}" type="hidden" /> 
 		<input id="mainImageUrl" value="${hairstyle.mainImageUrl}" type="hidden" />
+		<input id="originalMainImageUrl" value="${hairstyle.mainImageUrl}" type="hidden" />
 		<div class="input_list">
 			<div class="input_one">
 				<span>发型名称</span>
@@ -151,6 +152,7 @@
 	    var detail = $("#detail").val();
 	    var sex = $('input:radio[name="sex"]:checked').val()
 	    var mainImageUrl = $("#mainImageUrl").val();
+	    var originalMainImageUrl = $("#originalMainImageUrl").val();
 	    var status = $("#hairstyleStatus option:selected").val();
 	    $.ajax({
 			type : "post",
@@ -161,6 +163,7 @@
 			    	'detail':detail,
 			    	'sex':sex,
 			    	'mainImageUrl':mainImageUrl,
+			    	'originalMainImageUrl':originalMainImageUrl,
 			    	'status':status},
 			success : function(data) {
 			    if (data != null && data.code == 200) {

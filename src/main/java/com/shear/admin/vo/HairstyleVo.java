@@ -27,6 +27,7 @@ public class HairstyleVo implements Serializable {
 
     /** 图片(主图) */
     private String mainImageUrl;
+    
 
     /** 图片(副图) */
     private String multiImageUrls;

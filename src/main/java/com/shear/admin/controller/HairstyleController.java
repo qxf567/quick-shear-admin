@@ -126,7 +126,9 @@ public class HairstyleController extends AbstractController {
 	    hairstyle.setDetail(request.getParameter("detail"));
 	    hairstyle.setStatus(Integer.valueOf(request.getParameter("status")));
 	    // 保存操作
-	    wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"hairstyle.img");
+	    if(!request.getParameter("mainImageUrl").equals(request.getParameter("originalMainImageUrl"))){
+	    	wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"hairstyle.img");
+	    }
 	    int rlt = 0;
 	    if (hairstyle.getId() == null) {// 新增
 		rlt = hairstyleService.save(hairstyle);

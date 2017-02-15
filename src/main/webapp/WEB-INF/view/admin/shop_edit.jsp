@@ -17,6 +17,7 @@
 		<div class="gap"></div>
 		<input id="id" value="${shop.id}" type="hidden" /> 
 		<input id="mainImageUrl" value="${shop.mainImageUrl}" type="hidden" />
+		<input id="originalMainImageUrl" value="${shop.mainImageUrl}" type="hidden" />
 		<div class="input_list">
 			<div class="input_one">
 				<span>名称</span>
@@ -300,6 +301,7 @@
 							var cityId = $("#town option:selected").val();
 							var address = $("#address").val();
 							var mainImageUrl = $("#mainImageUrl").val();
+							var originalMainImageUrl = $("#originalMainImageUrl").val();
 							var status = $("#shopStatus option:selected").val();
 							$
 									.ajax({
@@ -315,6 +317,7 @@
 											'cityId' : cityId,
 											'address' : address,
 											'mainImageUrl' : mainImageUrl,
+											'originalMainImageUrl' : originalMainImageUrl,
 											'status' : status
 										},
 										success : function(data) {

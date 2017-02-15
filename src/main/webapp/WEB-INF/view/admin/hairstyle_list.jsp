@@ -16,8 +16,8 @@
 		<div class="info_list">
 		  <c:forEach items="${hairstyleList}" var="hairstyle">
 			<a href="${shear_admin_url}/admin/hairstyle/detail/${hairstyle.id}">
-				<div class="info_one">
-					<span></span> <img src="${hairstyle_img}/${hairstyle.mainImageUrl}" /> <span
+				<div class="info_one" style="height: 6.5rem;line-height: 6.2rem;">
+					<span></span> <img src="${hairstyle_img}/${hairstyle.mainImageUrl}" style="height: 5.5rem;width:5rem;"/> <span
 						class="checked_title">${hairstyle.name}</span>
 					<div class="checked_info_main">
 						<span></span> <img
@@ -28,6 +28,7 @@
 		  </c:forEach>
 		</div>
 		<!--底部固定End-->
+		<div style="height: 50px;"></div>
 		<div class="fixed_menu">
 			<div class="amount"></div>
 			<a href="${shear_admin_url}/admin/hairstyle/add" id="addnew">
@@ -36,17 +37,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".info_one,.list_default").mouseover(function() {
-				$(".info_one,.list_default").removeClass("info_one_active");//移除所有.handle的active类
-				$(this).addClass("info_one_active");//再将滑倒的这个添加上active类
-			});
 
-			$(".info_one,.list_default").mouseout(function() {
-				$(this).removeClass("info_one_active");
-			});
-
-		});
 	</script>
 </body>
 </html>

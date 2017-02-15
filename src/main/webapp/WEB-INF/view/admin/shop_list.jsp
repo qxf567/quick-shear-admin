@@ -27,6 +27,7 @@
 			</c:forEach>
 		</div>
 		<!--底部固定End-->
+		<div style="height: 50px;"></div>
 		<div class="fixed_menu">
 			<div class="amount"></div>
 			<a href="${shear_admin_url}/admin/shop/add" id="addnew">

@@ -176,7 +176,9 @@ public class ShopController extends AbstractController {
 	    shop.setLongitude((double) 0);
 	    shop.setGeocode("0");
 	    // 保存操作
-	    wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"shop.img");
+	    if(!request.getParameter("mainImageUrl").equals(request.getParameter("originalMainImageUrl"))){
+	    	wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"shop.img");
+	    }
 	    int rlt = 0;
 	    if (shop.getId() == null) {// 新增
 		// shop.setStatus(0);

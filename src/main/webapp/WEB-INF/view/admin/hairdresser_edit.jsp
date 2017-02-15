@@ -16,7 +16,8 @@
 	<div class="container">
 		<div class="gap"></div>
 		<input id="id" value="${hairdresser.id}" type="hidden" /> 
-		<input id="mainImageUrl" value="${hairdresser.photo}" type="hidden" />
+		<input id="photo" value="${hairdresser.photo}" type="hidden" />
+		<input id="originalPhoto" value="${hairdresser.photo}" type="hidden" />
 		<div class="input_list">
 			<div class="input_one">
 				<span>姓名</span>
@@ -56,14 +57,14 @@
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
-			<div class="input_one">
+			<%-- <div class="input_one">
 				<span></span>
 				<div class="input_info_main">
-					<input type="text" placeholder="输入休息日" id="address" value="${hairdresser.restday}"
+					<input type="text" placeholder="输入休息日" id="restday" value="${hairdresser.restday}"
 						readonly="readonly" /> <img src="${admin_img}/checked_icon.png" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
-			</div>
+			</div> --%>
 			<div class="input_one">
 				<span>状态</span>
 				<div class="input_info_main">
@@ -138,7 +139,7 @@
 		success : function(res) {
 		    mediaId = res.serverId; // 返回图片的服务器端ID  
 		    $("#mainImage").attr( 'src',e);
-			$("#mainImageUrl").val(mediaId);
+			$("#photo").val(mediaId);
 			$("#mainImage").attr('style', '');
 
 		},
@@ -153,8 +154,8 @@
 	    var name = $("#name").val();
 	    var phoneNumber = $("#phoneNumber").val();
 	    var shopId = $("#shop option:selected").val();
-	    var restday = $("restday").val();
-	    var mainImageUrl = $("#mainImageUrl").val();
+	    var photo = $("#photo").val();
+	    var originalPhoto = $("#originalPhoto").val();
 	    var status = $("#hairdresserStatus option:selected").val();
 	    $.ajax({
 			type : "post",
@@ -164,8 +165,8 @@
 			    	'name':name,
 			    	'phoneNumber':phoneNumber,
 			    	'shopId':shopId,
-			    	'restday':restday,
-			    	'mainImageUrl':mainImageUrl,
+			    	'photo':photo,
+			    	'originalPhoto':originalPhoto,
 			    	'status':status},
 			success : function(data) {
 			    if (data != null && data.code == 200) {

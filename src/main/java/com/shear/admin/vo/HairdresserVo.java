@@ -22,7 +22,7 @@ public class HairdresserVo implements Serializable {
     private Long shopId;
 
     /** 所属门店 */
-    private Long shopName;
+    private String shopName;
     
     /** 照片 */
     private String photo;
@@ -114,11 +114,11 @@ public class HairdresserVo implements Serializable {
 	this.mTime = mTime;
     }
 
-    public Long getShopName() {
+    public String getShopName() {
 	return shopName;
     }
 
-    public void setShopName(Long shopName) {
+    public void setShopName(String shopName) {
 	this.shopName = shopName;
     }
 
@@ -161,5 +161,4 @@ public class HairdresserVo implements Serializable {
 	public void setShopList(List<Shop> shopList) {
 		this.shopList = shopList;
 	}
-
 }

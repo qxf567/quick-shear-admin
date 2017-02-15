@@ -134,12 +134,14 @@ public class HairdresserController extends AbstractController {
         	hairdresser.setShopName(shops.get(0).getName());
         }
 	    hairdresser.setPhoto(request.getParameter("photo"));
-	    hairdresser.setRestday(request.getParameter("restday"));
+	    hairdresser.setRestday("1|2");
 	    hairdresser.setStatus(Integer.valueOf(request.getParameter("status")));
 	    hairdresser.setCardFacePhoto("");
 	    hairdresser.setCardBackPhoto("");
 	    // 保存操作
-	    wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"user.img");
+	    if(!request.getParameter("photo").equals(request.getParameter("originalPhoto"))){
+	    	wechatJsApiUtil.writeImageToDisk(request.getParameter("photo"),"user.img");
+	    }
 	    int rlt = 0;
 	    if (hairdresser.getId() == null) {// 新增
 		rlt = hairdresserService.save(hairdresser);
