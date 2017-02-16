@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quickshear.common.enumeration.RoleEnum;
 import com.quickshear.common.enumeration.ShopStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.RetdCodeType;
@@ -28,11 +29,13 @@ import com.quickshear.domain.query.CityQuery;
 import com.quickshear.domain.query.ShopQuery;
 import com.quickshear.service.CityService;
 import com.quickshear.service.ShopService;
+import com.shear.admin.aop.annotation.Permission;
 import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.ShopVo;
 
 @Controller
 @RequestMapping("/admin/shop")
+@Permission(roleTypes = { RoleEnum.ADMIN })
 public class ShopController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory

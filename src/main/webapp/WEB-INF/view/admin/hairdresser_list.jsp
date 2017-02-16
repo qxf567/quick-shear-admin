@@ -29,7 +29,7 @@
 		</div>
 		<!--底部固定End-->
 		<div style="height: 50px;"></div>
-		<div class="fixed_menu">
+		<div class="fixed_menu" style="display: none;">
 			<div class="amount"></div>
 			<a href="${shear_admin_url}/admin/hairdresser/add" id="addnew">
 				<div class="fixed_btn">新增发型师</div>

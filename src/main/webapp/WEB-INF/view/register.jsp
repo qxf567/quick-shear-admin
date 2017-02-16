@@ -41,6 +41,9 @@
                         <input class="identifying" id="sign_up_identifying" name="f_code" autocomplete="off" placeholder="请输入验证码" type="text">
                         <input id="J_code_btn" class="btn-xs" value="获取验证码" style="color: rgb(153, 153, 153);" type="button">
                     </p>
+                    <p class="field_set">
+                        <input id="sign_up_name" name="f_name" placeholder="请输入您的姓名" type="text">
+                    </p>
 <!--                    <p class="field_set">-->
 <!--                        <input class="" name="f_pw" type="password" placeholder="请设置登录密码(6～16位字母、数字或字符)" id="password">-->
 <!--                    </p>-->
@@ -148,11 +151,17 @@ function mobile_keyup_act()
 //保存
 $('#save').click(function() {
     var phoneNumber = $("#sign_up_mobile").val();
+    var name = $("#sign_up_name").val();
     var vertifyCode = $("#vertify_code").val();
     var identifyingCode = $("#sign_up_identifying").val();
     if(phoneNumber == '')
     {
 	    pop_up_alert("warning","请填写手机号码！");
+        return false;
+    }
+    if(name == '')
+    {
+	    pop_up_alert("warning","请填写姓名！");
         return false;
     }
     if(!(/^[1][34578][0-9]{9}$/.test(phoneNumber)))
@@ -169,7 +178,7 @@ $('#save').click(function() {
 		type : "post",
 		dataType : "json",
 		url : save_url,
-		data : {'phoneNumber':phoneNumber,'vertifyCode':vertifyCode,'identifyingCode':identifyingCode},
+		data : {'phoneNumber':phoneNumber,'vertifyCode':vertifyCode,'identifyingCode':identifyingCode,'name':name},
 		success : function(data) {
 		    if (data != null && data.code == 200) {
 			    window.location.href='<c:url value="/admin/login/${openid}"/>';

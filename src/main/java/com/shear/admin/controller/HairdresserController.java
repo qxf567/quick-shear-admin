@@ -16,16 +16,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.enumeration.HairdresserStatusEnum;
+import com.quickshear.common.enumeration.RoleEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.RetdCodeType;
 import com.quickshear.common.vo.ResObj;
 import com.quickshear.common.wechat.utils.WechatJsApiUtil;
 import com.quickshear.domain.Hairdresser;
 import com.quickshear.domain.Shop;
+import com.quickshear.domain.User;
 import com.quickshear.domain.query.HairdresserQuery;
 import com.quickshear.domain.query.ShopQuery;
+import com.quickshear.domain.query.UserQuery;
 import com.quickshear.service.HairdresserService;
 import com.quickshear.service.ShopService;
+import com.quickshear.service.UserService;
 import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.HairdresserVo;
 
@@ -36,6 +40,8 @@ public class HairdresserController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory
 	    .getLogger(HairdresserController.class);
 
+    @Autowired
+    private UserService userService;
     @Autowired
     private HairdresserService hairdresserService;
     @Autowired
@@ -148,11 +154,22 @@ public class HairdresserController extends AbstractController {
 	    } else {
 		rlt = hairdresserService.update(hairdresser);
 	    }
-
 	    if (rlt < 0) {
 		resObj.setCode(RetdCodeType.EX_APP.getCode());
 		resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
 	    }
+	    // 更新user表状态
+	    if(hairdresser.getStatus().equals(HairdresserStatusEnum.VALID.getCode())){
+	    	User user=new User();
+		    user.setRoles(RoleEnum.STYLIST.getCode());
+		    UserQuery queryUserObj = new UserQuery();
+		    queryUserObj.setPhoneNumber(request.getParameter("phoneNumber"));
+		    rlt = userService.update(user,queryUserObj);
+	    }
+	    if (rlt <= 0) {
+			resObj.setCode(RetdCodeType.EX_APP.getCode());
+			resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+		}
 	} catch (Exception e) {
 	    resObj.setCode(RetdCodeType.EX_APP.getCode());
 	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());

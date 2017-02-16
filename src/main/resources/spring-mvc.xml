@@ -60,5 +60,7 @@
 		<property name="defaultErrorView" value="error/error" />
 		<property name="defaultStatusCode" value="500" />
 	</bean>
-
+    <mvc:interceptors>
+        <bean class="com.shear.admin.aop.AuthInterceptor" />
+    </mvc:interceptors>
 </beans>
