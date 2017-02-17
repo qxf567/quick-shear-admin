@@ -88,8 +88,11 @@ public class LoginController extends AbstractController {
 	    if (RoleEnum.ADMIN.getCode().equals(roles)) {// 管理员
 		return "admin/index";
 	    }
-	    if (RoleEnum.CUSTOMER.getCode().equals(roles)) {// 发型师
-		return "stylist/index";
+	    if (RoleEnum.STYLIST.getCode().equals(roles)) {// 发型师
+	    	//存cookie
+		    String hairdresserId = String.valueOf(userList.get(0).getHairdresserId());
+		    storageService.set("hairdresserid", hairdresserId, response);
+		    return "stylist/index";
 	    }
 	    if(RoleEnum.PENDING.getCode().equals(roles)){// 待审核用户
 		model.addAttribute("isNewUser", "0");

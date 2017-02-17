@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.enumeration.HairstyleStatusEnum;
+import com.quickshear.common.enumeration.RoleEnum;
 import com.quickshear.common.enumeration.SexEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.RetdCodeType;
@@ -25,11 +26,13 @@ import com.quickshear.common.wechat.utils.WechatJsApiUtil;
 import com.quickshear.domain.Hairstyle;
 import com.quickshear.domain.query.HairstyleQuery;
 import com.quickshear.service.HairstyleService;
+import com.shear.admin.aop.annotation.Permission;
 import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.HairstyleVo;
 
 @Controller
 @RequestMapping("/admin/hairstyle")
+@Permission(roleTypes = { RoleEnum.ADMIN })
 public class HairstyleController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory
@@ -126,7 +129,8 @@ public class HairstyleController extends AbstractController {
 	    hairstyle.setDetail(request.getParameter("detail"));
 	    hairstyle.setStatus(Integer.valueOf(request.getParameter("status")));
 	    // 保存操作
-	    if(!request.getParameter("mainImageUrl").equals(request.getParameter("originalMainImageUrl"))){
+	    if(null != request.getParameter("mainImageUrl") && request.getParameter("mainImageUrl").length()> 2 && !request.getParameter("mainImageUrl").equals(request.getParameter("originalMainImageUrl"))){
+	    	//图片
 	    	wechatJsApiUtil.writeImageToDisk(request.getParameter("mainImageUrl"),"hairstyle.img");
 	    }
 	    int rlt = 0;

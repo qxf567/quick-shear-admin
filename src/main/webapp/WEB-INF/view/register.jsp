@@ -6,6 +6,8 @@
 <head>
 <%@ include file="common/meta.jsp"%>
 <%@ include file="common/taglibs.jsp"%>
+<link type="text/css" rel="stylesheet" href="${admin_css}/order_list.css">
+<link type="text/css" rel="stylesheet" href="${admin_css}/slides.css">
 <link type="text/css" rel="stylesheet" href="${admin_css}/personal_set.css">
 <style>
         .sign_up{width: 100%;margin-bottom: 1rem}
@@ -35,15 +37,16 @@
             <div class="sign_up"> <!-- 注册表单 -->
                 <form class="sign_up_main">
                     <p class="field_set">
+                        <input id="sign_up_name" name="f_name" placeholder="请输入您的姓名" type="text">
+                    </p>
+                    <p class="field_set">
                         <input id="sign_up_mobile" name="f_mobile" placeholder="请输入您的手机号" type="tel">
                     </p>
                     <p class="field_set">
                         <input class="identifying" id="sign_up_identifying" name="f_code" autocomplete="off" placeholder="请输入验证码" type="text">
                         <input id="J_code_btn" class="btn-xs" value="获取验证码" style="color: rgb(153, 153, 153);" type="button">
                     </p>
-                    <p class="field_set">
-                        <input id="sign_up_name" name="f_name" placeholder="请输入您的姓名" type="text">
-                    </p>
+                    
 <!--                    <p class="field_set">-->
 <!--                        <input class="" name="f_pw" type="password" placeholder="请设置登录密码(6～16位字母、数字或字符)" id="password">-->
 <!--                    </p>-->

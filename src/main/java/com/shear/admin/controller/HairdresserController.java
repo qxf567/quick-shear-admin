@@ -30,11 +30,13 @@ import com.quickshear.domain.query.UserQuery;
 import com.quickshear.service.HairdresserService;
 import com.quickshear.service.ShopService;
 import com.quickshear.service.UserService;
+import com.shear.admin.aop.annotation.Permission;
 import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.HairdresserVo;
 
 @Controller
 @RequestMapping("/admin/hairdresser")
+@Permission(roleTypes = { RoleEnum.ADMIN })
 public class HairdresserController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory
@@ -145,8 +147,9 @@ public class HairdresserController extends AbstractController {
 	    hairdresser.setCardFacePhoto("");
 	    hairdresser.setCardBackPhoto("");
 	    // 保存操作
-	    if(!request.getParameter("photo").equals(request.getParameter("originalPhoto"))){
-	    	wechatJsApiUtil.writeImageToDisk(request.getParameter("photo"),"user.img");
+	    if(null != request.getParameter("photo") && request.getParameter("photo").length()> 2 && !request.getParameter("photo").equals(request.getParameter("originalPhoto"))){
+	    	//图片
+	    	wechatJsApiUtil.writeImageToDisk(request.getParameter("photo"),"user.img"); 
 	    }
 	    int rlt = 0;
 	    if (hairdresser.getId() == null) {// 新增
