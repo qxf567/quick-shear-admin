@@ -64,22 +64,15 @@ p.product_name span {
 						<c:if test="${not empty order}">
 							<div class="gap"></div>
 							<div class="one_order">
-								<p class="store_name_id">${order.shopName}</p>
 								<div class="order_info">
-									<div class="store_img">
-										<img src="${shop_img}/${order.shopMainImageUrl}">
-									</div>
 									<div class="store_text">
 										<p>服务号：${order.serviceCode}</p>
 										<p>订单号：${order.orderId}</p>
 										<p>预约时间：${order.appointmentTime}</p>
 									</div>
 								</div>
-								<div class="total_main">
-									<span class="total_price">合计</span> <span class="sum">${order.actualPrice}元</span>
-								</div>
 								<div class="btn_block">
-									<a href=""><div class="tips_btn" style="background: #1c436f;">确认服务完成</div></a>
+									<a onclick="receiveConfirm()"><div class="tips_btn" style="background: #1c436f;">确认接单</div></a>
 								</div>
 							</div>
 						</c:if>
@@ -87,7 +80,32 @@ p.product_name span {
 		</div>
 	</div>
 	<script type="text/javascript">
-		
+	
+		var confirm_url = '<c:url value="/stylist/order/receive/confirm"/>';
+		// 确认接单
+		function receiveConfirm() {
+			if (confirm("确认接单?")) {
+				$.ajax({
+							type : "post",
+							dataType : "json",
+							url : confirm_url,
+							data : {
+								'orderId' : ${order.orderId}
+							},
+							success : function(data) {
+								if (data != null && data.code == 200) {
+									pop_up_alert("warning", "确认成功");
+									window.location.href = '<c:url value="/stylist/order/list"/>';
+								} else {
+									pop_up_alert("warning", data.message.msg);
+								}
+							},
+							error : function() {
+								pop_up_alert("warning", data.message.msg);
+							}
+						});
+			}
+		};
 	</script>
 </body>
 </html>

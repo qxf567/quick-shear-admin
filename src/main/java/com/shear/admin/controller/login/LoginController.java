@@ -91,6 +91,7 @@ public class LoginController extends AbstractController {
 	    if (RoleEnum.STYLIST.getCode().equals(roles)) {// 发型师
 	    	//存cookie
 		    String hairdresserId = String.valueOf(userList.get(0).getHairdresserId());
+		    LOGGER.info("cookie_hairdresserid save:"+hairdresserId);
 		    storageService.set("hairdresserid", hairdresserId, response);
 		    return "stylist/index";
 	    }
@@ -163,6 +164,9 @@ public class LoginController extends AbstractController {
 	    user.setRoles(RoleEnum.PENDING.getCode());
 	    user.setPhoneNumber(request.getParameter("phoneNumber"));
 	    user.setPassword("");
+	    if(hairdresser.getId() != null){
+	    	user.setHairdresserId(hairdresser.getId());
+	    }
 	    UserQuery queryUserObj = new UserQuery();
 	    queryUserObj.setWechatOpenId(openid);
 	    rlt = userService.update(user,queryUserObj);

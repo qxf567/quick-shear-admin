@@ -1,6 +1,7 @@
 package com.shear.admin.controller.hairdresser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.enumeration.OrderStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.DateUtil;
+import com.quickshear.common.util.RetdCodeType;
+import com.quickshear.common.vo.ResObj;
 import com.quickshear.common.wechat.utils.WechatJsApiUtil;
 import com.quickshear.domain.Order;
 import com.quickshear.domain.Shop;
@@ -53,16 +58,17 @@ public class StyOrderController extends AbstractController {
  	    if (cookie_hairdresserid == null) {//取不到cookie，跳转到登录页
  	    	return "admin/login/"+cookie_openid;
  	    }
+ 	   LOGGER.info("cookie_hairdresserid:"+cookie_hairdresserid);
     	OrderQuery queryObj = new OrderQuery();
     	List<Order> orderList = null;
     	List<OrderVo> inServiceOrders = new ArrayList<OrderVo>();
     	List<OrderVo> completedOrders = new ArrayList<OrderVo>();
     	try {
     		List<Integer> orderStatusList = new ArrayList<Integer>();
-    		/*orderStatusList.add(OrderStatusEnum.ORDER_RECEIVE.getCode());
+    		orderStatusList.add(OrderStatusEnum.ORDER_RECEIVE.getCode());
     		orderStatusList.add(OrderStatusEnum.SERVICE_COMPLETE.getCode());
     		queryObj.setOrderStatusList(orderStatusList);
-    		queryObj.setHairdresserId(Long.valueOf(cookie_hairdresserid));*/
+    		queryObj.setHairdresserId(Long.valueOf(cookie_hairdresserid));
     		orderList = orderService.selectByParam(queryObj);
     		if (orderList != null && orderList.size()>0) {
     			Shop shop = null;
@@ -90,8 +96,6 @@ public class StyOrderController extends AbstractController {
 					if (order.getOrderStatus() == OrderStatusEnum.SERVICE_COMPLETE.getCode()) {
 						completedOrders.add(orderVo);
 					}
-					inServiceOrders.add(orderVo);
-					completedOrders.add(orderVo);
 				}
     		}
     	} catch (Exception e) {
@@ -131,5 +135,97 @@ public class StyOrderController extends AbstractController {
 		}
 		model.addAttribute("order", orderVo);
     	return "stylist/order_receive";
+    }
+    
+    //接单确认
+    @RequestMapping(value ="/receive/confirm", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObj<String> receiveConfirm(HttpServletRequest request) {
+    	
+    	ResObj<String> resObj = new ResObj<String>();
+    	resObj.setCode(RetdCodeType.PASS_OK.getCode());
+    	resObj.getMessage().setMsg(RetdCodeType.PASS_OK.getMsg());
+    	
+    	String cookie_hairdresserid = storageService.get(request, "hairdresserid");
+ 	    if (cookie_hairdresserid == null) {//取不到cookie，跳转到登录页
+ 	    	resObj.setCode(RetdCodeType.EX_APP.getCode());
+    	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+    	    LOGGER.error("cookie_hairdresserid 获取失败");
+    	    return resObj;
+ 	    }
+    	try {
+    		//一次只能接一张订单
+    		OrderQuery queryObj = new OrderQuery();
+    		queryObj.setOrderStatus(OrderStatusEnum.ORDER_RECEIVE.getCode());
+    		queryObj.setHairdresserId(Long.valueOf(cookie_hairdresserid));
+    		List<Order> orders = orderService.selectByParam(queryObj);
+    		if(orders == null){
+    			resObj.setCode(RetdCodeType.EX_APP.getCode());
+        	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+        	    return resObj;
+    		}
+    		if(orders.size()>0){
+    			resObj.setCode(RetdCodeType.EX_APP.getCode());
+        	    resObj.getMessage().setMsg("接单失败，您还有未处理订单!");
+        	    return resObj;
+    		}
+    		
+    		queryObj.setOrderId(Long.valueOf(request.getParameter("orderId")));
+    		queryObj.setOrderStatus(OrderStatusEnum.PAY_COMPLETE.getCode());
+    		Order order = new Order();
+    		order.setOrderStatus(OrderStatusEnum.ORDER_RECEIVE.getCode());
+    		order.setHairdresserId(Long.valueOf(cookie_hairdresserid));
+    		int rlt = orderService.updateByParam(order, queryObj);
+    		if(rlt<=0){
+    			 resObj.setCode(RetdCodeType.EX_APP.getCode());
+    	    	 resObj.getMessage().setMsg("订单状态异常!");
+    		}
+    		
+    	} catch (Exception e) {
+    	    resObj.setCode(RetdCodeType.EX_APP.getCode());
+    	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+    	    LOGGER.error(e.getMessage());
+    	}
+
+    	return resObj;
+    }
+    
+    //服务完成确认
+    @RequestMapping(value ="/complete/confirm", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObj<String> completeConfirm(HttpServletRequest request) {
+    	
+    	ResObj<String> resObj = new ResObj<String>();
+    	resObj.setCode(RetdCodeType.PASS_OK.getCode());
+    	resObj.getMessage().setMsg(RetdCodeType.PASS_OK.getMsg());
+    	
+    	String cookie_hairdresserid = storageService.get(request, "hairdresserid");
+ 	    if (cookie_hairdresserid == null) {//取不到cookie，跳转到登录页
+ 	    	resObj.setCode(RetdCodeType.EX_APP.getCode());
+    	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+    	    LOGGER.error("cookie_hairdresserid 获取失败");
+    	    return resObj;
+ 	    }
+    	try {
+    		OrderQuery queryObj = new OrderQuery();
+    		queryObj.setOrderId(Long.valueOf(request.getParameter("orderId")));
+    		queryObj.setOrderStatus(OrderStatusEnum.ORDER_RECEIVE.getCode());
+    		queryObj.setHairdresserId(Long.valueOf(cookie_hairdresserid));
+    		Order order = new Order();
+    		order.setOrderStatus(OrderStatusEnum.SERVICE_COMPLETE.getCode());
+    		order.setServiceCompletionTime(new Date());
+    		int rlt = orderService.updateByParam(order, queryObj);
+    		if(rlt<=0){
+    			 resObj.setCode(RetdCodeType.EX_APP.getCode());
+    	    	 resObj.getMessage().setMsg("订单状态异常!");
+    		}
+    		
+    	} catch (Exception e) {
+    	    resObj.setCode(RetdCodeType.EX_APP.getCode());
+    	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+    	    LOGGER.error(e.getMessage());
+    	}
+
+    	return resObj;
     }
 }

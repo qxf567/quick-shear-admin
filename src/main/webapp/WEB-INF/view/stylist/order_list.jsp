@@ -89,7 +89,7 @@ p.product_name span {
 									<span class="total_price">合计</span> <span class="sum">${sOrder.actualPrice}元</span>
 								</div>
 								<div class="btn_block">
-									<a href=""><div class="tips_btn" style="background: #1c436f;">确认服务完成</div></a>
+									<a onclick="serviceCompleteConfirm(${sOrder.orderId})"><div class="tips_btn" style="background: #1c436f;">确认服务完成</div></a>
 								</div>
 							</div>
 						</c:forEach>
@@ -143,7 +143,7 @@ p.product_name span {
 		</div>
 	</div>
 	<script type="text/javascript">
-	
+	    var complete_confirm_url = '<c:url value="/stylist/order/complete/confirm"/>';
 		//微信jsApi授权
 		wx.config({
 			debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -164,6 +164,30 @@ p.product_name span {
 					window.location.href = '<c:url value="/stylist/order/receive/' + result + '"/>';
 				}
 			});
+		};
+		
+		// 确认服务完成
+		function serviceCompleteConfirm(e) {
+			if (confirm("确认完成?")) {
+				$.ajax({
+							type : "post",
+							dataType : "json",
+							url : complete_confirm_url,
+							data : {
+								'orderId' : e
+							},
+							success : function(data) {
+								if (data != null && data.code == 200) {
+									window.location.href = '<c:url value="/stylist/order/list"/>';
+								} else {
+									pop_up_alert("warning", data.message.msg);
+								}
+							},
+							error : function() {
+								pop_up_alert("warning", data.message.msg);
+							}
+						});
+			}
 		};
 	</script>
 	<script type="text/javascript">
