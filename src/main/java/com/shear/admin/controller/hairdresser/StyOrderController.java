@@ -26,7 +26,6 @@ import com.quickshear.common.wechat.utils.WechatJsApiUtil;
 import com.quickshear.domain.Order;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.OrderQuery;
-import com.quickshear.service.HairstyleService;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
 import com.quickshear.service.sms.StorageService;
@@ -40,8 +39,6 @@ public class StyOrderController extends AbstractController {
 
     @Autowired
     private ShopService shopService;
-    @Autowired
-    private HairstyleService hairstyleService;
     @Autowired
     private OrderService orderService;
     @Autowired
