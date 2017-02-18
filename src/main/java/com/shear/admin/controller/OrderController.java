@@ -1,7 +1,12 @@
 package com.shear.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.quickshear.common.enumeration.OrderStatusEnum;
+import com.quickshear.common.util.DateUtil;
+import com.quickshear.domain.Shop;
+import com.quickshear.service.ShopService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,71 +32,51 @@ public class OrderController extends AbstractController {
 
     @Autowired
     private OrderService orderService;
+	@Autowired
+	private ShopService shopService;
 
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
-		OrderQuery query = new OrderQuery();
+		OrderQuery queryObj = new OrderQuery();
 		List<Order> orderList = null;
+		List<OrderVo> inServiceOrders = new ArrayList<OrderVo>();
+		List<OrderVo> allOrders = new ArrayList<OrderVo>();
 		try {
-			orderList = orderService.selectByParam(query);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
+			List<Integer> orderStatusList = new ArrayList<Integer>();
+			orderList = orderService.selectByParam(queryObj);
+			if (orderList != null && orderList.size()>0) {
+				Shop shop = null;
+				for (Order order : orderList) {
+					OrderVo orderVo = new OrderVo();
+					BeanCopier copier = BeanCopierUtil.copy(Order.class,
+							OrderVo.class);
+					copier.copy(order, orderVo, null);
+					// 预约时间
+					orderVo.setAppointmentTime(DateUtil.format(order.getAppointmentTime(), DateUtil.ALL));
+					// 门店信息
+					try {
+						shop = shopService.findbyid(order.getShopId());
+					} catch (Exception e) {
+						LOGGER.error(e.getMessage());
+					}
+					if(shop != null){
+						orderVo.setShopName(shop.getName());
+						orderVo.setShopMainImageUrl(shop.getMainImageUrl());
+					}
 
-		model.addAttribute("orderList", orderList);
-		return "admin/order_list";
-	}
-
-	@RequestMapping(value = "/edit")
-	public String edit(@ModelAttribute("formBean") OrderVo orderVo, Model model,
-			@RequestParam Long orderId) {
-		Order order = null;
-		try {
-			order = orderService.findbyid(orderId);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
-		BeanCopier copier = BeanCopierUtil.copy(Order.class, OrderVo.class);
-		copier.copy(order, orderVo, null);
-		model.addAttribute("addOrEdit", "edit");
-		return "admin/order_edit";
-	}
-
-	@RequestMapping(value = "/view")
-	public String view(@ModelAttribute("formBean") OrderVo orderVo, Model model,
-			@RequestParam Long orderId) {
-		Order order = null;
-		try {
-			order = orderService.findbyid(orderId);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
-		BeanCopier copier = BeanCopierUtil.copy(Order.class, OrderVo.class);
-		copier.copy(order, orderVo, null);
-		return "admin/order_view";
-	}
-
-	@RequestMapping(value = "/save")
-	@ResponseBody
-	public String save(@ModelAttribute("formBean") OrderVo orderVo, Model model,
-			@RequestParam Long orderId) {
-		String success = "{\"success\": true}";
-		try {
-			Order order = new Order();
-			BeanCopier copier = BeanCopierUtil.copy(OrderVo.class, Order.class);
-			copier.copy(orderVo, order, null);
-			// 保存操作
-			int rlt = orderService.update(order);
-
-			if (rlt < 0) {
-				success = "{\"success\": false, \"exception\": \"保存失败\"}";
+					if (order.getOrderStatus() == OrderStatusEnum.ORDER_RECEIVE.getCode() || order.getOrderStatus() == OrderStatusEnum.PAY_COMPLETE.getCode()) {
+						inServiceOrders.add(orderVo);
+					} else {
+						allOrders.add(orderVo);
+					}
+				}
 			}
 		} catch (Exception e) {
-			success = "{\"success\": false, \"exception\": \"保存失败\"}";
 			LOGGER.error(e.getMessage());
 		}
-
-		return success;
+		model.addAttribute("inServiceOrders", inServiceOrders);
+		model.addAttribute("allOrders", allOrders);
+		return "stylist/order_list";
 	}
     
 }
