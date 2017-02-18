@@ -169,7 +169,7 @@ public class StyOrderController extends AbstractController {
         	    resObj.getMessage().setMsg("接单失败，您还有未处理订单!");
         	    return resObj;
     		}
-    		
+			queryObj = new OrderQuery();
     		queryObj.setOrderId(Long.valueOf(request.getParameter("orderId")));
     		queryObj.setOrderStatus(OrderStatusEnum.PAY_COMPLETE.getCode());
     		Order order = new Order();
