@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <c:set var="shear_admin_url" value="http://localhost:8080" /> --%>
-<c:set var="shear_admin_url" value="http://m.qiansishun.com/v1" />
+<c:set var="shear_admin_url" value="http://localhost:8080" />
+<%-- <c:set var="shear_admin_url" value="http://m.qiansishun.com/v1" /> --%>
 <c:set var="admin_js" value="http://www.qiansishun.com:8180/admin.js" />
 <c:set var="admin_css" value="http://www.qiansishun.com:8180/admin.css" />
 <c:set var="admin_img" value="http://www.qiansishun.com:8180/admin.img" />

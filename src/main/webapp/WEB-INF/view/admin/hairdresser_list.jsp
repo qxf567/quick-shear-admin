@@ -49,8 +49,8 @@ p.product_name span {
 	<div class="container">
 		<div class="tab_switch">
 			<ul id="pagenavi" class="page fixed_top">
-				<li><a href="javascript:;" <c:if test="${empty pendingHairdressers}">class="active"</c:if>>全部</a></li>
-				<li><a href="javascript:;" <c:if test="${not empty pendingHairdressers}">class="active"</c:if>>待审核</a></li>
+				<li><a href="javascript:;" class="active">全部</a></li>
+				<li><a href="javascript:;" class="">待审核</a></li>
 			</ul>
 			<div id="slider" class="swipe mt37"
 				style="overflow: hidden; visibility: visible; list-style: none; position: relative;">
@@ -118,7 +118,7 @@ p.product_name span {
 									</div>
 								</div>
 								<div class="btn_block">
-									<a onclick="passedConfirm(${aHairdresser.id})"><div class="tips_btn" style="background: #1c436f;">审核通过</div></a>
+									<a onclick="passedConfirm(${pHairdresser.id})"><div class="tips_btn" style="background: #1c436f;">审核通过</div></a>
 								</div>
 							</div>
 						</c:forEach>

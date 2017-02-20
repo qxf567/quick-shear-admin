@@ -62,7 +62,7 @@ public class OrderController extends AbstractController {
 					}
 					orderVo.setOrderStatusName(OrderStatusEnum.valueOfCode(order.getOrderStatus()).getName());
 
-					if (order.getOrderStatus() == OrderStatusEnum.ORDER_RECEIVE.getCode() || order.getOrderStatus() == OrderStatusEnum.PAY_COMPLETE.getCode()) {
+					if (order.getOrderStatus().equals(OrderStatusEnum.ORDER_RECEIVE.getCode()) || order.getOrderStatus().equals(OrderStatusEnum.PAY_COMPLETE.getCode())) {
 						inServiceOrders.add(orderVo);
 					} else {
 						allOrders.add(orderVo);

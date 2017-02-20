@@ -76,7 +76,7 @@ public class HairdresserController extends AbstractController {
 				 
 				 allHairdressers.add(hairdresserVo);
 				 
-				 if(hairdresser.getStatus()==HairdresserStatusEnum.PENDING.getCode()){
+				 if(hairdresser.getStatus().equals(HairdresserStatusEnum.PENDING.getCode())){
 					 pendingHairdressers.add(hairdresserVo);
 				 }
 			}
