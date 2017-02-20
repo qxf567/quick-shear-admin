@@ -202,6 +202,12 @@ public class HairdresserController extends AbstractController {
 	 	    resObj.getMessage().setMsg("获取发型师id失败!");
 	 	    return resObj;
 	    }
+	    if (null == request.getParameter("phoneNumber")
+			    || request.getParameter("phoneNumber").length() == 0) {
+		    	resObj.setCode(RetdCodeType.EX_APP.getCode());
+		 	    resObj.getMessage().setMsg("获取发型师phoneNumber失败!");
+		 	    return resObj;
+		    }
 	    hairdresser.setId(Long.valueOf(request.getParameter("id")));
 	    hairdresser.setStatus(HairdresserStatusEnum.VALID.getCode());
 	    int rlt = hairdresserService.update(hairdresser);

@@ -118,7 +118,7 @@ p.product_name span {
 									</div>
 								</div>
 								<div class="btn_block">
-									<a onclick="passedConfirm(${pHairdresser.id})"><div class="tips_btn" style="background: #1c436f;">审核通过</div></a>
+									<a onclick="passedConfirm(${pHairdresser.id},${pHairdresser.phoneNumber})"><div class="tips_btn" style="background: #1c436f;">审核通过</div></a>
 								</div>
 							</div>
 						</c:forEach>
@@ -175,14 +175,15 @@ p.product_name span {
 	
 		var confirm_url = '<c:url value="/admin/hairdresser/passedconfirm"/>';
 		// 确认审核
-		function passedConfirm(e) {
+		function passedConfirm(id,phoneNumber) {
 			if (confirm("确认审核通过?")) {
 				$.ajax({
 							type : "post",
 							dataType : "json",
 							url : confirm_url,
 							data : {
-								'id' : e
+								'id' : id,
+								'phoneNumber' : phoneNumber
 							},
 							success : function(data) {
 								if (data != null && data.code == 200) {
