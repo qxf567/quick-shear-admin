@@ -54,6 +54,13 @@
 				</div>
 			</div>
 			<div class="input_one">
+				<span>坐标</span>
+				<div class="input_info_main">
+				    <input type="text"  id="gps" value="${shop.gps}" disabled="disabled" />
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
 				<span></span>
 				<div class="input_info_main">
 					<input type="text" id="address"

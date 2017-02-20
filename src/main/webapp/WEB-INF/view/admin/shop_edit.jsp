@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.quickshear.common.enumeration.ShopStatusEnum"%>
 <!doctype html>
@@ -14,7 +15,13 @@
 </head>
 <body>
 	<div class="container">
-		<div class="gap"></div>
+	  <div id="apis-div" style="display:none">
+    <iframe id="mapPage" width="100%" height="800px" frameborder=0 
+          src="http://apis.map.qq.com/tools/locpicker?search=1&type=1&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp">
+    </iframe> 
+	  </div>
+	  <div id="info-div" >
+	    <div class="gap"></div>
 		<input id="id" value="${shop.id}" type="hidden" /> 
 		<input id="mainImageUrl" value="${shop.mainImageUrl}" type="hidden" />
 		<input id="originalMainImageUrl" value="${shop.mainImageUrl}" type="hidden" />
@@ -67,8 +74,14 @@
 			<div class="input_one">
 				<span></span>
 				<div class="input_info_main">
-					<input type="text" placeholder="输入详细地址" id="address" value="${shop.address}"
-						readonly="readonly" /> <img src="${admin_img}/checked_icon.png" />
+				<input type="text" placeholder="输入详细地址" id="address" value="${shop.address}"/>
+				</div>
+				<hr style="background: #f2f2f2;height: 1px;border: none">
+			</div>
+			<div class="input_one">
+				<span>坐标</span>
+				<div class="input_info_main">
+				    <a onclick="getApis()"><input type="text" placeholder="选择地图坐标" id="gps" value="${shop.gps}" readonly="readonly" /></a> <img src="${admin_img}/checked_icon.png" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -106,6 +119,7 @@
 				<div class="fixed_btn">保存</div>
 			</a>
 		</div>
+	  </div>
 	</div>
 
 	<script type="text/javascript">
@@ -156,8 +170,14 @@
 	    });
 	}
 	
-
-		$(document).ready(
+	//选择地图坐标
+	function getApis() {
+		$('#apis-div').removeAttr("style");
+		$('#info-div').attr("style", "display: none;");
+	}
+	
+	
+	$(document).ready(
 				function() {
 					if (${addOrEdit eq 'edit'}) {
 						$("#mainImage").attr("src",
@@ -301,6 +321,7 @@
 							var businessHours = $("#businessHours").val();
 							var cityId = $("#town option:selected").val();
 							var address = $("#address").val();
+							var gps = $("#gps").val();
 							var mainImageUrl = $("#mainImageUrl").val();
 							var originalMainImageUrl = $(
 									"#originalMainImageUrl").val();
@@ -319,6 +340,7 @@
 												'businessHours' : businessHours,
 												'cityId' : cityId,
 												'address' : address,
+												'gps' : gps,
 												'mainImageUrl' : mainImageUrl,
 												'originalMainImageUrl' : originalMainImageUrl,
 												'status' : status
@@ -341,5 +363,16 @@
 							}
 						});
 	</script>
+<script>
+    window.addEventListener('message', function(event) {
+        // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
+        var loc = event.data;
+        if (loc && loc.module == 'locationPicker') {//防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
+        	$('#info-div').removeAttr("style");
+    		$('#apis-div').attr("style", "display: none;"); 
+    		$('#gps').val(loc.latlng.lat+","+loc.latlng.lng);
+        }                                
+    }, false); 
+</script>
 </body>
 </html>

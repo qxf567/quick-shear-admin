@@ -33,6 +33,9 @@ public class ShopVo implements Serializable {
 
     /** 坐标纬度 */
     private Double latitude;
+    
+    /** 坐标40.2222,116.33333 */
+    private String gps;
 
     /** 详细地址 */
     private String address;
@@ -224,5 +227,13 @@ public class ShopVo implements Serializable {
     public void setSelectTownId(Long selectTownId) {
         this.selectTownId = selectTownId;
     }
+
+	public String getGps() {
+		return gps;
+	}
+
+	public void setGps(String gps) {
+		this.gps = gps;
+	}
 
 }

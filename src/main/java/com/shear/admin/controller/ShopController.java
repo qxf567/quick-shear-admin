@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.quickshear.common.enumeration.RoleEnum;
 import com.quickshear.common.enumeration.ShopStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
+import com.quickshear.common.util.Geohash;
 import com.quickshear.common.util.RetdCodeType;
 import com.quickshear.common.vo.ResObj;
 import com.quickshear.common.wechat.utils.WechatJsApiUtil;
@@ -103,6 +104,8 @@ public class ShopController extends AbstractController {
 	if (shop != null) {
 	    BeanCopier copier = BeanCopierUtil.copy(Shop.class, ShopVo.class);
 	    copier.copy(shop, shopVo, null);
+	    //坐标
+		shopVo.setGps(shop.getLatitude()+","+shop.getLongitude());
 
 	    try {
 		City city = cityService.findbyid(shop.getCityId());
@@ -149,6 +152,8 @@ public class ShopController extends AbstractController {
 	} catch (Exception e) {
 	    LOGGER.error(e.getMessage());
 	}
+	//坐标
+	shopVo.setGps(shop.getLatitude()+","+shop.getLongitude());
 
 	model.addAttribute("shop", shopVo);
 	return "admin/shop_detail";
@@ -175,9 +180,12 @@ public class ShopController extends AbstractController {
 	    shop.setMainImageUrl(request.getParameter("mainImageUrl"));
 	    shop.setMultiImageUrls("");
 	    shop.setStatus(Integer.valueOf(request.getParameter("status")));
-	    shop.setLatitude((double) 0);
-	    shop.setLongitude((double) 0);
-	    shop.setGeocode("0");
+	    if(request.getParameter("gps") != null){
+	    	String[] gps = request.getParameter("gps").split(",");
+	    	shop.setLatitude(Double.valueOf(gps[0]));
+		    shop.setLongitude(Double.valueOf(gps[1]));
+		    shop.setGeocode(Geohash.encode(Double.valueOf(gps[0]), Double.valueOf(gps[1])));
+	    }
 	    // 保存操作
 	    if(null != request.getParameter("mainImageUrl") && request.getParameter("mainImageUrl").length()> 2 && !request.getParameter("mainImageUrl").equals(request.getParameter("originalMainImageUrl"))){
 	    	//图片
