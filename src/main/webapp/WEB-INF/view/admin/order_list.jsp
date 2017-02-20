@@ -5,7 +5,6 @@
 <head>
 <%@ include file="../common/meta.jsp"%>
 <%@ include file="../common/taglibs.jsp"%>
-<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="${admin_js}/touchslider.js"></script>
 <link type="text/css" rel="stylesheet" href="${admin_css}/order_list.css">
 <title>订单列表</title>
@@ -50,17 +49,53 @@ p.product_name span {
 	<div class="container">
 		<div class="tab_switch">
 			<ul id="pagenavi" class="page fixed_top">
-				<li><a href="javascript:;" class="active">待服务</a></li>
-				<li><a href="javascript:;" class="">已完成</a></li>
+				<li><a href="javascript:;" class="active">全部</a></li>
+				<li><a href="javascript:;" class="">待服务</a></li>
 			</ul>
 			<div id="slider" class="swipe mt37"
 				style="overflow: hidden; visibility: visible; list-style: none; position: relative;">
 				<ul class="tab_switch_list"
 					style="position: relative; transition: left 300ms ease-out; width: 2560px; left: -1280px;">
+					<!--  全部  -->
+					<li class="li_list"
+						style="width: 640px; display: table-cell; padding: 0px; margin: 0px; float: left; vertical-align: top; min-height: 807px; line-height: 807px;">
+                        <c:if test="${empty allOrders}">
+							<div class="gap"></div>
+							<div class="one_order hide_order_li">
+								<div class="max_box">
+									<div class="info_box">
+										<img src="${admin_img}/no_has_order.jpg">
+										<p>还没有顾客下单哦！</p>
+									</div>
+								</div>
+							</div>
+						</c:if>
+						<c:forEach items="${allOrders}" var="aOrder">
+							<div class="gap"></div>
+							<div class="one_order">
+								<p class="store_name_id">${aOrder.shopName}<span class="state_label">${aOrder.orderStatusName}</span></p>
+								<div class="order_info">
+									<div class="store_img">
+										<img src="${shop_img}/${aOrder.shopMainImageUrl}">
+									</div>
+									<div class="store_text">
+										<p>服务号：${aOrder.serviceCode}</p>
+										<p>订单号：${aOrder.orderId}</p>
+										<p>顾客电话：${aOrder.customerNumber}</p>
+										<p>预约时间：${aOrder.appointmentTime}</p>
+									</div>
+								</div>
+								<div class="total_main">
+									<span class="total_price">合计</span> <span class="sum">${aOrder.actualPrice}元</span>
+								</div>
+							</div>
+						</c:forEach>
+					</li>
+
 					<!--  待服务  -->
 					<li class="li_list"
 						style="width: 640px; display: table-cell; padding: 0px; margin: 0px; float: left; vertical-align: top; min-height: 807px; line-height: 807px;">
-                        <c:if test="${empty inServiceOrders}">
+						<c:if test="${empty inServiceOrders}">
 							<div class="gap"></div>
 							<div class="one_order hide_order_li">
 								<div class="max_box">
@@ -74,7 +109,7 @@ p.product_name span {
 						<c:forEach items="${inServiceOrders}" var="sOrder">
 							<div class="gap"></div>
 							<div class="one_order">
-								<p class="store_name_id">${sOrder.shopName}</p>
+								<p class="store_name_id">${sOrder.shopName}<span class="state_label">${sOrder.orderStatusName}</span></p>
 								<div class="order_info">
 									<div class="store_img">
 										<img src="${shop_img}/${sOrder.shopMainImageUrl}">
@@ -93,52 +128,8 @@ p.product_name span {
 						</c:forEach>
 					</li>
 
-					<!--  已完成  -->
-					<li class="li_list"
-						style="width: 640px; display: table-cell; padding: 0px; margin: 0px; float: left; vertical-align: top; min-height: 807px; line-height: 807px;">
-						<c:if test="${empty allOrders}">
-							<div class="gap"></div>
-							<div class="one_order hide_order_li">
-								<div class="max_box">
-									<div class="info_box">
-										<img src="${admin_img}/no_has_order.jpg">
-										<p>还没有顾客下单哦！</p>
-									</div>
-								</div>
-							</div>
-						</c:if>
-						<c:forEach items="${allOrders}" var="aOrder">
-							<div class="gap"></div>
-							<div class="one_order">
-								<p class="store_name_id">${aOrder.shopName}</p>
-								<div class="order_info">
-									<div class="store_img">
-										<img src="${shop_img}/${aOrder.shopMainImageUrl}">
-									</div>
-									<div class="store_text">
-										<p>服务号：${aOrder.serviceCode}</p>
-										<p>订单号：${aOrder.orderId}</p>
-										<p>顾客电话：${aOrder.customerNumber}</p>
-										<p>预约时间：${aOrder.appointmentTime}</p>
-									</div>
-								</div>
-								<div class="total_main">
-									<span class="total_price">合计</span> <span class="sum">${cOrder.actualPrice}元</span>
-								</div>
-							</div>
-						</c:forEach>
-					</li>
-
 				</ul>
 			</div>
-		</div>
-		<!--底部固定End-->
-		<div style="height: 50px;"></div>
-		<div class="fixed_menu">
-			<div class="amount"></div>
-			<a onclick="wxScanQRCode()" id="receive">
-				<div class="fixed_btn">扫码接单</div>
-			</a>
 		</div>
 	</div>
 	<script type="text/javascript">

@@ -18,7 +18,7 @@
 				<span>名称</span>
 				<div class="input_info_main">
 					<input type="text" id="name"
-						value="${shop.name}" readonly="readonly"/>
+						value="${shop.name}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -26,7 +26,7 @@
 				<span>电话</span>
 				<div class="input_info_main">
 					<input type="text" id="phoneNumber"
-						value="${shop.phoneNumber}" readonly="readonly"/>
+						value="${shop.phoneNumber}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -34,7 +34,7 @@
 				<span>价格￥</span>
 				<div class="input_info_main">
 					<input type="text" id="price"
-						value="${shop.price}" readonly="readonly"/>
+						value="${shop.price}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -42,7 +42,7 @@
 				<span>营业时间</span>
 				<div class="input_info_main">
 					<input type="text" id="businessHours"
-						value="${shop.businessHours}" readonly="readonly"/>
+						value="${shop.businessHours}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -50,14 +50,14 @@
 				<span>地址</span>
 				<div class="input_info_main">
 					<input type="text" id="fullPathName"
-						value="${shop.fullPathName}" readonly="readonly"/>
+						value="${shop.fullPathName}" disabled="disabled" />
 				</div>
 			</div>
 			<div class="input_one">
 				<span></span>
 				<div class="input_info_main">
 					<input type="text" id="address"
-						value="${shop.address}" readonly="readonly" />
+						value="${shop.address}" disabled="disabled"  />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -72,7 +72,7 @@
 				<span>状态</span>
 				<div class="input_info_main">
 				<input type="text" id="statusName"
-						value="${shop.statusName}" readonly="readonly" />
+						value="${shop.statusName}" disabled="disabled"  />
 				</div>
 			</div>
 		</div>

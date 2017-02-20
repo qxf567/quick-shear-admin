@@ -1,5 +1,6 @@
 package com.shear.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,15 +59,34 @@ public class HairdresserController extends AbstractController {
     @RequestMapping(value = "/list")
     public String list(Model model) {
 	HairdresserQuery query = new HairdresserQuery();
-	List<Hairdresser> hairdresserList = null;
+	List<HairdresserVo> allHairdressers = new ArrayList<HairdresserVo>();
+	List<HairdresserVo> pendingHairdressers = new ArrayList<HairdresserVo>();
+	HairdresserVo hairdresserVo = null;
 	query.setSort("shop_id");
 	try {
-	    hairdresserList = hairdresserService.selectByParam(query);
+		//查询全部
+		List<Hairdresser> hairdressers = hairdresserService.selectByParam(query);
+		if (hairdressers != null) {
+			for(Hairdresser hairdresser : hairdressers){
+				hairdresserVo = new HairdresserVo();
+				BeanCopier copier = BeanCopierUtil.copy(Hairdresser.class,
+					    HairdresserVo.class);
+				 copier.copy(hairdresser, hairdresserVo, null);
+				 hairdresserVo.setStatusName(HairdresserStatusEnum.valueOfCode(hairdresser.getStatus()).getName());
+				 
+				 allHairdressers.add(hairdresserVo);
+				 
+				 if(hairdresser.getStatus()==HairdresserStatusEnum.PENDING.getCode()){
+					 pendingHairdressers.add(hairdresserVo);
+				 }
+			}
+		}
 	} catch (Exception e) {
 	    LOGGER.error(e.getMessage());
 	}
 
-	model.addAttribute("hairdresserList", hairdresserList);
+	model.addAttribute("allHairdressers", allHairdressers);
+	model.addAttribute("pendingHairdressers", pendingHairdressers);
 	return "admin/hairdresser_list";
     }
 
@@ -128,10 +148,13 @@ public class HairdresserController extends AbstractController {
 	resObj.getMessage().setMsg(RetdCodeType.PASS_OK.getMsg());
 	try {
 	    Hairdresser hairdresser = new Hairdresser();
-	    if (null != request.getParameter("id")
-		    && request.getParameter("id").length() != 0) {
+	    if (null == request.getParameter("id")
+			    || request.getParameter("id").length() == 0) {
+		    	resObj.setCode(RetdCodeType.EX_APP.getCode());
+		 	    resObj.getMessage().setMsg("获取发型师id失败!");
+		 	    return resObj;
+		    }
 		hairdresser.setId(Long.valueOf(request.getParameter("id")));
-	    }
 	    hairdresser.setName(request.getParameter("name"));
 	    hairdresser.setPhoneNumber(request.getParameter("phoneNumber"));
 	    Long shopId=Long.valueOf(request.getParameter("shopId"));
@@ -151,27 +174,52 @@ public class HairdresserController extends AbstractController {
 	    	//图片
 	    	wechatJsApiUtil.writeImageToDisk(request.getParameter("photo"),"user.img"); 
 	    }
-	    int rlt = 0;
-	    if (hairdresser.getId() == null) {// 新增
-		rlt = hairdresserService.save(hairdresser);
-	    } else {
-		rlt = hairdresserService.update(hairdresser);
-	    }
-	    if (rlt < 0) {
+	    int rlt = hairdresserService.update(hairdresser);
+	    if (rlt <= 0) {
 		resObj.setCode(RetdCodeType.EX_APP.getCode());
 		resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
 	    }
-	    // 更新user表状态
-	    if(hairdresser.getStatus().equals(HairdresserStatusEnum.VALID.getCode())){
-	    	User user=new User();
-		    user.setRoles(RoleEnum.STYLIST.getCode());
-		    UserQuery queryUserObj = new UserQuery();
-		    queryUserObj.setPhoneNumber(request.getParameter("phoneNumber"));
-		    rlt = userService.update(user,queryUserObj);
+	} catch (Exception e) {
+	    resObj.setCode(RetdCodeType.EX_APP.getCode());
+	    resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+	    LOGGER.error(e.getMessage());
+	}
+
+	return resObj;
+    }
+    
+    @RequestMapping(value = "/passedconfirm", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObj<String> passedConfirm(HttpServletRequest request) {
+	ResObj<String> resObj = new ResObj<String>();
+	resObj.setCode(RetdCodeType.PASS_OK.getCode());
+	resObj.getMessage().setMsg(RetdCodeType.PASS_OK.getMsg());
+	try {
+	    Hairdresser hairdresser = new Hairdresser();
+	    if (null == request.getParameter("id")
+		    || request.getParameter("id").length() == 0) {
+	    	resObj.setCode(RetdCodeType.EX_APP.getCode());
+	 	    resObj.getMessage().setMsg("获取发型师id失败!");
+	 	    return resObj;
 	    }
+	    hairdresser.setId(Long.valueOf(request.getParameter("id")));
+	    hairdresser.setStatus(HairdresserStatusEnum.VALID.getCode());
+	    int rlt = hairdresserService.update(hairdresser);
+	    if (rlt <= 0) {
+		resObj.setCode(RetdCodeType.EX_APP.getCode());
+		resObj.getMessage().setMsg("更新发型师状态失败!");
+		return resObj;
+	    }
+	    // 更新user表状态
+	    User user=new User();
+	    user.setRoles(RoleEnum.STYLIST.getCode());
+	    UserQuery queryUserObj = new UserQuery();
+	    queryUserObj.setPhoneNumber(request.getParameter("phoneNumber"));
+	    rlt = userService.update(user,queryUserObj);
 	    if (rlt <= 0) {
 			resObj.setCode(RetdCodeType.EX_APP.getCode());
-			resObj.getMessage().setMsg(RetdCodeType.EX_APP.getMsg());
+			resObj.getMessage().setMsg("更新发型师权限失败!");
+			return resObj;
 		}
 	} catch (Exception e) {
 	    resObj.setCode(RetdCodeType.EX_APP.getCode());

@@ -3,25 +3,22 @@ package com.shear.admin.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.quickshear.common.enumeration.OrderStatusEnum;
-import com.quickshear.common.util.DateUtil;
-import com.quickshear.domain.Shop;
-import com.quickshear.service.ShopService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quickshear.common.enumeration.OrderStatusEnum;
 import com.quickshear.common.util.BeanCopierUtil;
+import com.quickshear.common.util.DateUtil;
 import com.quickshear.domain.Order;
+import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.OrderQuery;
 import com.quickshear.service.OrderService;
+import com.quickshear.service.ShopService;
 import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.OrderVo;
 
@@ -63,6 +60,7 @@ public class OrderController extends AbstractController {
 						orderVo.setShopName(shop.getName());
 						orderVo.setShopMainImageUrl(shop.getMainImageUrl());
 					}
+					orderVo.setOrderStatusName(OrderStatusEnum.valueOfCode(order.getOrderStatus()).getName());
 
 					if (order.getOrderStatus() == OrderStatusEnum.ORDER_RECEIVE.getCode() || order.getOrderStatus() == OrderStatusEnum.PAY_COMPLETE.getCode()) {
 						inServiceOrders.add(orderVo);
@@ -76,7 +74,7 @@ public class OrderController extends AbstractController {
 		}
 		model.addAttribute("inServiceOrders", inServiceOrders);
 		model.addAttribute("allOrders", allOrders);
-		return "stylist/order_list";
+		return "admin/order_list";
 	}
     
 }

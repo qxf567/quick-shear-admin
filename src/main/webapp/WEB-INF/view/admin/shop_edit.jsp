@@ -113,7 +113,7 @@
 	var save_url = '<c:url value="/admin/shop/save"/>';
 	//微信jsApi授权
 	wx.config({
-	    debug : true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	    debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 	    appId : '${appid}', // 必填，公众号的唯一标识
 	    timestamp : '${timestamp}', // 必填，生成签名的时间戳
 	    nonceStr : '${nonceStr}', // 必填，生成签名的随机串
@@ -289,6 +289,7 @@
 			return objData;
 		};
 
+		
 		//保存
 		$('#save')
 				.click(
@@ -301,38 +302,43 @@
 							var cityId = $("#town option:selected").val();
 							var address = $("#address").val();
 							var mainImageUrl = $("#mainImageUrl").val();
-							var originalMainImageUrl = $("#originalMainImageUrl").val();
+							var originalMainImageUrl = $(
+									"#originalMainImageUrl").val();
 							var status = $("#shopStatus option:selected").val();
-							$
-									.ajax({
-										type : "post",
-										dataType : "json",
-										url : save_url,
-										data : {
-											'id' : id,
-											'name' : name,
-											'phoneNumber' : phoneNumber,
-											'price' : price,
-											'businessHours' : businessHours,
-											'cityId' : cityId,
-											'address' : address,
-											'mainImageUrl' : mainImageUrl,
-											'originalMainImageUrl' : originalMainImageUrl,
-											'status' : status
-										},
-										success : function(data) {
-											if (data != null
-													&& data.code == 200) {
-												pop_up_alert("warning", "保存成功");
-												window.location.href = '<c:url value="/admin/shop/list"/>';
-											} else {
+							if (confirm("确认保存?")) {
+								$
+										.ajax({
+											type : "post",
+											dataType : "json",
+											url : save_url,
+											data : {
+												'id' : id,
+												'name' : name,
+												'phoneNumber' : phoneNumber,
+												'price' : price,
+												'businessHours' : businessHours,
+												'cityId' : cityId,
+												'address' : address,
+												'mainImageUrl' : mainImageUrl,
+												'originalMainImageUrl' : originalMainImageUrl,
+												'status' : status
+											},
+											success : function(data) {
+												if (data != null
+														&& data.code == 200) {
+													pop_up_alert("warning",
+															"保存成功");
+													window.location.href = '<c:url value="/admin/shop/list"/>';
+												} else {
+													pop_up_alert("warning",
+															"保存失败");
+												}
+											},
+											error : function() {
 												pop_up_alert("warning", "保存失败");
 											}
-										},
-										error : function() {
-											pop_up_alert("warning", "保存失败");
-										}
-									});
+										});
+							}
 						});
 	</script>
 </body>

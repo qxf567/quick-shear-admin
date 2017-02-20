@@ -25,6 +25,8 @@ public class OrderVo implements Serializable {
 
     /** 订单状态(0待支付1支付完成50已接单100服务完成300取消) */
     private Integer orderStatus;
+    /** 订单状态(0待支付1支付完成50已接单100服务完成300取消) */
+    private String orderStatusName;
 
     /** 合计价格 */
     private BigDecimal totalPrice;
@@ -140,6 +142,14 @@ public class OrderVo implements Serializable {
 
 	public void setShopMainImageUrl(String shopMainImageUrl) {
 		this.shopMainImageUrl = shopMainImageUrl;
+	}
+
+	public String getOrderStatusName() {
+		return orderStatusName;
+	}
+
+	public void setOrderStatusName(String orderStatusName) {
+		this.orderStatusName = orderStatusName;
 	}
 
 }

@@ -18,7 +18,7 @@
 				<span>发型名称</span>
 				<div class="input_info_main">
 					<input type="text" id="name"
-						value="${hairstyle.name}" readonly="readonly"/>
+						value="${hairstyle.name}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -34,7 +34,7 @@
 				<span>价格￥</span>
 				<div class="input_info_main">
 					<input type="text" id="price"
-						value="${hairstyle.price}" readonly="readonly"/>
+						value="${hairstyle.price}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div> --%>
@@ -49,7 +49,7 @@
 				<span>详情</span>
 				<div class="input_info_main">
 					<input type="text" id="detail"
-						value="${hairstyle.detail}" readonly="readonly" />
+						value="${hairstyle.detail}" disabled="disabled"  />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -57,7 +57,7 @@
 				<span>状态</span>
 				<div class="input_info_main">
 				<input type="text" id="statusName"
-						value="${hairstyle.statusName}" readonly="readonly" />
+						value="${hairstyle.statusName}" disabled="disabled"  />
 				</div>
 			</div>
 		</div>

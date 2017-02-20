@@ -18,7 +18,7 @@
 				<span>姓名</span>
 				<div class="input_info_main">
 					<input type="text" id="name"
-						value="${hairdresser.name}" readonly="readonly"/>
+						value="${hairdresser.name}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -26,7 +26,7 @@
 				<span>电话</span>
 				<div class="input_info_main">
 					<input type="text" id="phoneNumber"
-						value="${hairdresser.phoneNumber}" readonly="readonly"/>
+						value="${hairdresser.phoneNumber}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -34,7 +34,7 @@
 				<span>店铺</span>
 				<div class="input_info_main">
 					<input type="text" id="shopName"
-						value="${hairdresser.shopName}" readonly="readonly"/>
+						value="${hairdresser.shopName}" disabled="disabled" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
