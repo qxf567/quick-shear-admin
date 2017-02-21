@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.enumeration.OrderStatusEnum;
+import com.quickshear.common.enumeration.RoleEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.util.RetdCodeType;
@@ -29,11 +30,13 @@ import com.quickshear.domain.query.OrderQuery;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
 import com.quickshear.service.sms.StorageService;
+import com.shear.admin.aop.annotation.Permission;
 import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.OrderVo;
 
 @Controller
 @RequestMapping("/stylist/order")
+@Permission(roleTypes = { RoleEnum.STYLIST })
 public class StyOrderController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(StyOrderController.class);
 

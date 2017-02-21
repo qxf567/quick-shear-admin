@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quickshear.common.enumeration.OrderStatusEnum;
+import com.quickshear.common.enumeration.RoleEnum;
 import com.quickshear.common.util.BeanCopierUtil;
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.domain.Order;
@@ -19,11 +20,13 @@ import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.OrderQuery;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
+import com.shear.admin.aop.annotation.Permission;
 import com.shear.admin.controller.base.AbstractController;
 import com.shear.admin.vo.OrderVo;
 
 @Controller
 @RequestMapping("/admin/order")
+@Permission(roleTypes = { RoleEnum.ADMIN })
 public class OrderController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
