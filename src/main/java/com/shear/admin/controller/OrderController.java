@@ -61,11 +61,9 @@ public class OrderController extends AbstractController {
 						orderVo.setShopMainImageUrl(shop.getMainImageUrl());
 					}
 					orderVo.setOrderStatusName(OrderStatusEnum.valueOfCode(order.getOrderStatus()).getName());
-
+					allOrders.add(orderVo);
 					if (order.getOrderStatus().equals(OrderStatusEnum.ORDER_RECEIVE.getCode()) || order.getOrderStatus().equals(OrderStatusEnum.PAY_COMPLETE.getCode())) {
 						inServiceOrders.add(orderVo);
-					} else {
-						allOrders.add(orderVo);
 					}
 				}
 			}
