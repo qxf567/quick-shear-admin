@@ -58,7 +58,7 @@ public class StyOrderController extends AbstractController {
  	    if (cookie_hairdresserid == null) {//取不到cookie，跳转到登录页
  	    	return "admin/login/"+cookie_openid;
  	    }
- 	   LOGGER.info("cookie_hairdresserid:"+cookie_hairdresserid);
+ 	    //LOGGER.info("cookie_hairdresserid:"+cookie_hairdresserid);
     	OrderQuery queryObj = new OrderQuery();
     	List<Order> orderList = null;
     	List<OrderVo> inServiceOrders = new ArrayList<OrderVo>();
