@@ -41,6 +41,9 @@
 						    <c:if test="${empty hairdresser.shopId}">
 								<option value="-100">选择店铺</option>
 							</c:if>
+							<c:if test="${hairdresser.shopId <= 0}">
+								<option value="-100">选择店铺</option>
+							</c:if>
 							<c:forEach items="${hairdresser.shopList}" var="shop">
 								<option value="${shop.id}"
 									<c:if test="${hairdresser.shopId eq shop.id}"> selected="selected"</c:if>>${shop.name}</option>

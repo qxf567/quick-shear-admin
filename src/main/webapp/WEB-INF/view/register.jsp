@@ -26,7 +26,7 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container" style="text-align: center;">
 <div class="one_question" id="first" style="display: block;">
 <input id="vertify_code" value="" type="hidden" /> 
         <div class="title_box">

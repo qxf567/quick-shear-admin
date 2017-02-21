@@ -102,7 +102,9 @@ public class LoginController extends AbstractController {
 				return "register";
 		    }
 		    if(hairdresserList.get(0).getShopId()<=0){
-		    	return "redirect:http://m.qiansishun.com/v1/stylist/hairdresser/edit/"+hairdresserList.get(0).getId();
+		    	model.addAttribute("isNewUser", "0");
+				model.addAttribute("message", "<a href=\"http://m.qiansishun.com/v1/stylist/hairdresser/edit/"+hairdresserList.get(0).getId()+"\" style=\"text-decoration:underline;color:#f8c4b2;\">完善资料</a>");
+				return "register";
 		    }
 		    return "stylist/index";
 	    }
