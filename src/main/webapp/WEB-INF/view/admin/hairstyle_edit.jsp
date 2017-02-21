@@ -154,6 +154,21 @@
 	    var mainImageUrl = $("#mainImageUrl").val();
 	    var originalMainImageUrl = $("#originalMainImageUrl").val();
 	    var status = $("#hairstyleStatus option:selected").val();
+	    if(name == '')
+	    {
+		    pop_up_alert("warning","请填写发型名称！");
+	        return false;
+	    }
+	    if(mainImageUrl == '')
+	    {
+		    pop_up_alert("warning","请上传图片！");
+	        return false;
+	    }
+	    if(status == '-100')
+	    {
+		    pop_up_alert("warning","请选择状态！");
+	        return false;
+	    }
 	    if (confirm("确认保存?")) {
 	    $.ajax({
 			type : "post",
@@ -168,7 +183,6 @@
 			    	'status':status},
 			success : function(data) {
 			    if (data != null && data.code == 200) {
-				  pop_up_alert("warning","保存成功");
 				  window.location.href='<c:url value="/admin/hairstyle/list"/>';
 			    } else {
 				  pop_up_alert("warning","保存失败");

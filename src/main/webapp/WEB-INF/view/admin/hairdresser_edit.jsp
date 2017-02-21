@@ -175,6 +175,11 @@
 		    pop_up_alert("warning","请上传照片！");
 		    return false;
 	    }
+	    if(status == '-100')
+	    {
+		    pop_up_alert("warning","请选择状态！");
+	        return false;
+	    }
 	    if (confirm("确认保存?")) {
 	    $.ajax({
 			type : "post",
@@ -189,7 +194,6 @@
 			    	'status':status},
 			success : function(data) {
 			    if (data != null && data.code == 200) {
-				  pop_up_alert("warning","保存成功");
 				  window.location.href='<c:url value="/admin/hairdresser/list"/>';
 			    } else {
 				  pop_up_alert("warning","保存失败");

@@ -161,7 +161,6 @@
 			    	'originalPhoto':originalPhoto},
 			success : function(data) {
 			    if (data != null && data.code == 200) {
-				  pop_up_alert("warning","保存成功");
 				  window.location.href='<c:url value="/stylist/index"/>';
 			    } else {
 				  pop_up_alert("warning","保存失败");

@@ -326,6 +326,51 @@
 							var originalMainImageUrl = $(
 									"#originalMainImageUrl").val();
 							var status = $("#shopStatus option:selected").val();
+							if(name == '')
+						    {
+							    pop_up_alert("warning","请填写店铺名称！");
+						        return false;
+						    }
+							if(phoneNumber == '')
+						    {
+							    pop_up_alert("warning","请填写店铺电话！");
+						        return false;
+						    }
+							if(price == '')
+						    {
+							    pop_up_alert("warning","请填写价格！");
+						        return false;
+						    }
+							if(businessHours == '')
+						    {
+							    pop_up_alert("warning","请填写营业时间！");
+						        return false;
+						    }
+							if(cityId == '-100')
+						    {
+							    pop_up_alert("warning","请选择城市！");
+						        return false;
+						    }
+							if(address == '')
+						    {
+							    pop_up_alert("warning","请填写详细地址！");
+						        return false;
+						    }
+							if(gps == '')
+						    {
+							    pop_up_alert("warning","请选择坐标！");
+						        return false;
+						    }
+							if(mainImageUrl == '')
+						    {
+							    pop_up_alert("warning","请上传图片！");
+						        return false;
+						    }
+							if(status == '-100')
+						    {
+							    pop_up_alert("warning","请选择状态！");
+						        return false;
+						    }
 							if (confirm("确认保存?")) {
 								$
 										.ajax({
@@ -346,10 +391,7 @@
 												'status' : status
 											},
 											success : function(data) {
-												if (data != null
-														&& data.code == 200) {
-													pop_up_alert("warning",
-															"保存成功");
+												if (data != null && data.code == 200) {
 													window.location.href = '<c:url value="/admin/shop/list"/>';
 												} else {
 													pop_up_alert("warning",
