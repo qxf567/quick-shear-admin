@@ -22,7 +22,7 @@
 			<div class="input_one">
 				<span>姓名</span>
 				<div class="input_info_main">
-					<input type="text" placeholder="输入发型师姓名" id="name" value="${hairdresser.name}" />
+					<input type="text" placeholder="输入姓名" id="name" value="${hairdresser.name}" />
 				</div>
 				<hr style="background: #f2f2f2;height: 1px;border: none">
 			</div>
@@ -157,6 +157,21 @@
 	    var photo = $("#photo").val();
 	    var originalPhoto = $("#originalPhoto").val();
 	    var status = $("#hairdresserStatus option:selected").val();
+	    if(name == '')
+	    {
+		    pop_up_alert("warning","请填写姓名！");
+	        return false;
+	    }
+	    if(shopId == '-100')
+	    {
+		    pop_up_alert("warning","请选择店铺！");
+	        return false;
+	    }
+	    if(photo == '')
+	    {
+		    pop_up_alert("warning","请上传照片！");
+		    return false;
+	    }
 	    if (confirm("确认保存?")) {
 	    $.ajax({
 			type : "post",

@@ -91,8 +91,19 @@ public class LoginController extends AbstractController {
 	    if (RoleEnum.STYLIST.getCode().equals(roles)) {// 发型师
 	    	//存cookie
 		    String hairdresserId = String.valueOf(userList.get(0).getHairdresserId());
-		    LOGGER.info("cookie_hairdresserid save:"+hairdresserId);
+		    //LOGGER.info("cookie_hairdresserid save:"+hairdresserId);
 		    storageService.set("hairdresserid", hairdresserId, response);
+		    HairdresserQuery queryHairObj =new HairdresserQuery();
+		    queryHairObj.setPhoneNumber(userList.get(0).getPhoneNumber());
+		    List<Hairdresser> hairdresserList= hairdresserService.selectByParam(queryHairObj);
+		    if(hairdresserList==null || hairdresserList.size()<=0 ){
+		    	model.addAttribute("isNewUser", "0");
+				model.addAttribute("message", "用户信息查询失败。");
+				return "register";
+		    }
+		    if(hairdresserList.get(0).getShopId()<=0){
+		    	return "redirect:http://m.qiansishun.com/v1/stylist/hairdresser/edit/"+hairdresserList.get(0).getId();
+		    }
 		    return "stylist/index";
 	    }
 	    if(RoleEnum.PENDING.getCode().equals(roles)){// 待审核用户
